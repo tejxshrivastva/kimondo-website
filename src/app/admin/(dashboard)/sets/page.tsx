@@ -1,0 +1,90 @@
+import Link from "next/link";
+import { prisma } from "@/lib/prisma";
+import { Plus } from "lucide-react";
+
+export default async function AdminSetsPage() {
+  const sets = await prisma.set.findMany({
+    include: {
+      items: { include: { variants: true } },
+      _count: { select: { items: true } },
+    },
+    orderBy: { sortOrder: "asc" },
+  });
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="font-display text-2xl">Sets</h1>
+        <Link
+          href="/admin/sets/new"
+          className="flex items-center gap-2 h-10 px-4 bg-black text-white text-sm font-semibold rounded-[12px]"
+        >
+          <Plus size={16} /> New set
+        </Link>
+      </div>
+
+      <div className="border border-[rgba(0,0,0,0.12)] rounded-[12px] overflow-hidden">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-[rgba(0,0,0,0.08)] bg-surface">
+              <th className="text-left p-3 font-medium">Name</th>
+              <th className="text-left p-3 font-medium">Status</th>
+              <th className="text-left p-3 font-medium">Items</th>
+              <th className="text-left p-3 font-medium">Stock</th>
+              <th className="text-right p-3 font-medium">Min price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sets.map((set) => {
+              const totalStock = set.items.reduce(
+                (sum, item) =>
+                  sum + item.variants.reduce((vs, v) => vs + v.stock, 0),
+                0
+              );
+              const minPrice = Math.min(
+                ...set.items.map((i) => i.price),
+                Infinity
+              );
+              return (
+                <tr
+                  key={set.id}
+                  className="border-b border-[rgba(0,0,0,0.04)] last:border-0 hover:bg-surface/50"
+                >
+                  <td className="p-3">
+                    <Link
+                      href={`/admin/sets/${set.id}`}
+                      className="font-medium hover:underline"
+                    >
+                      {set.name}
+                    </Link>
+                    <p className="text-xs text-muted">{set.slug}</p>
+                  </td>
+                  <td className="p-3">
+                    <span
+                      className={`text-xs px-2 py-0.5 rounded-full ${
+                        set.status === "live"
+                          ? "bg-green-100 text-green-800"
+                          : set.status === "draft"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-gray-100 text-gray-600"
+                      }`}
+                    >
+                      {set.status}
+                    </span>
+                  </td>
+                  <td className="p-3 text-muted">{set._count.items}</td>
+                  <td className="p-3 text-muted">{totalStock}</td>
+                  <td className="p-3 text-right">
+                    {minPrice === Infinity
+                      ? "—"
+                      : `₹${(minPrice / 100).toLocaleString("en-IN")}`}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
