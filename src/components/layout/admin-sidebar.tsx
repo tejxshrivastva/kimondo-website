@@ -79,7 +79,9 @@ export function AdminSidebar({
                   {section.heading}
                 </div>
               )}
-              {visibleItems.map(({ href, label, showBadge }) => {
+              {visibleItems.map((item) => {
+                const { href, label } = item;
+                const showBadge = "showBadge" in item && item.showBadge;
                 const active =
                   href === "/admin"
                     ? pathname === "/admin"
