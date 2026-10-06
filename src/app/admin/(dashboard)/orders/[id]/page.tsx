@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { OrderActions } from "./actions";
+import { syncOrderShipping } from "@/lib/sync-shipping";
 
 export default async function AdminOrderDetailPage({
   params,
@@ -8,6 +9,8 @@ export default async function AdminOrderDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+
+  await syncOrderShipping(id);
 
   const order = await prisma.order.findUnique({
     where: { id },

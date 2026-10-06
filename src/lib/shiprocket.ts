@@ -83,6 +83,38 @@ export async function checkServiceability(
   }
 }
 
+export async function getShipmentStatus(awb: string): Promise<{
+  status: string | null;
+  delivered: boolean;
+  shipped: boolean;
+  trackingUrl: string | null;
+}> {
+  if (!isShiprocketLive || !awb || awb.startsWith("STUB_")) {
+    return { status: null, delivered: false, shipped: false, trackingUrl: null };
+  }
+
+  try {
+    const token = await getToken();
+    const res = await fetch(`${BASE_URL}/courier/track/awb/${awb}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await res.json();
+    const info = data?.tracking_data;
+    const currentStatus = info?.shipment_track?.[0]?.current_status || info?.track_status_string || null;
+    const delivered = currentStatus === "Delivered" || info?.shipment_status === 7;
+    const shipped = delivered || info?.shipment_status >= 6 || currentStatus === "In Transit" || currentStatus === "Out For Delivery";
+    return {
+      status: currentStatus,
+      delivered,
+      shipped,
+      trackingUrl: awb ? `https://www.shiprocket.in/shipment-tracking/${awb}` : null,
+    };
+  } catch (err) {
+    console.error("[Shiprocket] Track shipment failed:", err);
+    return { status: null, delivered: false, shipped: false, trackingUrl: null };
+  }
+}
+
 export async function createShipment(orderData: {
   orderId: string;
   orderNumber: string;
