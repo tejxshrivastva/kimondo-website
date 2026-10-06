@@ -10,13 +10,18 @@ const SECTIONS = [
     items: [{ href: "/admin", label: "Overview" }],
   },
   {
-    heading: "Content",
+    heading: "Catalog",
     items: [
-      { href: "/admin/sets", label: "Sets" },
-      { href: "/admin/campaigns", label: "Campaigns" },
+      { href: "/admin/sets", label: "Products" },
+      { href: "/admin/campaigns", label: "Archive stories" },
       { href: "/admin/badges", label: "Badges" },
-      { href: "/admin/faqs", label: "FAQ" },
+    ],
+  },
+  {
+    heading: "Site content",
+    items: [
       { href: "/admin/homepage", label: "Homepage" },
+      { href: "/admin/faqs", label: "FAQ" },
       { href: "/admin/settings", label: "Settings", adminOnly: true },
     ],
   },
@@ -24,7 +29,7 @@ const SECTIONS = [
     heading: "Operations",
     items: [
       { href: "/admin/orders", label: "Orders", showBadge: true },
-      { href: "/admin/notify-requests", label: "Back in stock" },
+      { href: "/admin/notify-requests", label: "Restock requests" },
     ],
   },
   {

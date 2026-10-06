@@ -1,12 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { useOverlayStore } from "@/store/overlay-store";
 import { formatPrice } from "@/lib/utils";
 
+interface SliderImage {
+  id: string;
+  name: string;
+  image: string | null;
+}
+
 interface SetDetailClientProps {
-  action: "setButton" | "itemButton" | "itemRow" | "accordions";
+  action: "setButton" | "itemButton" | "itemRow" | "accordions" | "imageSlider";
   setSlug?: string;
   itemId?: string;
   itemName?: string;
@@ -14,6 +20,9 @@ interface SetDetailClientProps {
   itemPrice?: number;
   productDetails?: string | null;
   careInstructions?: string | null;
+  sliderImages?: SliderImage[];
+  toneFrom?: string;
+  toneTo?: string;
 }
 
 export function SetDetailClient({
@@ -25,10 +34,14 @@ export function SetDetailClient({
   itemPrice,
   productDetails,
   careInstructions,
+  sliderImages,
+  toneFrom,
+  toneTo,
 }: SetDetailClientProps) {
   const { openSetPicker, openItemPicker, openSizeGuide } = useOverlayStore();
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [careOpen, setCareOpen] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   if (action === "setButton") {
     return (
@@ -66,6 +79,80 @@ export function SetDetailClient({
         </div>
         <span className="text-sm">{formatPrice(itemPrice!)}</span>
       </button>
+    );
+  }
+
+  if (action === "imageSlider") {
+    const images = sliderImages || [];
+    const total = images.length;
+
+    const prev = () => setCurrentSlide((s) => (s - 1 + total) % total);
+    const next = () => setCurrentSlide((s) => (s + 1) % total);
+
+    return (
+      <div className="relative aspect-[4/5] overflow-hidden sticky top-24">
+        {total > 0 ? (
+          <>
+            {images.map((img, i) => (
+              <div
+                key={img.id}
+                className="absolute inset-0 transition-opacity duration-500"
+                style={{ opacity: i === currentSlide ? 1 : 0 }}
+              >
+                {img.image ? (
+                  <img
+                    src={img.image}
+                    alt={img.name}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div
+                    className="w-full h-full"
+                    style={{
+                      background: `linear-gradient(150deg, ${toneFrom || "#d4d4d4"}, ${toneTo || "#a3a3a3"})`,
+                    }}
+                  />
+                )}
+              </div>
+            ))}
+            {total > 1 && (
+              <>
+                <button
+                  onClick={prev}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 hover:bg-white flex items-center justify-center transition-colors"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+                <button
+                  onClick={next}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 hover:bg-white flex items-center justify-center transition-colors"
+                  aria-label="Next image"
+                >
+                  <ChevronRight size={18} />
+                </button>
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                  {images.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setCurrentSlide(i)}
+                      className={`w-2 h-2 transition-colors ${i === currentSlide ? "bg-black" : "bg-black/30"}`}
+                      aria-label={`Go to image ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </>
+        ) : (
+          <div
+            className="w-full h-full"
+            style={{
+              background: `linear-gradient(150deg, ${toneFrom || "#d4d4d4"}, ${toneTo || "#a3a3a3"})`,
+            }}
+          />
+        )}
+      </div>
     );
   }
 

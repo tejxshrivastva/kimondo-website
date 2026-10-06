@@ -36,9 +36,14 @@ export default async function SetPage({ params }: Props) {
   const prices = set.items.map((i) => i.price);
   const minPrice = prices.length > 0 ? Math.min(...prices) : 0;
 
+  const sliderImages = set.items.map((item) => ({
+    id: item.id,
+    name: item.name,
+    image: item.image,
+  }));
+
   return (
     <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10">
-      {/* Breadcrumb */}
       <Link
         href="/store"
         className="text-sm text-muted hover:text-foreground transition-colors"
@@ -46,43 +51,32 @@ export default async function SetPage({ params }: Props) {
         ← Store
       </Link>
 
-      <div className="mt-6 lg:grid lg:grid-cols-[1fr_400px] lg:gap-12">
-        {/* Gallery */}
-        <div className="space-y-4">
-          {/* Hero image */}
+      <div className="mt-6 lg:grid lg:grid-cols-3 lg:gap-6">
+        {/* Column 1: Static hero image */}
+        <div>
           <div
-            className="aspect-[4/5] overflow-hidden"
+            className="aspect-[4/5] overflow-hidden sticky top-24"
             style={!set.coverImage ? { background: `linear-gradient(150deg, ${set.toneFrom}, ${set.toneTo})` } : undefined}
           >
             {set.coverImage && (
               <img src={set.coverImage} alt={set.name} className="w-full h-full object-cover" />
             )}
           </div>
-          {/* Per-item images */}
-          {set.items.map((item) => (
-            <div key={item.id} className="relative group">
-              <div
-                className="aspect-[4/5] overflow-hidden"
-                style={!item.image ? { background: `linear-gradient(150deg, ${set.toneFrom}dd, ${set.toneTo}dd)` } : undefined}
-              >
-                {item.image && (
-                  <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                )}
-              </div>
-              <div className="absolute bottom-4 left-4">
-                <SetDetailClient
-                  action="itemButton"
-                  setSlug={set.slug}
-                  itemId={item.id}
-                  itemName={item.name}
-                />
-              </div>
-            </div>
-          ))}
         </div>
 
-        {/* Sidebar */}
-        <div className="mt-8 lg:mt-0 lg:sticky lg:top-24 lg:self-start space-y-6">
+        {/* Column 2: Image slider (per-item images) */}
+        <div>
+          <SetDetailClient
+            action="imageSlider"
+            setSlug={set.slug}
+            sliderImages={sliderImages}
+            toneFrom={set.toneFrom}
+            toneTo={set.toneTo}
+          />
+        </div>
+
+        {/* Column 3: Product details */}
+        <div className="mt-8 lg:mt-0 space-y-6">
           <div>
             <p className="text-[9px] font-semibold tracking-[0.2em] uppercase text-muted mb-2">
               {set.items.length} {set.items.length === 1 ? "piece" : "pieces"}
@@ -91,10 +85,8 @@ export default async function SetPage({ params }: Props) {
             <p className="mt-2 text-lg">From {formatPrice(minPrice)}</p>
           </div>
 
-          {/* Shop the set button */}
           <SetDetailClient action="setButton" setSlug={set.slug} />
 
-          {/* Individual item buttons */}
           <div className="space-y-2">
             {set.items.map((item) => (
               <SetDetailClient
@@ -109,27 +101,24 @@ export default async function SetPage({ params }: Props) {
             ))}
           </div>
 
-          {/* Description */}
           {set.description && (
             <p className="text-[#666666] leading-relaxed">
               {set.description}
             </p>
           )}
 
-          {/* Accordion sections */}
           <SetDetailClient
             action="accordions"
             productDetails={set.productDetails}
             careInstructions={set.careInstructions}
           />
 
-          {/* Campaign link */}
           {set.campaign && (
             <Link
               href={`/archive/${set.campaign.slug}`}
               className="block text-sm font-medium underline underline-offset-4"
             >
-              Read the campaign →
+              Read the story →
             </Link>
           )}
         </div>

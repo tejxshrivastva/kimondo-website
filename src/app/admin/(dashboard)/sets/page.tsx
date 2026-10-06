@@ -14,12 +14,12 @@ export default async function AdminSetsPage() {
   return (
     <div className="px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="font-display text-2xl">Sets</h1>
+        <h1 className="font-display text-2xl">Products</h1>
         <Link
           href="/admin/sets/new"
           className="flex items-center gap-2 h-10 px-4 bg-black text-white text-sm font-semibold"
         >
-          <Plus size={16} /> New set
+          <Plus size={16} /> New product
         </Link>
       </div>
 
