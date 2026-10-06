@@ -214,6 +214,7 @@ model Order {
   razorpayPaymentId String?
   shiprocketOrderId String?
   shiprocketAWB     String?
+  trackingRef       String?
   trackingUrl       String?
   deliveredAt       DateTime?
   notes             String?
