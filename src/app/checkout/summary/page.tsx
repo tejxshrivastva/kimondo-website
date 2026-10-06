@@ -122,6 +122,9 @@ function SummaryContent() {
         };
         // @ts-expect-error Razorpay is loaded from external script
         const rzp = new window.Razorpay(options);
+        rzp.on("payment.failed", () => {
+          setPaymentState("failed");
+        });
         rzp.open();
       };
       document.body.appendChild(script);

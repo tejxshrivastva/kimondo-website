@@ -45,7 +45,8 @@ export default async function SetPage({ params }: Props) {
     take: 8,
   });
 
-  const sliderImages = set.items.slice(0, 3);
+  const setImages: string[] = JSON.parse(set.images || "[]");
+  const sliderSlots = [0, 1, 2];
 
   return (
     <div className="max-w-[1600px] mx-auto">
@@ -58,9 +59,9 @@ export default async function SetPage({ params }: Props) {
         </Link>
       </div>
 
-      <div className="lg:grid lg:grid-cols-3 gap-1 px-4 sm:px-6 lg:px-4 pb-16">
+      <div className="lg:grid lg:grid-cols-3 gap-1 px-4 sm:px-6 lg:px-8 pb-16">
         {/* Column 1: Static hero image - sticky, matches first slider image height */}
-        <div className="lg:sticky lg:top-16 lg:self-start">
+        <div className="lg:sticky lg:top-16 lg:self-start pb-8">
           <div
             className="w-full overflow-hidden bg-[#f0f0f0]"
             style={{ aspectRatio: "4/5", ...(!set.coverImage ? { background: `linear-gradient(150deg, ${set.toneFrom}, ${set.toneTo})` } : {}) }}
@@ -75,19 +76,19 @@ export default async function SetPage({ params }: Props) {
           </div>
         </div>
 
-        {/* Column 2: Vertical image scroll - 3 images stacked */}
+        {/* Column 2: Vertical image scroll - 3 product slider images */}
         <div className="flex flex-col gap-1">
-          {sliderImages.map((item) => (
-            <div key={item.id} className="w-full overflow-hidden" style={{ aspectRatio: "4/5" }}>
-              {item.image ? (
+          {sliderSlots.map((i) => (
+            <div key={i} className="w-full overflow-hidden" style={{ aspectRatio: "4/5" }}>
+              {setImages[i] ? (
                 <img
-                  src={item.image}
-                  alt={item.name}
+                  src={setImages[i]}
+                  alt={`${set.name} — image ${i + 1}`}
                   className="w-full h-full object-cover"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-[#f0f0f0]">
-                  <span className="text-[#c0c0c0] text-xs tracking-[0.15em] uppercase">{item.name}</span>
+                  <span className="text-[#c0c0c0] text-xs tracking-[0.15em] uppercase">Slider image {i + 1}</span>
                 </div>
               )}
             </div>
