@@ -42,8 +42,10 @@ export default async function SetPage({ params }: Props) {
     where: { status: "live", slug: { not: slug } },
     include: { items: true },
     orderBy: { sortOrder: "asc" },
-    take: 6,
+    take: 8,
   });
+
+  const sliderImages = set.items.slice(0, 3);
 
   return (
     <div className="max-w-[1600px] mx-auto">
@@ -56,12 +58,12 @@ export default async function SetPage({ params }: Props) {
         </Link>
       </div>
 
-      <div className="lg:grid lg:grid-cols-3">
-        {/* Column 1: Static hero image - sticky, fills viewport */}
-        <div className="lg:sticky lg:top-0 lg:h-screen">
+      <div className="lg:grid lg:grid-cols-3 gap-1 px-4 sm:px-6 lg:px-4 pb-16">
+        {/* Column 1: Static hero image - sticky, matches first slider image height */}
+        <div className="lg:sticky lg:top-16 lg:self-start">
           <div
-            className="w-full h-full overflow-hidden bg-[#f0f0f0]"
-            style={!set.coverImage ? { background: `linear-gradient(150deg, ${set.toneFrom}, ${set.toneTo})` } : undefined}
+            className="w-full overflow-hidden bg-[#f0f0f0]"
+            style={{ aspectRatio: "4/5", ...(!set.coverImage ? { background: `linear-gradient(150deg, ${set.toneFrom}, ${set.toneTo})` } : {}) }}
           >
             {set.coverImage ? (
               <img src={set.coverImage} alt={set.name} className="w-full h-full object-cover" />
@@ -73,9 +75,9 @@ export default async function SetPage({ params }: Props) {
           </div>
         </div>
 
-        {/* Column 2: Vertical image scroll - flows naturally */}
-        <div>
-          {set.items.map((item) => (
+        {/* Column 2: Vertical image scroll - 3 images stacked */}
+        <div className="flex flex-col gap-1">
+          {sliderImages.map((item) => (
             <div key={item.id} className="w-full overflow-hidden" style={{ aspectRatio: "4/5" }}>
               {item.image ? (
                 <img
@@ -84,9 +86,7 @@ export default async function SetPage({ params }: Props) {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div
-                  className="w-full h-full flex items-center justify-center bg-[#f0f0f0]"
-                >
+                <div className="w-full h-full flex items-center justify-center bg-[#f0f0f0]">
                   <span className="text-[#c0c0c0] text-xs tracking-[0.15em] uppercase">{item.name}</span>
                 </div>
               )}
@@ -122,7 +122,7 @@ export default async function SetPage({ params }: Props) {
             </div>
 
             {set.description && (
-              <p className="text-[#666666] leading-relaxed">
+              <p className="text-[#666666] leading-relaxed text-sm">
                 {set.description}
               </p>
             )}
