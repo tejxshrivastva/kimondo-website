@@ -23,14 +23,13 @@ export async function PUT(req: Request) {
   const body = await req.json();
   const existing = await prisma.siteSettings.findFirst();
 
-  const data = {
-    returnWindowDays: body.returnWindowDays ?? 14,
-    exchangeWindowDays: body.exchangeWindowDays ?? 14,
-    founderEmail: body.founderEmail || "",
-    founderPageTitle: body.founderPageTitle || "",
-    founderPageSubtitle: body.founderPageSubtitle || "",
-    socialLinks: JSON.stringify(body.socialLinks || {}),
-  };
+  const data: Record<string, unknown> = {};
+  if (body.returnWindowDays !== undefined) data.returnWindowDays = body.returnWindowDays;
+  if (body.exchangeWindowDays !== undefined) data.exchangeWindowDays = body.exchangeWindowDays;
+  if (body.founderEmail !== undefined) data.founderEmail = body.founderEmail;
+  if (body.founderPageTitle !== undefined) data.founderPageTitle = body.founderPageTitle;
+  if (body.founderPageSubtitle !== undefined) data.founderPageSubtitle = body.founderPageSubtitle;
+  if (body.socialLinks !== undefined) data.socialLinks = JSON.stringify(body.socialLinks);
 
   if (existing) {
     await prisma.siteSettings.update({ where: { id: existing.id }, data });

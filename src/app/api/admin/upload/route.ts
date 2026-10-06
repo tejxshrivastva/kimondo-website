@@ -1,8 +1,14 @@
 import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import path from "path";
+import { auth } from "@/lib/auth";
 
 export async function POST(req: Request) {
+  const session = await auth();
+  if (!session?.user || !["admin", "editor"].includes(session.user.role || "")) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
   const formData = await req.formData();
   const file = formData.get("file") as File | null;
 
