@@ -114,7 +114,7 @@ export async function createShipment(orderData: {
       body: JSON.stringify({
         order_id: orderData.orderNumber,
         order_date: new Date().toISOString().split("T")[0],
-        pickup_location: "Kimondo Warehouse",
+        pickup_location: "Primary",
         billing_customer_name: orderData.contactName,
         billing_last_name: "",
         billing_address: orderData.address,
