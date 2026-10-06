@@ -7,7 +7,7 @@ import { Providers } from "@/components/providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Kimondo",
+  title: { default: "Kimondo", template: "%s" },
   description:
     "Handwoven garments crafted on traditional looms. Each piece carries the mark of its maker.",
 };
