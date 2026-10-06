@@ -2,28 +2,123 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const LATIN_NAMES = [
-  "Lorem", "Ipsum", "Dolor", "Amet", "Consect", "Adipis", "Tempor", "Incidi",
-  "Labore", "Magna", "Veniam", "Nostrud", "Exerci", "Ullamco", "Laboris",
-  "Aliquip", "Commodo", "Fugiat", "Pariatur", "Occaecat", "Cupida", "Proident",
-  "Mollit", "Voluptas",
-];
-
-const TONES: [string, string][] = [
-  ["#d4d4d4", "#a3a3a3"], ["#c4b5a0", "#9a8b78"], ["#8b7355", "#6b5b45"], ["#a0b0c0", "#7890a0"],
-  ["#c8b8a8", "#a89888"], ["#b0c4b0", "#88a888"], ["#d4c0a0", "#b8a080"], ["#a8b8c8", "#8898a8"],
-  ["#c0a890", "#a08870"], ["#b8c8b0", "#98a890"], ["#d0b8a0", "#b09880"], ["#a0a8b8", "#808898"],
-  ["#c8c0b0", "#a8a090"], ["#b0b8c0", "#9098a0"], ["#d4c8b8", "#b4a898"], ["#a8b0a8", "#889088"],
-  ["#c0b0a0", "#a09080"], ["#b8b0c0", "#9890a0"], ["#d0c0b0", "#b0a090"], ["#a0b8b0", "#809890"],
-  ["#c8b0a8", "#a89088"], ["#b0c0b8", "#90a098"], ["#d4b8a8", "#b49888"], ["#a8c0b8", "#88a098"],
-];
-
-const ITEM_NAMES = [
-  "Vestibulum", "Pellentesque", "Suspendisse", "Curabitur", "Fermentum",
-  "Malesuada", "Venenatis", "Sagittis", "Porttitor", "Ultricies",
-  "Faucibus", "Accumsan", "Eleifend", "Bibendum", "Placerat",
-  "Pharetra", "Pulvinar", "Vehicula", "Interdum", "Praesent",
-  "Maecenas", "Tristique", "Convallis", "Dignissim",
+const SETS = [
+  {
+    name: "Vanya",
+    slug: "vanya",
+    tagline: "Handspun cotton, naturally dyed",
+    description: "Vanya is born from raw cotton spun on a charkha and coloured with indigo, pomegranate, and iron. Each piece takes shape on a pit loom in Maheshwar, where the weaver decides the rhythm of the weave. No two are identical.",
+    productDetails: "Handspun kala cotton. Natural dyes: indigo, iron, pomegranate rind. Pit-loom woven in Maheshwar, Madhya Pradesh. Pre-washed and softened.",
+    careInstructions: "Hand wash cold with mild detergent. Dry in shade. Natural dyes deepen with wear and age gracefully. Do not bleach.",
+    toneFrom: "#c4b5a0",
+    toneTo: "#9a8b78",
+    items: [
+      { name: "Vanya Tunic", category: "top" as const, priceBase: 349900 },
+      { name: "Vanya Trousers", category: "bottom" as const, priceBase: 289900 },
+      { name: "Vanya Scarf", category: "accessory" as const, priceBase: 149900 },
+    ],
+  },
+  {
+    name: "Kashi",
+    slug: "kashi",
+    tagline: "Woven on pit looms in Varanasi",
+    description: "Kashi draws from the silk-weaving tradition of Varanasi. The fabric is a silk-cotton blend handwoven with a fine jamdani technique — each motif inserted by hand, one thread at a time. The result is cloth that breathes and catches light.",
+    productDetails: "Silk-cotton blend (60/40). Jamdani handloom technique. Woven in Varanasi, Uttar Pradesh. Unlined, naturally structured.",
+    careInstructions: "Dry clean recommended. If hand washing, use cold water and a pH-neutral soap. Press on reverse with a cool iron.",
+    toneFrom: "#d4d4d4",
+    toneTo: "#a3a3a3",
+    items: [
+      { name: "Kashi Shirt", category: "top" as const, priceBase: 449900 },
+      { name: "Kashi Dhoti Pants", category: "bottom" as const, priceBase: 379900 },
+      { name: "Kashi Stole", category: "accessory" as const, priceBase: 199900 },
+    ],
+  },
+  {
+    name: "Sutra",
+    slug: "sutra",
+    tagline: "Silk and cotton, interlocked by hand",
+    description: "Sutra uses an interlock weave that binds silk warp to cotton weft without any mechanical intervention. The technique is native to Chanderi, where weavers have refined it across generations. The cloth is sheer, strong, and impossibly light.",
+    productDetails: "Chanderi interlock weave. Silk warp, cotton weft. Handwoven in Chanderi, Madhya Pradesh. Naturally crisp hand feel.",
+    careInstructions: "Hand wash in cold water. Do not wring. Lay flat to dry. Iron on low heat while slightly damp for best results.",
+    toneFrom: "#b0c4b0",
+    toneTo: "#88a888",
+    items: [
+      { name: "Sutra Kurta", category: "top" as const, priceBase: 529900 },
+      { name: "Sutra Palazzos", category: "bottom" as const, priceBase: 419900 },
+    ],
+  },
+  {
+    name: "Dhara",
+    slug: "dhara",
+    tagline: "Raw linen, sun-bleached and softened",
+    description: "Dhara is made from handwoven linen sourced from small-batch spinners. The yarn is sun-bleached rather than chemically whitened, then woven on a frame loom. The fabric softens dramatically with each wash — it is designed to be worn for years.",
+    productDetails: "100% handwoven linen. Sun-bleached. Frame-loom woven. Enzyme-washed for initial softness. Gets better with every wear.",
+    careInstructions: "Machine wash gentle cycle, cold water. Tumble dry low or line dry. Linen wrinkles are part of its character — iron only if preferred.",
+    toneFrom: "#d4c0a0",
+    toneTo: "#b8a080",
+    items: [
+      { name: "Dhara Overshirt", category: "top" as const, priceBase: 399900 },
+      { name: "Dhara Wide Legs", category: "bottom" as const, priceBase: 349900 },
+    ],
+  },
+  {
+    name: "Neel",
+    slug: "neel",
+    tagline: "Indigo-dipped, resist-printed by hand",
+    description: "Neel takes its name from the Hindi word for indigo. Each garment is hand-block printed using carved teak blocks and natural indigo paste, then dipped repeatedly until the colour reaches its depth. The prints evolve as the indigo fades with sunlight and wear.",
+    productDetails: "Organic cotton khadi. Hand-block printed with natural indigo. Resist-print technique (dabu). Made in Bagru, Rajasthan.",
+    careInstructions: "Wash separately for the first three washes. Hand wash cold. Indigo will soften over time — this is intentional. Avoid direct sunlight for storage.",
+    toneFrom: "#8b7355",
+    toneTo: "#6b5b45",
+    items: [
+      { name: "Neel Camp Collar", category: "top" as const, priceBase: 319900 },
+      { name: "Neel Drawstring Pants", category: "bottom" as const, priceBase: 279900 },
+      { name: "Neel Bandana", category: "accessory" as const, priceBase: 89900 },
+    ],
+  },
+  {
+    name: "Tara",
+    slug: "tara",
+    tagline: "Tussar silk with hand-embroidered detail",
+    description: "Tara pairs wild tussar silk — harvested without killing the silkworm — with minimal hand embroidery drawn from Chikankari traditions. The embroidery is sparse by design: a single motif on a collar, a line of shadow work along a cuff.",
+    productDetails: "Ahimsa tussar silk. Hand-embroidered Chikankari detail. Woven and finished in Lucknow, Uttar Pradesh. Naturally textured grain.",
+    careInstructions: "Dry clean only. Store folded in muslin. Tussar silk has a natural slub texture — this is a mark of the wild cocoon, not a defect.",
+    toneFrom: "#c8b8a8",
+    toneTo: "#a89888",
+    items: [
+      { name: "Tara Blouse", category: "top" as const, priceBase: 579900 },
+      { name: "Tara Skirt", category: "bottom" as const, priceBase: 499900 },
+    ],
+  },
+  {
+    name: "Rasa",
+    slug: "rasa",
+    tagline: "Khadi cotton, spun on the charkha",
+    description: "Rasa is pure khadi — hand-spun, hand-woven, untouched by machinery. The cotton is grown in Gujarat and spun in self-help cooperatives. Each metre of fabric takes a full day to produce. Rasa exists because slowness is not a limitation but a value.",
+    productDetails: "100% khadi cotton. Hand-spun on charkha, hand-woven. Sourced from Gujarat cooperatives. Naturally breathable and moisture-wicking.",
+    careInstructions: "Hand wash cold. Khadi becomes softer and more comfortable with each wash. Line dry. Iron on medium heat.",
+    toneFrom: "#a0b0c0",
+    toneTo: "#7890a0",
+    items: [
+      { name: "Rasa Henley", category: "top" as const, priceBase: 269900 },
+      { name: "Rasa Joggers", category: "bottom" as const, priceBase: 249900 },
+    ],
+  },
+  {
+    name: "Mira",
+    slug: "mira",
+    tagline: "Wool and silk, woven for winter",
+    description: "Mira is a cold-weather cloth woven from a blend of Himalayan pashmina wool and mulberry silk. The weave is tight enough for warmth but light enough to drape. Made in the workshops of Kullu, where the loom sits beside the hearth.",
+    productDetails: "Pashmina wool and mulberry silk blend (70/30). Handwoven in Kullu, Himachal Pradesh. Naturally warm, lightweight drape.",
+    careInstructions: "Dry clean only. Fold and store with cedar or lavender. Do not hang — wool blends stretch under their own weight. Air out between wears.",
+    toneFrom: "#a8b8c8",
+    toneTo: "#8898a8",
+    items: [
+      { name: "Mira Wrap Jacket", category: "top" as const, priceBase: 699900 },
+      { name: "Mira Trousers", category: "bottom" as const, priceBase: 549900 },
+      { name: "Mira Shawl", category: "accessory" as const, priceBase: 399900 },
+    ],
+  },
 ];
 
 const SIZES_TOP = ["XS", "S", "M", "L", "XL"];
@@ -34,7 +129,6 @@ function randomStock() {
 }
 
 async function main() {
-  // Clear existing data
   await prisma.badgeAward.deleteMany();
   await prisma.badge.deleteMany();
   await prisma.notifyRequest.deleteMany();
@@ -54,14 +148,14 @@ async function main() {
   // ── Campaigns ──
   const campaign1 = await prisma.campaign.create({
     data: {
-      slug: "lorem-ipsum-dolor",
-      title: "Lorem ipsum dolor",
-      subtitle: "Sed ut perspiciatis unde",
-      body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      slug: "thread-and-time",
+      title: "Thread and Time",
+      subtitle: "A journey to the pit looms of Maheshwar",
+      body: "We travelled to the banks of the Narmada to meet the weavers behind Vanya. In Maheshwar, the loom sits in the courtyard and the day begins before sunrise. The warp is dressed by hand, the shuttle thrown in rhythm with breath. What arrives as a finished garment began as a conversation between cotton and colour, held together by patience.\n\nThis campaign documents three days in the workshop — the dyeing vats, the warping posts, the quiet concentration of a weaver counting threads. No garment is rushed. No shortcut exists.",
       credits: JSON.stringify([
-        { role: "Lorem", name: "Ipsum Dolor" },
-        { role: "Amet", name: "Consectetur Elit" },
-        { role: "Tempor", name: "Incididunt Labore" },
+        { role: "Photography", name: "Arjun Menon" },
+        { role: "Words", name: "Aman Bashera" },
+        { role: "Production", name: "Kimondo Studio" },
       ]),
       location: "Maheshwar, Madhya Pradesh",
       date: "September 2026",
@@ -73,15 +167,15 @@ async function main() {
 
   const campaign2 = await prisma.campaign.create({
     data: {
-      slug: "consectetur-adipiscing",
-      title: "Consectetur adipiscing",
-      subtitle: "Nemo enim ipsam voluptatem",
-      body: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      slug: "the-colour-indigo",
+      title: "The Colour Indigo",
+      subtitle: "Hand-block printing in the villages of Bagru",
+      body: "Indigo is not a dye — it is a fermentation. The leaves are composted, reduced to a paste, dissolved in a vat with lime and jaggery, and left to breathe. The printer carves teak blocks by hand, presses them into the resist paste, and stamps each metre of cloth before it enters the vat.\n\nIn Bagru, outside Jaipur, this process has not changed in four hundred years. The Neel set was born here — each piece carrying the fingerprint of its maker in the slight irregularity of every print.",
       credits: JSON.stringify([
-        { role: "Lorem", name: "Magna Aliqua" },
-        { role: "Amet", name: "Veniam Nostrud" },
+        { role: "Photography", name: "Priya Kapoor" },
+        { role: "Words", name: "Aman Bashera" },
       ]),
-      location: "Chanderi, Madhya Pradesh",
+      location: "Bagru, Rajasthan",
       date: "August 2026",
       status: "live",
       publishedAt: new Date(),
@@ -91,14 +185,16 @@ async function main() {
 
   const campaign3 = await prisma.campaign.create({
     data: {
-      slug: "sit-amet-elit",
-      title: "Sit amet elit",
-      subtitle: "Quis autem vel eum",
-      body: "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.",
+      slug: "silk-and-shadow",
+      title: "Silk and Shadow",
+      subtitle: "Chikankari embroidery in Lucknow",
+      body: "Chikankari is embroidery done on the wrong side of the fabric so the pattern appears as shadow on the right side. In Lucknow, entire families practise the craft — one person traces the pattern, another stitches, a third washes and finishes. The Tara set carries this tradition in its most restrained form: a single motif where it matters most.",
       credits: JSON.stringify([
-        { role: "Lorem", name: "Ullamco Laboris" },
+        { role: "Photography", name: "Kavya Sharma" },
+        { role: "Styling", name: "Rhea Malhotra" },
+        { role: "Words", name: "Aman Bashera" },
       ]),
-      location: "Varanasi, Uttar Pradesh",
+      location: "Lucknow, Uttar Pradesh",
       date: "July 2026",
       status: "live",
       publishedAt: new Date(),
@@ -108,99 +204,65 @@ async function main() {
 
   const campaign4 = await prisma.campaign.create({
     data: {
-      slug: "sed-do-eiusmod",
-      title: "Sed do eiusmod",
-      subtitle: "At vero eos et accusamus",
-      body: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+      slug: "winter-in-kullu",
+      title: "Winter in Kullu",
+      subtitle: "Pashmina and silk from the Himalayan workshops",
+      body: "At 1200 metres above sea level, the looms of Kullu produce some of India's finest wool textiles. The pashmina comes from Changthang, the silk from Karnataka — they meet on a handloom in a workshop heated by a single bukhari stove. The Mira set is the result: cloth that holds warmth without weight, drapes without bulk, and ages like good leather.",
       credits: JSON.stringify([
-        { role: "Lorem", name: "Exercitation Ullamco" },
-        { role: "Amet", name: "Aliquip Commodo" },
-        { role: "Tempor", name: "Fugiat Pariatur" },
+        { role: "Photography", name: "Vikram Joshi" },
+        { role: "Words", name: "Aman Bashera" },
       ]),
-      location: "Bhagalpur, Bihar",
-      date: "June 2026",
+      location: "Kullu, Himachal Pradesh",
+      date: "December 2026",
       status: "live",
       publishedAt: new Date(),
       sortOrder: 3,
     },
   });
 
-  const campaigns = [campaign1, campaign2, campaign3, campaign4];
+  const campaignMap: Record<string, string> = {
+    vanya: campaign1.id,
+    neel: campaign2.id,
+    tara: campaign3.id,
+    mira: campaign4.id,
+  };
 
-  // ── 24 Sets with Items and Variants ──
+  // ── Sets with Items and Variants ──
   const setIds: string[] = [];
 
-  for (let i = 0; i < 24; i++) {
-    const name = LATIN_NAMES[i];
-    const slug = name.toLowerCase();
-    const [tFrom, tTo] = TONES[i];
-    const campaignId = i < 4 ? campaigns[i].id : (i < 8 ? campaigns[i % 4].id : null);
-    const basePrice = 120000 + Math.floor(Math.random() * 300000);
-    const itemNameOffset = i % ITEM_NAMES.length;
-    const skuPrefix = `S${String(i).padStart(2, "0")}`;
+  for (let i = 0; i < SETS.length; i++) {
+    const s = SETS[i];
+    const skuPrefix = s.slug.toUpperCase().slice(0, 3);
 
-    const items = [];
+    const items = s.items.map((item, j) => {
+      const sizes =
+        item.category === "accessory"
+          ? [{ size: "One size", sku: `${skuPrefix}-OS-A`, stock: randomStock() }]
+          : item.category === "top"
+            ? SIZES_TOP.map((sz) => ({ size: sz, sku: `${skuPrefix}-${sz}-T${j}`, stock: randomStock() }))
+            : SIZES_BOTTOM.map((sz) => ({ size: sz, sku: `${skuPrefix}-${sz}-B${j}`, stock: randomStock() }));
 
-    // Every set gets a top
-    items.push({
-      name: ITEM_NAMES[(itemNameOffset) % ITEM_NAMES.length],
-      category: "top",
-      price: basePrice,
-      sortOrder: 0,
-      variants: {
-        create: SIZES_TOP.map((s) => ({
-          size: s,
-          sku: `${skuPrefix}-${s}-T`,
-          stock: randomStock(),
-        })),
-      },
+      return {
+        name: item.name,
+        category: item.category,
+        price: item.priceBase,
+        sortOrder: j,
+        variants: { create: sizes },
+      };
     });
-
-    // Most sets get a bottom
-    if (i % 5 !== 4) {
-      items.push({
-        name: ITEM_NAMES[(itemNameOffset + 1) % ITEM_NAMES.length],
-        category: "bottom",
-        price: basePrice + 30000,
-        sortOrder: 1,
-        variants: {
-          create: SIZES_BOTTOM.map((s) => ({
-            size: s,
-            sku: `${skuPrefix}-${s}-B`,
-            stock: randomStock(),
-          })),
-        },
-      });
-    }
-
-    // Some sets get an accessory
-    if (i % 3 === 0) {
-      items.push({
-        name: ITEM_NAMES[(itemNameOffset + 2) % ITEM_NAMES.length],
-        category: "accessory",
-        price: Math.floor(basePrice * 0.6),
-        sortOrder: 2,
-        variants: {
-          create: [{ size: "One size", sku: `${skuPrefix}-OS-A`, stock: randomStock() }],
-        },
-      });
-    }
 
     const set = await prisma.set.create({
       data: {
-        slug,
-        name,
-        tagline: "Lorem ipsum dolor sit amet",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
-        productDetails:
-          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
-        careInstructions:
-          "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
-        toneFrom: tFrom,
-        toneTo: tTo,
+        slug: s.slug,
+        name: s.name,
+        tagline: s.tagline,
+        description: s.description,
+        productDetails: s.productDetails,
+        careInstructions: s.careInstructions,
+        toneFrom: s.toneFrom,
+        toneTo: s.toneTo,
         status: "live",
-        campaignId,
+        campaignId: campaignMap[s.slug] || null,
         sortOrder: i,
         items: { create: items },
       },
@@ -210,9 +272,9 @@ async function main() {
   }
 
   // ── Badges (one per set, first 8) ──
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < Math.min(8, setIds.length); i++) {
     await prisma.badge.create({
-      data: { name: LATIN_NAMES[i], setId: setIds[i] },
+      data: { name: SETS[i].name, setId: setIds[i] },
     });
   }
 
@@ -220,39 +282,52 @@ async function main() {
   await prisma.faq.createMany({
     data: [
       {
-        question: "Lorem ipsum dolor sit amet?",
-        answer:
-          "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
-        section: "Lorem",
+        question: "What does handloom mean?",
+        answer: "Every Kimondo garment is woven on a manually operated loom — no electricity, no automation. The weaver controls the tension, the pattern, and the pace. This is what gives handloom cloth its distinctive texture and slight irregularity.",
+        section: "The cloth",
         sortOrder: 0,
       },
       {
-        question: "Ut enim ad minim veniam?",
-        answer:
-          "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.",
-        section: "Lorem",
+        question: "Are your dyes natural?",
+        answer: "Most of our dyes are plant-derived: indigo from the indigofera leaf, ochre from iron-rich earth, yellow from pomegranate rind. Some sets use azo-free synthetic dyes where colour fastness requires it. Each product page specifies the dye method used.",
+        section: "The cloth",
         sortOrder: 1,
       },
       {
-        question: "Duis aute irure dolor?",
-        answer:
-          "In reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-        section: "Ipsum",
+        question: "How should I care for handloom garments?",
+        answer: "Hand wash in cold water with a mild detergent. Do not wring — press gently and lay flat to dry. Handloom fabrics soften with each wash. Specific care instructions are listed on every set page and printed on the garment label.",
+        section: "Care",
         sortOrder: 2,
       },
       {
-        question: "Excepteur sint occaecat?",
-        answer:
-          "Cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error.",
-        section: "Dolor",
+        question: "Do you offer free shipping?",
+        answer: "Yes. All orders ship free across India. We use a domestic courier partner with tracking. Delivery typically takes 5–7 business days depending on your location.",
+        section: "Orders",
         sortOrder: 3,
       },
       {
-        question: "Sed ut perspiciatis unde?",
-        answer:
-          "Omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
-        section: "Dolor",
+        question: "What is your return policy?",
+        answer: "We accept returns within 7 days of delivery and exchanges within 14 days, provided the garment is unworn, unwashed, and in its original packaging. Return shipping is on us. Refunds are processed to the original payment method within 5 business days.",
+        section: "Orders",
         sortOrder: 4,
+      },
+      {
+        question: "How do sizes work?",
+        answer: "Each set page includes a size guide with measurements in inches. If you are between sizes, we recommend sizing up — handloom cloth does not stretch. You can save your size profile in your account for faster checkout.",
+        section: "Fit",
+        sortOrder: 5,
+      },
+      {
+        question: "Can I buy individual pieces from a set?",
+        answer: "Yes. Every item in a set is sold individually. You can buy the full set or any single piece — a top on its own, a scarf without the kurta. The set page lists each piece with its own price.",
+        section: "Orders",
+        sortOrder: 6,
+      },
+      {
+        question: "What are badges?",
+        answer: "When you purchase from a set, you earn that set's badge. Badges solidify after the return window closes and live permanently on your profile. They are a record of the cloth you have chosen to wear.",
+        section: "Your account",
+        sortOrder: 7,
       },
     ],
   });
@@ -262,28 +337,28 @@ async function main() {
     data: [
       {
         slug: "privacy",
-        title: "Lorem Ipsum",
-        body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+        title: "Privacy Policy",
+        body: "Kimondo collects your name, email address, phone number, and delivery address when you create an account or place an order. This information is used solely to process orders, communicate delivery updates, and improve your experience on the site.\n\nWe do not sell, rent, or share your personal information with third parties for marketing purposes. Payment processing is handled by Razorpay; we do not store card details on our servers.\n\nCookies are used to maintain your session and remember your preferences. You may disable cookies in your browser settings, though this may affect site functionality.\n\nFor questions about your data, write to hello@kimondo.in.",
       },
       {
         slug: "terms",
-        title: "Dolor Sit Amet",
-        body: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.\n\nQuis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.\n\nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        title: "Terms of Service",
+        body: "By using kimondo.in, you agree to these terms. Kimondo is operated by Aman Bashera as a sole proprietorship registered in India.\n\nAll prices are listed in Indian Rupees and are inclusive of GST. Prices may change without notice, but confirmed orders are honoured at the price shown at checkout.\n\nProduct images are representative. Due to the handmade nature of our garments, slight variations in colour, texture, and pattern are inherent and expected. These are not defects.\n\nKimondo reserves the right to cancel orders in cases of pricing errors, suspected fraud, or stock discrepancies. In such cases, a full refund will be issued.",
       },
       {
         slug: "shipping",
-        title: "Sed Do Eiusmod",
-        body: "Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.\n\nUllamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n\nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.",
+        title: "Shipping Policy",
+        body: "All orders ship free within India. We dispatch within 2 business days of order confirmation.\n\nDelivery typically takes 5–7 business days, depending on your location. Remote pincodes may take up to 10 business days.\n\nOnce shipped, you will receive a tracking reference by email. You can also track your order from your profile page.\n\nWe do not currently ship internationally. If you are outside India and interested in Kimondo, write to the founder — we may be able to arrange something.",
       },
       {
         slug: "returns",
-        title: "Ut Enim Ad Minim",
-        body: "Veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.\n\nIn reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.\n\nSunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis.",
+        title: "Returns Policy",
+        body: "We accept returns within 7 days of delivery. The garment must be unworn, unwashed, and returned in its original packaging with all tags attached.\n\nTo initiate a return, go to your profile, find the order, and select 'Return'. We will arrange a reverse pickup at no cost to you.\n\nRefunds are processed within 5 business days of receiving the returned item, to the original payment method.\n\nItems purchased during a sale or at a reduced price are eligible for exchange only, not refund.",
       },
       {
         slug: "cancellation",
-        title: "Quis Nostrud",
-        body: "Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.\n\nVelit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+        title: "Cancellation Policy",
+        body: "Orders can be cancelled before they are dispatched. Once an order has shipped, it cannot be cancelled — you may return it after delivery under our returns policy.\n\nTo cancel, write to hello@kimondo.in with your order number. If the order has not yet been handed to the courier, we will cancel it and issue a full refund within 3 business days.",
       },
     ],
   });
@@ -291,7 +366,7 @@ async function main() {
   // ── Homepage Settings ──
   await prisma.homepageSetting.create({
     data: {
-      ctaLabel: "Lorem ipsum",
+      ctaLabel: "Enter the collection",
       ctaTarget: "/store",
       featuredSetIds: JSON.stringify(setIds.slice(0, 4)),
     },
@@ -309,16 +384,16 @@ async function main() {
 
   // ── Admin User ──
   await prisma.user.upsert({
-    where: { email: "admin@kimondo.in" },
+    where: { email: "tejxshrivastava@gmail.com" },
     update: { role: "admin" },
     create: {
-      email: "admin@kimondo.in",
-      name: "Lorem Admin",
+      email: "tejxshrivastava@gmail.com",
+      name: "Tejas Shrivastava",
       role: "admin",
     },
   });
 
-  console.log("Seed complete — 24 sets created.");
+  console.log(`Seed complete — ${SETS.length} sets, 4 campaigns, 8 FAQs, 5 policies.`);
 }
 
 main()
