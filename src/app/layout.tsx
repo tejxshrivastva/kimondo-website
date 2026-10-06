@@ -7,8 +7,23 @@ import { Providers } from "@/components/providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: { default: "Kimondo", template: "%s" },
-  description: "Kimondo",
+  title: { default: "Kimondo", template: "%s | Kimondo" },
+  description: "Handloom clothing, woven by hand. Each garment begins as raw yarn and is crafted into something you'll want to keep.",
+  metadataBase: new URL("https://kimondo-website.vercel.app"),
+  openGraph: {
+    type: "website",
+    siteName: "Kimondo",
+    title: "Kimondo",
+    description: "Handloom clothing, woven by hand.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Kimondo",
+    description: "Handloom clothing, woven by hand.",
+  },
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
