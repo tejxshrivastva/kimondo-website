@@ -7,10 +7,13 @@ export const metadata = {
 };
 
 export default async function ArchivePage() {
-  const campaigns = await prisma.campaign.findMany({
-    where: { status: "live" },
-    orderBy: { sortOrder: "asc" },
-  });
+  const [campaigns, settings] = await Promise.all([
+    prisma.campaign.findMany({
+      where: { status: "live" },
+      orderBy: { sortOrder: "asc" },
+    }),
+    prisma.siteSettings.findFirst(),
+  ]);
 
   const featured = campaigns[0];
   const rest = campaigns.slice(1);
@@ -22,11 +25,15 @@ export default async function ArchivePage() {
           Stories behind the cloth
         </p>
         <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl tracking-[0.3px]">
-          The Archive
+          {settings?.archivePageTitle || "The Archive"}
         </h1>
+        {settings?.archivePageSubtitle && (
+          <p className="mt-2 text-[#666666] max-w-xl">
+            {settings.archivePageSubtitle}
+          </p>
+        )}
       </div>
 
-      {/* Featured story - full width */}
       {featured && (
         <Link href={`/archive/${featured.slug}`} className="group block mb-12 lg:mb-20">
           <div className="relative aspect-[16/7] bg-[#f0f0f0] rounded-xl overflow-hidden">
@@ -59,7 +66,6 @@ export default async function ArchivePage() {
         </Link>
       )}
 
-      {/* Grid */}
       {rest.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10 lg:gap-x-6 lg:gap-y-14">
           {rest.map((c) => (

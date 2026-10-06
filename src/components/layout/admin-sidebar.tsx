@@ -21,6 +21,7 @@ const SECTIONS = [
     heading: "Site content",
     items: [
       { href: "/admin/homepage", label: "Homepage" },
+      { href: "/admin/pages", label: "Pages" },
       { href: "/admin/faqs", label: "FAQ" },
       { href: "/admin/founder", label: "Founder" },
       { href: "/admin/settings", label: "Settings", adminOnly: true },

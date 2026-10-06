@@ -96,6 +96,30 @@ export function SetEditor({
     setUploading(null);
   };
 
+  const getSliderImages = (): string[] => {
+    try { return JSON.parse(form.images || "[]"); } catch { return []; }
+  };
+
+  const handleSliderUpload = async (slotIdx: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(`slider-${slotIdx}`);
+    const url = await uploadFile(file);
+    if (url) {
+      const imgs = getSliderImages();
+      while (imgs.length <= slotIdx) imgs.push("");
+      imgs[slotIdx] = url;
+      updateField("images", JSON.stringify(imgs));
+    }
+    setUploading(null);
+  };
+
+  const removeSliderImage = (slotIdx: number) => {
+    const imgs = getSliderImages();
+    imgs[slotIdx] = "";
+    updateField("images", JSON.stringify(imgs.filter(Boolean).length > 0 ? imgs : []));
+  };
+
   const handleItemImageUpload = async (idx: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -238,6 +262,37 @@ export function SetEditor({
             )}
             <input type="file" accept="image/*" className="hidden" onChange={handleCoverUpload} />
           </label>
+
+          <label className="text-xs font-medium text-muted block mb-2 mt-4">Slider images (product detail page)</label>
+          <div className="grid grid-cols-3 gap-3">
+            {[0, 1, 2].map((slotIdx) => {
+              const imgs = getSliderImages();
+              const imgUrl = imgs[slotIdx] || "";
+              return (
+                <label key={slotIdx} className="block cursor-pointer">
+                  {imgUrl ? (
+                    <div className="relative aspect-[4/5] overflow-hidden border border-[rgba(0,0,0,0.12)]">
+                      <img src={imgUrl} alt={`Slider ${slotIdx + 1}`} className="w-full h-full object-cover" />
+                      <button
+                        type="button"
+                        onClick={(e) => { e.preventDefault(); removeSliderImage(slotIdx); }}
+                        className="absolute top-1 right-1 bg-black text-white text-[10px] px-1.5 py-0.5"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="aspect-[4/5] border border-dashed border-[rgba(0,0,0,0.2)] flex items-center justify-center hover:bg-[#f8f8f8] transition-colors">
+                      <span className="text-[10px] text-[#666666] text-center px-1">
+                        {uploading === `slider-${slotIdx}` ? "Uploading..." : `Image ${slotIdx + 1}`}
+                      </span>
+                    </div>
+                  )}
+                  <input type="file" accept="image/*" className="hidden" onChange={(e) => handleSliderUpload(slotIdx, e)} />
+                </label>
+              );
+            })}
+          </div>
         </section>
 
         <section className="grid grid-cols-2 gap-4">

@@ -29,6 +29,11 @@ export async function PUT(req: Request) {
   if (body.founderEmail !== undefined) data.founderEmail = body.founderEmail;
   if (body.founderPageTitle !== undefined) data.founderPageTitle = body.founderPageTitle;
   if (body.founderPageSubtitle !== undefined) data.founderPageSubtitle = body.founderPageSubtitle;
+  if (body.storePageTitle !== undefined) data.storePageTitle = body.storePageTitle;
+  if (body.storePageSubtitle !== undefined) data.storePageSubtitle = body.storePageSubtitle;
+  if (body.archivePageTitle !== undefined) data.archivePageTitle = body.archivePageTitle;
+  if (body.archivePageSubtitle !== undefined) data.archivePageSubtitle = body.archivePageSubtitle;
+  if (body.faqPageTitle !== undefined) data.faqPageTitle = body.faqPageTitle;
   if (body.socialLinks !== undefined) data.socialLinks = JSON.stringify(body.socialLinks);
 
   if (existing) {

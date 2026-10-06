@@ -9,11 +9,14 @@ export const metadata = {
 };
 
 export default async function StorePage() {
-  const sets = await prisma.set.findMany({
-    where: { status: "live" },
-    include: { items: true },
-    orderBy: { sortOrder: "asc" },
-  });
+  const [sets, settings] = await Promise.all([
+    prisma.set.findMany({
+      where: { status: "live" },
+      include: { items: true },
+      orderBy: { sortOrder: "asc" },
+    }),
+    prisma.siteSettings.findFirst(),
+  ]);
 
   return (
     <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
@@ -22,10 +25,10 @@ export default async function StorePage() {
           The collection
         </p>
         <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl tracking-[0.3px]">
-          Store
+          {settings?.storePageTitle || "Store"}
         </h1>
         <p className="mt-2 text-[#666666] max-w-xl">
-          Browse the full collection.
+          {settings?.storePageSubtitle || "Browse the full collection."}
         </p>
       </div>
 

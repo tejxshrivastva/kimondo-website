@@ -329,6 +329,11 @@ model SiteSettings {
   founderEmail          String @default("")
   founderPageTitle      String @default("")
   founderPageSubtitle   String @default("")
+  storePageTitle        String @default("")
+  storePageSubtitle     String @default("")
+  archivePageTitle      String @default("")
+  archivePageSubtitle   String @default("")
+  faqPageTitle          String @default("")
   socialLinks           String @default("[]")
   updatedAt             DateTime @updatedAt
 }
