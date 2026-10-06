@@ -25,7 +25,11 @@ export default async function ArchivePage() {
             href={`/archive/${c.slug}`}
             className="group block"
           >
-            <div className="aspect-[3/2] bg-surface mb-3" />
+            <div className="aspect-[3/2] bg-surface mb-3 overflow-hidden">
+              {c.heroImage && (
+                <img src={c.heroImage} alt={c.title} className="w-full h-full object-cover" />
+              )}
+            </div>
             <h2 className="font-display text-xl group-hover:underline">
               {c.title}
             </h2>

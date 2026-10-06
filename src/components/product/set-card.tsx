@@ -5,6 +5,7 @@ interface SetCardProps {
   slug: string;
   name: string;
   tagline?: string | null;
+  coverImage?: string;
   toneFrom: string;
   toneTo: string;
   minPrice?: number;
@@ -16,6 +17,7 @@ export function SetCard({
   slug,
   name,
   tagline,
+  coverImage,
   toneFrom,
   toneTo,
   minPrice,
@@ -26,10 +28,12 @@ export function SetCard({
     <Link href={`/store/${slug}`} className="group block">
       <div
         className="aspect-[4/5] mb-3 overflow-hidden"
-        style={{
-          background: `linear-gradient(150deg, ${toneFrom}, ${toneTo})`,
-        }}
-      />
+        style={!coverImage ? { background: `linear-gradient(150deg, ${toneFrom}, ${toneTo})` } : undefined}
+      >
+        {coverImage && (
+          <img src={coverImage} alt={name} className="w-full h-full object-cover" />
+        )}
+      </div>
       <div className="space-y-1">
         <h3 className="font-display text-lg">{name}</h3>
         {tagline && (

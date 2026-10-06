@@ -17,6 +17,7 @@ interface Item {
   name: string;
   category: string;
   price: number;
+  image: string | null;
   sortOrder: number;
   variants: Variant[];
 }
@@ -29,6 +30,8 @@ interface SetData {
   description: string | null;
   productDetails: string | null;
   careInstructions: string | null;
+  coverImage: string;
+  images: string;
   status: string;
   toneFrom: string;
   toneTo: string;
@@ -59,6 +62,8 @@ export function SetEditor({
       description: "",
       productDetails: "",
       careInstructions: "",
+      coverImage: "",
+      images: "[]",
       status: "draft",
       toneFrom: "#e8d5b7",
       toneTo: "#c4a882",
@@ -71,6 +76,35 @@ export function SetEditor({
   const updateField = (field: string, value: string | null) =>
     setForm((p) => ({ ...p, [field]: value }));
 
+  const [uploading, setUploading] = useState<string | null>(null);
+
+  const uploadFile = async (file: File): Promise<string | null> => {
+    const fd = new FormData();
+    fd.append("file", file);
+    const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.url;
+  };
+
+  const handleCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading("cover");
+    const url = await uploadFile(file);
+    if (url) updateField("coverImage", url);
+    setUploading(null);
+  };
+
+  const handleItemImageUpload = async (idx: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(`item-${idx}`);
+    const url = await uploadFile(file);
+    if (url) updateItem(idx, "image", url);
+    setUploading(null);
+  };
+
   const addItem = () =>
     setForm((p) => ({
       ...p,
@@ -80,6 +114,7 @@ export function SetEditor({
           name: "",
           category: "top",
           price: 0,
+          image: null,
           sortOrder: p.items.length,
           variants: [],
         },
@@ -177,6 +212,32 @@ export function SetEditor({
       </div>
 
       <div className="space-y-6">
+        {/* Cover image */}
+        <section>
+          <label className="text-xs font-medium text-muted block mb-2">Cover image (shown on store cards)</label>
+          <label className="block cursor-pointer">
+            {form.coverImage ? (
+              <div className="relative aspect-[4/5] max-w-[300px] overflow-hidden border border-[rgba(0,0,0,0.12)]">
+                <img src={form.coverImage} alt="Cover" className="w-full h-full object-cover" />
+                <button
+                  type="button"
+                  onClick={(e) => { e.preventDefault(); updateField("coverImage", ""); }}
+                  className="absolute top-2 right-2 bg-black text-white text-xs px-2 py-1"
+                >
+                  Remove
+                </button>
+              </div>
+            ) : (
+              <div className="aspect-[4/5] max-w-[300px] border border-dashed border-[rgba(0,0,0,0.2)] flex items-center justify-center hover:bg-[#f8f8f8] transition-colors">
+                <span className="text-sm text-[#666666]">
+                  {uploading === "cover" ? "Uploading..." : "Cover image — click to upload"}
+                </span>
+              </div>
+            )}
+            <input type="file" accept="image/*" className="hidden" onChange={handleCoverUpload} />
+          </label>
+        </section>
+
         <section className="grid grid-cols-2 gap-4">
           <div className="col-span-2">
             <label className="text-xs font-medium text-muted block mb-1">Name</label>
@@ -306,6 +367,29 @@ export function SetEditor({
                 key={idx}
                 className="border border-[rgba(0,0,0,0.12)] p-4"
               >
+                {/* Item image */}
+                <label className="block cursor-pointer mb-3">
+                  {item.image ? (
+                    <div className="relative aspect-[4/5] max-w-[160px] overflow-hidden border border-[rgba(0,0,0,0.12)]">
+                      <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                      <button
+                        type="button"
+                        onClick={(e) => { e.preventDefault(); updateItem(idx, "image", ""); }}
+                        className="absolute top-1 right-1 bg-black text-white text-[10px] px-1.5 py-0.5"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="aspect-[4/5] max-w-[160px] border border-dashed border-[rgba(0,0,0,0.2)] flex items-center justify-center hover:bg-[#f8f8f8] transition-colors">
+                      <span className="text-xs text-[#666666] text-center px-2">
+                        {uploading === `item-${idx}` ? "Uploading..." : "Item image — click to upload"}
+                      </span>
+                    </div>
+                  )}
+                  <input type="file" accept="image/*" className="hidden" onChange={(e) => handleItemImageUpload(idx, e)} />
+                </label>
+
                 <div className="flex items-start gap-3 mb-3">
                   <div className="flex-1 grid grid-cols-3 gap-3">
                     <input

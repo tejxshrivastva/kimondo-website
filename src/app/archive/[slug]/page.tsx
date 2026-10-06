@@ -32,13 +32,18 @@ export default async function CampaignPage({ params }: Props) {
   return (
     <div>
       {/* Hero */}
-      <section className="relative px-4 py-20 lg:py-32 text-center bg-surface">
-        <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl max-w-3xl mx-auto">
-          {campaign.title}
-        </h1>
-        <p className="mt-3 text-muted text-lg">
-          {[campaign.location, campaign.date].filter(Boolean).join(" · ")}
-        </p>
+      <section className="relative px-4 py-20 lg:py-32 text-center bg-surface overflow-hidden">
+        {campaign.heroImage && (
+          <img src={campaign.heroImage} alt={campaign.title} className="absolute inset-0 w-full h-full object-cover" />
+        )}
+        <div className="relative">
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl max-w-3xl mx-auto">
+            {campaign.title}
+          </h1>
+          <p className="mt-3 text-muted text-lg">
+            {[campaign.location, campaign.date].filter(Boolean).join(" · ")}
+          </p>
+        </div>
       </section>
 
       {/* Body */}

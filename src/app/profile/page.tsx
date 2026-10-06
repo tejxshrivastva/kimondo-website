@@ -166,7 +166,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="max-w-[720px] mx-auto px-4 py-8">
+    <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
       {/* Membership card */}
       <div className="bg-black text-white  p-6 mb-8">
         <p className="text-[9px] font-semibold tracking-[0.3em] uppercase text-white/60 mb-1">

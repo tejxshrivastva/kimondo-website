@@ -52,19 +52,23 @@ export default async function SetPage({ params }: Props) {
           {/* Hero image */}
           <div
             className="aspect-[4/5] overflow-hidden"
-            style={{
-              background: `linear-gradient(150deg, ${set.toneFrom}, ${set.toneTo})`,
-            }}
-          />
+            style={!set.coverImage ? { background: `linear-gradient(150deg, ${set.toneFrom}, ${set.toneTo})` } : undefined}
+          >
+            {set.coverImage && (
+              <img src={set.coverImage} alt={set.name} className="w-full h-full object-cover" />
+            )}
+          </div>
           {/* Per-item images */}
           {set.items.map((item) => (
             <div key={item.id} className="relative group">
               <div
                 className="aspect-[4/5] overflow-hidden"
-                style={{
-                  background: `linear-gradient(150deg, ${set.toneFrom}dd, ${set.toneTo}dd)`,
-                }}
-              />
+                style={!item.image ? { background: `linear-gradient(150deg, ${set.toneFrom}dd, ${set.toneTo}dd)` } : undefined}
+              >
+                {item.image && (
+                  <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                )}
+              </div>
               <div className="absolute bottom-4 left-4">
                 <SetDetailClient
                   action="itemButton"

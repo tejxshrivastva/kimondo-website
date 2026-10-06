@@ -36,6 +36,7 @@ export default async function StorePage() {
             slug={set.slug}
             name={set.name}
             tagline={set.tagline}
+            coverImage={set.coverImage || undefined}
             toneFrom={set.toneFrom}
             toneTo={set.toneTo}
             showPrice={false}

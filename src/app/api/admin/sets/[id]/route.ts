@@ -31,6 +31,8 @@ export async function PATCH(
       description: setData.description || "",
       productDetails: setData.productDetails || "",
       careInstructions: setData.careInstructions || "",
+      coverImage: setData.coverImage ?? undefined,
+      images: setData.images ?? undefined,
       status: setData.status,
       toneFrom: setData.toneFrom,
       toneTo: setData.toneTo,
@@ -50,11 +52,11 @@ export async function PATCH(
       }
     }
 
-    for (const item of items as { id?: string; name: string; category: string; price: number; sortOrder: number; variants: { id?: string; size: string; sku: string; stock: number }[] }[]) {
+    for (const item of items as { id?: string; name: string; category: string; price: number; image?: string | null; sortOrder: number; variants: { id?: string; size: string; sku: string; stock: number }[] }[]) {
       if (item.id && existingIds.has(item.id)) {
         await prisma.item.update({
           where: { id: item.id },
-          data: { name: item.name, category: item.category, price: item.price, sortOrder: item.sortOrder },
+          data: { name: item.name, category: item.category, price: item.price, image: item.image || null, sortOrder: item.sortOrder },
         });
         const existingVars = existingItems.find((e) => e.id === item.id)?.variants || [];
         const existingVarIds = new Set(existingVars.map((v) => v.id));
@@ -84,6 +86,7 @@ export async function PATCH(
             name: item.name,
             category: item.category,
             price: item.price,
+            image: item.image || null,
             sortOrder: item.sortOrder,
             variants: {
               create: item.variants.map((v) => ({

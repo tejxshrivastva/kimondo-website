@@ -62,6 +62,7 @@ export default async function HomePage() {
                   slug={set.slug}
                   name={set.name}
                   tagline={set.tagline}
+                  coverImage={set.coverImage || undefined}
                   toneFrom={set.toneFrom}
                   toneTo={set.toneTo}
                   minPrice={minPrice}
