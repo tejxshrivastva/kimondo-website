@@ -55,7 +55,16 @@ export async function POST(req: Request) {
   const orderCount = await prisma.order.count();
   const orderNumber = `KMD-${String(orderCount + 1).padStart(5, "0")}`;
 
-  const razorpayOrder = await createRazorpayOrder(totalMinor, orderNumber);
+  let razorpayOrder;
+  try {
+    razorpayOrder = await createRazorpayOrder(totalMinor, orderNumber);
+  } catch (err) {
+    console.error("[Checkout] Razorpay order creation failed:", err);
+    return NextResponse.json(
+      { error: "Payment gateway error. Please try again." },
+      { status: 502 }
+    );
+  }
 
   const order = await prisma.order.create({
     data: {

@@ -122,7 +122,8 @@ function SummaryContent() {
         };
         // @ts-expect-error Razorpay is loaded from external script
         const rzp = new window.Razorpay(options);
-        rzp.on("payment.failed", () => {
+        rzp.on("payment.failed", (response: { error?: { description?: string; reason?: string } }) => {
+          console.error("[Razorpay] Payment failed:", response?.error?.description, response?.error?.reason);
           setPaymentState("failed");
         });
         rzp.open();

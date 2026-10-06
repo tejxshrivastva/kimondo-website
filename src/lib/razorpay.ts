@@ -31,7 +31,12 @@ export async function createRazorpayOrder(amountPaise: number, receipt: string) 
     }),
   });
 
-  return res.json();
+  const data = await res.json();
+  if (!res.ok || data.error) {
+    console.error("[Razorpay] Order creation failed:", JSON.stringify(data));
+    throw new Error(data.error?.description || "Razorpay order creation failed");
+  }
+  return data;
 }
 
 export async function verifyPayment(

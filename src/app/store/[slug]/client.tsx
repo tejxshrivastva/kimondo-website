@@ -57,12 +57,7 @@ export function SetDetailClient({
         onClick={() => openItemPicker(setSlug!, itemId!)}
         className="w-full flex items-center justify-between p-3 border border-[rgba(0,0,0,0.16)] hover:border-black transition-colors text-left"
       >
-        <div>
-          <span className="text-sm font-medium">{itemName}</span>
-          <span className="text-sm text-muted ml-2 capitalize">
-            {itemCategory}
-          </span>
-        </div>
+        <span className="text-sm font-medium">{itemName}</span>
         <span className="text-sm">{formatPrice(itemPrice!)}</span>
       </button>
     );
