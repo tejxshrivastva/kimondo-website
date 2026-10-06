@@ -28,11 +28,20 @@ export default async function HomePage() {
             <source src={homepage.heroVideo} type="video/mp4" />
           </video>
         ) : homepage?.heroImage ? (
-          <img
-            src={homepage.heroImage}
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+          <>
+            <img
+              src={homepage.heroImage}
+              alt=""
+              className={`absolute inset-0 w-full h-full object-cover ${homepage.heroImageMobile ? "hidden sm:block" : ""}`}
+            />
+            {homepage.heroImageMobile && (
+              <img
+                src={homepage.heroImageMobile}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover sm:hidden"
+              />
+            )}
+          </>
         ) : (
           <div className="absolute inset-0 bg-[#f8f8f8]" />
         )}

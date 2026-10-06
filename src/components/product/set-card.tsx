@@ -18,10 +18,11 @@ export function SetCard({
   name,
   coverImage,
   minPrice,
+  showPrice = true,
 }: SetCardProps) {
   return (
     <Link href={`/store/${slug}`} className="group block">
-      <div className="aspect-[4/5] mb-3 overflow-hidden bg-[#f0f0f0] rounded-xl">
+      <div className="aspect-[4/5] mb-3 overflow-hidden bg-[#f0f0f0]">
         {coverImage ? (
           <img
             src={coverImage}
@@ -37,20 +38,9 @@ export function SetCard({
         )}
       </div>
       <h3 className="text-sm font-medium">{name}</h3>
-      <div className="relative h-5 mt-0.5 overflow-hidden">
-        {minPrice != null ? (
-          <>
-            <p className="text-xs text-[#999] transition-all duration-300 ease-out group-hover:opacity-0 group-hover:-translate-y-1">
-              Shop now
-            </p>
-            <p className="absolute top-0 text-xs text-[#999] opacity-0 translate-y-1 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-              From {formatPrice(minPrice)}
-            </p>
-          </>
-        ) : (
-          <p className="text-xs text-[#999]">Shop now</p>
-        )}
-      </div>
+      <p className="text-xs text-[#999] mt-0.5">
+        {showPrice && minPrice != null ? `From ${formatPrice(minPrice)}` : "Shop now"}
+      </p>
     </Link>
   );
 }
