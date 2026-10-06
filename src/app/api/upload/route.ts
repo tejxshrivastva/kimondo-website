@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
+import { put } from "@vercel/blob";
 import { auth } from "@/lib/auth";
-import { writeFile, mkdir } from "fs/promises";
-import { join } from "path";
-import crypto from "crypto";
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
 export async function POST(req: Request) {
   const session = await auth();
@@ -20,24 +18,22 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
-    if (!file.type.startsWith("image/")) {
-      return NextResponse.json({ error: "Only image files are accepted" }, { status: 400 });
-    }
-
     if (file.size > MAX_FILE_SIZE) {
-      return NextResponse.json({ error: "File size exceeds 5MB limit" }, { status: 400 });
+      return NextResponse.json({ error: "File size exceeds 10MB limit" }, { status: 400 });
     }
 
     const ext = file.name.split(".").pop() || "jpg";
-    const filename = `${crypto.randomUUID()}.${ext}`;
-    const uploadDir = join(process.cwd(), "public", "uploads");
+    const safeName = file.name
+      .replace(/[^a-zA-Z0-9.-]/g, "-")
+      .replace(/-+/g, "-")
+      .toLowerCase();
+    const filename = `${Date.now()}-${safeName}`;
 
-    await mkdir(uploadDir, { recursive: true });
+    const blob = await put(`uploads/${filename}`, file, {
+      access: "public",
+    });
 
-    const buffer = Buffer.from(await file.arrayBuffer());
-    await writeFile(join(uploadDir, filename), buffer);
-
-    return NextResponse.json({ url: `/uploads/${filename}` });
+    return NextResponse.json({ url: blob.url });
   } catch (error) {
     console.error("Failed to upload file:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
