@@ -152,15 +152,19 @@ export default async function SetPage({ params }: Props) {
             You may also like
           </h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-6 lg:gap-x-4 lg:gap-y-8">
-            {recommendations.map((rec) => (
+            {recommendations.map((rec) => {
+              const recPrices = rec.items.map((i) => i.price);
+              const recMin = recPrices.length > 0 ? Math.min(...recPrices) : undefined;
+              return (
                 <SetCard
                   key={rec.id}
                   slug={rec.slug}
                   name={rec.name}
                   coverImage={rec.coverImage || undefined}
-                  showPrice={false}
+                  minPrice={recMin}
                 />
-            ))}
+              );
+            })}
           </div>
         </section>
       )}

@@ -90,15 +90,19 @@ export default async function HomePage() {
             </Link>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-6 lg:gap-x-4 lg:gap-y-8">
-            {sets.map((set) => (
+            {sets.map((set) => {
+              const prices = set.items.map((i) => i.price);
+              const minPrice = prices.length > 0 ? Math.min(...prices) : undefined;
+              return (
                 <SetCard
                   key={set.id}
                   slug={set.slug}
                   name={set.name}
                   coverImage={set.coverImage || undefined}
-                  showPrice={false}
+                  minPrice={minPrice}
                 />
-            ))}
+              );
+            })}
           </div>
         </section>
       )}
