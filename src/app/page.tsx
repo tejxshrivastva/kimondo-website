@@ -15,7 +15,7 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero - full viewport, video/image background */}
-      <section className="relative h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
+      <section className="relative min-h-[100dvh] -mt-16 pt-16 flex flex-col items-center justify-center text-center px-4 overflow-hidden">
         {/* Background: video if uploaded, image if uploaded, gray fallback */}
         {homepage?.heroVideo ? (
           <video
