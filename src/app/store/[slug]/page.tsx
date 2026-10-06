@@ -36,12 +36,6 @@ export default async function SetPage({ params }: Props) {
   const prices = set.items.map((i) => i.price);
   const minPrice = prices.length > 0 ? Math.min(...prices) : 0;
 
-  const sliderImages = set.items.map((item) => ({
-    id: item.id,
-    name: item.name,
-    image: item.image,
-  }));
-
   return (
     <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10">
       <Link
@@ -64,15 +58,26 @@ export default async function SetPage({ params }: Props) {
           </div>
         </div>
 
-        {/* Column 2: Image slider (per-item images) */}
-        <div>
-          <SetDetailClient
-            action="imageSlider"
-            setSlug={set.slug}
-            sliderImages={sliderImages}
-            toneFrom={set.toneFrom}
-            toneTo={set.toneTo}
-          />
+        {/* Column 2: Vertical image scroll */}
+        <div className="space-y-1">
+          {set.items.map((item) => (
+            <div key={item.id} className="aspect-[4/5] overflow-hidden">
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div
+                  className="w-full h-full"
+                  style={{
+                    background: `linear-gradient(150deg, ${set.toneFrom}, ${set.toneTo})`,
+                  }}
+                />
+              )}
+            </div>
+          ))}
         </div>
 
         {/* Column 3: Product details */}
