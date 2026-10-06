@@ -12,11 +12,14 @@ export async function PATCH(
   }
 
   const { id } = await params;
-  const { status } = await req.json();
+  const { status, trackingRef } = await req.json();
 
   const updateData: Record<string, unknown> = { status };
   if (status === "delivered") {
     updateData.deliveredAt = new Date();
+  }
+  if (status === "shipped" && trackingRef) {
+    updateData.trackingRef = trackingRef;
   }
 
   await prisma.order.update({

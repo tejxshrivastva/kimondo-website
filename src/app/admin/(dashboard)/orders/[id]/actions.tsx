@@ -4,18 +4,17 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-const STATUS_FLOW: Record<string, string[]> = {
-  confirmed: ["processing"],
-  processing: ["shipped"],
-  shipped: ["in_transit"],
-  in_transit: ["out_for_delivery"],
-  out_for_delivery: ["delivered"],
-  return_requested: ["return_approved"],
-  return_approved: ["return_picked"],
-  return_picked: ["return_completed", "refunded"],
-  exchange_requested: ["exchange_approved"],
-  exchange_approved: ["exchange_shipped"],
-  exchange_shipped: ["exchange_delivered"],
+const STATUS_FLOW: Record<string, { next: string; label: string }[]> = {
+  confirmed: [{ next: "accepted", label: "Accept order" }],
+  accepted: [{ next: "processed", label: "Mark as processed" }],
+  processed: [{ next: "shipped", label: "Mark as shipped" }],
+  return_requested: [{ next: "return_approved", label: "Approve return" }],
+  return_approved: [{ next: "reverse_pickup_scheduled", label: "Schedule pickup" }],
+  reverse_pickup_scheduled: [{ next: "return_received", label: "Mark received" }],
+  return_received: [{ next: "refunded", label: "Mark refunded" }],
+  exchange_requested: [{ next: "exchange_approved", label: "Approve exchange" }],
+  exchange_approved: [{ next: "exchange_dispatched", label: "Dispatch exchange" }],
+  exchange_dispatched: [{ next: "exchange_complete", label: "Mark complete" }],
 };
 
 export function OrderActions({
@@ -27,16 +26,26 @@ export function OrderActions({
 }) {
   const router = useRouter();
   const [updating, setUpdating] = useState(false);
-  const nextStatuses = STATUS_FLOW[currentStatus] || [];
+  const [trackingRef, setTrackingRef] = useState("");
+  const actions = STATUS_FLOW[currentStatus] || [];
 
-  if (nextStatuses.length === 0) return null;
+  if (actions.length === 0) return null;
+
+  const needsTracking = currentStatus === "processed";
 
   const handleUpdate = async (newStatus: string) => {
+    if (needsTracking && !trackingRef.trim()) {
+      toast.error("Tracking reference is required");
+      return;
+    }
     setUpdating(true);
+    const body: Record<string, string> = { status: newStatus };
+    if (needsTracking) body.trackingRef = trackingRef.trim();
+
     const res = await fetch(`/api/admin/orders/${orderId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status: newStatus }),
+      body: JSON.stringify(body),
     });
     setUpdating(false);
     if (res.ok) {
@@ -52,15 +61,26 @@ export function OrderActions({
       <h2 className="text-sm font-semibold tracking-[0.1em] uppercase mb-3">
         Actions
       </h2>
+      {needsTracking && (
+        <div className="mb-3">
+          <label className="text-xs font-medium text-muted block mb-1">Tracking reference</label>
+          <input
+            value={trackingRef}
+            onChange={(e) => setTrackingRef(e.target.value)}
+            placeholder="Enter tracking number"
+            className="w-full max-w-[300px] border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black"
+          />
+        </div>
+      )}
       <div className="flex gap-2">
-        {nextStatuses.map((status) => (
+        {actions.map(({ next, label }) => (
           <button
-            key={status}
-            onClick={() => handleUpdate(status)}
+            key={next}
+            onClick={() => handleUpdate(next)}
             disabled={updating}
-            className="h-10 px-4 bg-black text-white text-sm font-semibold rounded-[12px] disabled:opacity-50 capitalize"
+            className="h-10 px-4 bg-black text-white text-sm font-semibold rounded-[12px] disabled:opacity-50"
           >
-            Mark as {status.replace(/_/g, " ")}
+            {label}
           </button>
         ))}
       </div>

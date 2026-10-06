@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 const SECTIONS = [
   {
@@ -164,6 +165,12 @@ export function AdminSidebar({
             </div>
           </div>
         )}
+        <button
+          onClick={() => signOut({ callbackUrl: "/admin/login" })}
+          className="w-full mt-3 px-3 py-[9px] text-[12px] text-white/50 hover:text-white hover:bg-white/[0.08] rounded-[10px] transition-colors text-left"
+        >
+          Sign out
+        </button>
       </div>
     </aside>
   );

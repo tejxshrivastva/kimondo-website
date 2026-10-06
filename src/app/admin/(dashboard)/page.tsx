@@ -68,7 +68,11 @@ export default async function AdminOverview() {
   const statusLabel: Record<string, string> = {
     confirmed: "Placed",
     accepted: "Accepted",
+    processed: "Processed",
     shipped: "Shipped",
+    in_transit: "In transit",
+    out_for_delivery: "Out for delivery",
+    delivered: "Delivered",
     payment_pending: "Pending",
   };
 

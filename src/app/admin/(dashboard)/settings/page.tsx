@@ -51,7 +51,7 @@ export default function AdminSettingsPage() {
   };
 
   return (
-    <div className="max-w-[600px]">
+    <div className="max-w-[600px] px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display text-2xl">Settings</h1>
         <button onClick={handleSave} disabled={saving} className="flex items-center gap-2 h-10 px-6 bg-black text-white text-sm font-semibold rounded-[12px] disabled:opacity-50">

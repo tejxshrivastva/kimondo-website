@@ -16,7 +16,7 @@ export default async function AdminNotifyPage() {
   });
 
   return (
-    <div>
+    <div className="px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <h1 className="font-display text-2xl mb-6">Back-in-stock requests</h1>
       <div className="border border-[rgba(0,0,0,0.12)] rounded-[12px] overflow-hidden">
         <table className="w-full text-sm">

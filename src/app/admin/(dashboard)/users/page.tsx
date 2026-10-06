@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { RoleSelector } from "./role-selector";
 
 export default async function AdminUsersPage() {
   const users = await prisma.user.findMany({
@@ -14,7 +15,7 @@ export default async function AdminUsersPage() {
   });
 
   return (
-    <div>
+    <div className="px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <h1 className="font-display text-2xl mb-6">Users</h1>
       <div className="border border-[rgba(0,0,0,0.12)] rounded-[12px] overflow-hidden">
         <table className="w-full text-sm">
@@ -33,9 +34,7 @@ export default async function AdminUsersPage() {
                 <td className="p-3">{user.email}</td>
                 <td className="p-3 text-muted">{user.name || "—"}</td>
                 <td className="p-3">
-                  <span className={`text-xs px-2 py-0.5 rounded-full ${user.role === "admin" ? "bg-black text-white" : user.role === "editor" ? "bg-blue-100 text-blue-800" : "bg-surface"}`}>
-                    {user.role}
-                  </span>
+                  <RoleSelector userId={user.id} currentRole={user.role} />
                 </td>
                 <td className="p-3 text-center">{user._count.orders}</td>
                 <td className="p-3 text-xs text-muted">{user.createdAt.toLocaleDateString("en-IN")}</td>

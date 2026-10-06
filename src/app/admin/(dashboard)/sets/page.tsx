@@ -12,7 +12,7 @@ export default async function AdminSetsPage() {
   });
 
   return (
-    <div>
+    <div className="px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display text-2xl">Sets</h1>
         <Link

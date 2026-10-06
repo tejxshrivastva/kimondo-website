@@ -9,7 +9,7 @@ export default async function AdminBadgesPage() {
   });
 
   return (
-    <div>
+    <div className="px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <h1 className="font-display text-2xl mb-6">Badges</h1>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         {badges.map((badge) => (
