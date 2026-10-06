@@ -24,7 +24,7 @@ export async function GET() {
       totalMinor: o.totalMinor,
       createdAt: o.createdAt.toISOString(),
       deliveredAt: o.deliveredAt?.toISOString() || null,
-      trackingUrl: o.trackingUrl,
+      trackingRef: o.trackingUrl,
       lines: o.orderLines.map((l) => ({
         id: l.id,
         setName: l.setName,

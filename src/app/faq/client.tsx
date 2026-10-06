@@ -30,7 +30,7 @@ export function FaqAccordion({ faqs }: { faqs: FaqItem[] }) {
             />
           </button>
           {openId === faq.id && (
-            <p className="pb-5 text-muted-foreground font-body leading-relaxed">
+            <p className="pb-5 text-[#666666] leading-relaxed">
               {faq.answer}
             </p>
           )}

@@ -13,8 +13,8 @@ export default async function AdminBadgesPage() {
       <h1 className="font-display text-2xl mb-6">Badges</h1>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         {badges.map((badge) => (
-          <div key={badge.id} className="border border-[rgba(0,0,0,0.12)] rounded-[12px] p-4 text-center">
-            <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-surface flex items-center justify-center text-2xl">
+          <div key={badge.id} className="border border-[rgba(0,0,0,0.12)] p-4 text-center">
+            <div className="w-16 h-16 mx-auto mb-3 bg-[#f8f8f8] flex items-center justify-center text-2xl">
               {badge.artwork || "🏷"}
             </div>
             <p className="text-sm font-medium">{badge.name}</p>

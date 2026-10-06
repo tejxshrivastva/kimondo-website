@@ -13,10 +13,10 @@ export default async function AdminOrdersPage() {
   return (
     <div className="px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <h1 className="font-display text-2xl mb-6">Orders</h1>
-      <div className="border border-[rgba(0,0,0,0.12)] rounded-[12px] overflow-hidden">
+      <div className="border border-[rgba(0,0,0,0.12)] overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-[rgba(0,0,0,0.08)] bg-surface">
+            <tr className="border-b border-[rgba(0,0,0,0.08)] bg-[#f8f8f8]">
               <th className="text-left p-3 font-medium">Order</th>
               <th className="text-left p-3 font-medium">Customer</th>
               <th className="text-left p-3 font-medium">Items</th>
@@ -27,7 +27,7 @@ export default async function AdminOrdersPage() {
           </thead>
           <tbody>
             {orders.map((order) => (
-              <tr key={order.id} className="border-b border-[rgba(0,0,0,0.04)] last:border-0 hover:bg-surface/50">
+              <tr key={order.id} className="border-b border-[rgba(0,0,0,0.04)] last:border-0 hover:bg-[#f8f8f8]/50">
                 <td className="p-3">
                   <Link href={`/admin/orders/${order.id}`} className="font-mono text-xs font-medium hover:underline">
                     {order.orderNumber}
@@ -36,7 +36,7 @@ export default async function AdminOrdersPage() {
                 <td className="p-3 text-muted">{order.user.name || order.user.email}</td>
                 <td className="p-3 text-muted">{order._count.orderLines}</td>
                 <td className="p-3">
-                  <span className="text-xs px-2 py-0.5 bg-surface rounded-full capitalize">
+                  <span className="text-xs px-2 py-0.5 bg-[#f8f8f8] capitalize">
                     {order.status.replace(/_/g, " ")}
                   </span>
                 </td>

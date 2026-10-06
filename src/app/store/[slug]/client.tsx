@@ -34,7 +34,7 @@ export function SetDetailClient({
     return (
       <button
         onClick={() => openSetPicker(setSlug!)}
-        className="w-full h-12 bg-black text-white text-sm font-semibold rounded-[12px] hover:bg-black/90 transition-colors"
+        className="w-full h-12 bg-black text-white text-sm font-semibold hover:bg-black/90 transition-colors"
       >
         Shop the set
       </button>
@@ -45,7 +45,7 @@ export function SetDetailClient({
     return (
       <button
         onClick={() => openItemPicker(setSlug!, itemId!)}
-        className="h-10 px-5 bg-white text-black text-sm font-semibold rounded-[12px] border border-[rgba(0,0,0,0.16)] hover:bg-black hover:text-white transition-colors"
+        className="h-10 px-5 bg-white text-black text-sm font-semibold border border-[rgba(0,0,0,0.16)] hover:bg-black hover:text-white transition-colors"
       >
         Shop {itemName}
       </button>
@@ -56,7 +56,7 @@ export function SetDetailClient({
     return (
       <button
         onClick={() => openItemPicker(setSlug!, itemId!)}
-        className="w-full flex items-center justify-between p-3 border border-[rgba(0,0,0,0.16)] rounded-[12px] hover:border-black transition-colors text-left"
+        className="w-full flex items-center justify-between p-3 border border-[rgba(0,0,0,0.16)] hover:border-black transition-colors text-left"
       >
         <div>
           <span className="text-sm font-medium">{itemName}</span>
@@ -85,7 +85,7 @@ export function SetDetailClient({
               />
             </button>
             {detailsOpen && (
-              <p className="pb-4 text-sm text-muted-foreground font-body leading-relaxed">
+              <p className="pb-4 text-sm text-[#666666] leading-relaxed">
                 {productDetails}
               </p>
             )}
@@ -104,7 +104,7 @@ export function SetDetailClient({
               />
             </button>
             {careOpen && (
-              <p className="pb-4 text-sm text-muted-foreground font-body leading-relaxed">
+              <p className="pb-4 text-sm text-[#666666] leading-relaxed">
                 {careInstructions}
               </p>
             )}

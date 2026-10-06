@@ -7,8 +7,8 @@ import { toast } from "sonner";
 const ROLES = ["customer", "editor", "admin"] as const;
 const ROLE_STYLES: Record<string, string> = {
   admin: "bg-black text-white",
-  editor: "bg-blue-100 text-blue-800",
-  customer: "bg-[#f0f0ee] text-[#1a1a1a]",
+  editor: "bg-[#f8f8f8] text-black",
+  customer: "bg-[#f8f8f8] text-[#666666]",
 };
 
 export function RoleSelector({ userId, currentRole }: { userId: string; currentRole: string }) {
@@ -38,7 +38,7 @@ export function RoleSelector({ userId, currentRole }: { userId: string; currentR
       value={currentRole}
       onChange={(e) => handleChange(e.target.value)}
       disabled={updating}
-      className={`text-xs px-2 py-1 rounded-full border-0 cursor-pointer disabled:opacity-50 ${ROLE_STYLES[currentRole] || ROLE_STYLES.customer}`}
+      className={`text-xs px-2 py-1 border-0 cursor-pointer disabled:opacity-50 ${ROLE_STYLES[currentRole] || ROLE_STYLES.customer}`}
     >
       {ROLES.map((role) => (
         <option key={role} value={role}>{role}</option>

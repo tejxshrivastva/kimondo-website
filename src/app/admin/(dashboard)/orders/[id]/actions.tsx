@@ -68,7 +68,7 @@ export function OrderActions({
             value={trackingRef}
             onChange={(e) => setTrackingRef(e.target.value)}
             placeholder="Enter tracking number"
-            className="w-full max-w-[300px] border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black"
+            className="w-full max-w-[300px] border border-[rgba(0,0,0,0.16)] p-3 text-sm focus:outline-none focus:border-black"
           />
         </div>
       )}
@@ -78,7 +78,7 @@ export function OrderActions({
             key={next}
             onClick={() => handleUpdate(next)}
             disabled={updating}
-            className="h-10 px-4 bg-black text-white text-sm font-semibold rounded-[12px] disabled:opacity-50"
+            className="h-10 px-4 bg-black text-white text-sm font-semibold disabled:opacity-50"
           >
             {label}
           </button>

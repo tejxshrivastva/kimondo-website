@@ -142,8 +142,8 @@ function SummaryContent() {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center text-center p-6">
         <Loader2 size={48} className="animate-spin mb-4" />
-        <h2 className="font-display text-2xl mb-2">Processing payment</h2>
-        <p className="text-sm text-muted">Lorem ipsum dolor sit amet.</p>
+        <h2 className="font-display text-2xl mb-2">Processing your payment</h2>
+        <p className="text-sm text-[#666666]">Processing your payment</p>
       </div>
     );
   }
@@ -154,19 +154,19 @@ function SummaryContent() {
         <div className="w-16 h-16 rounded-full bg-black text-white flex items-center justify-center mb-6">
           <Check size={32} />
         </div>
-        <h2 className="font-display text-3xl mb-2">Thank you</h2>
-        <p className="text-muted mb-1">Lorem ipsum dolor sit amet.</p>
+        <h2 className="font-display text-3xl mb-2">Order placed</h2>
+        <p className="text-[#666666] mb-1">Your order has been confirmed. You will receive updates by email.</p>
         <p className="text-sm font-mono font-medium mb-8">{orderNumber}</p>
         <div className="flex gap-3">
           <button
             onClick={() => router.push("/profile")}
-            className="h-12 px-8 bg-black text-white text-sm font-semibold rounded-[12px]"
+            className="h-12 px-8 bg-black text-white text-sm font-semibold "
           >
             View orders
           </button>
           <button
             onClick={() => router.push("/store")}
-            className="h-12 px-8 border border-[rgba(0,0,0,0.16)] text-sm font-medium rounded-[12px]"
+            className="h-12 px-8 border border-[rgba(0,0,0,0.16)] text-sm font-medium "
           >
             Continue shopping
           </button>
@@ -178,14 +178,14 @@ function SummaryContent() {
   if (paymentState === "failed") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center text-center p-6">
-        <div className="w-16 h-16 rounded-full bg-red-600 text-white flex items-center justify-center mb-6">
+        <div className="w-16 h-16 rounded-full bg-black text-white flex items-center justify-center mb-6">
           <XIcon size={32} />
         </div>
         <h2 className="font-display text-3xl mb-2">Payment failed</h2>
-        <p className="text-sm text-muted mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p className="text-sm text-[#666666] mb-6">Payment could not be completed. No amount has been charged.</p>
         <button
           onClick={() => setPaymentState("idle")}
-          className="h-12 px-8 bg-black text-white text-sm font-semibold rounded-[12px]"
+          className="h-12 px-8 bg-black text-white text-sm font-semibold "
         >
           Try again
         </button>
@@ -199,7 +199,7 @@ function SummaryContent() {
 
       <section className="mb-6">
         <h2 className="text-sm font-semibold tracking-[0.1em] uppercase mb-3">Delivering to</h2>
-        <div className="p-4 border border-[rgba(0,0,0,0.12)] rounded-[12px]">
+        <div className="p-4 border border-[rgba(0,0,0,0.12)] ">
           <p className="text-sm font-medium">{address.fullName}</p>
           <p className="text-xs text-muted mt-1">
             {address.line1}{address.line2 ? `, ${address.line2}` : ""}
@@ -219,11 +219,11 @@ function SummaryContent() {
         <h2 className="text-sm font-semibold tracking-[0.1em] uppercase mb-3">
           {count} {count === 1 ? "item" : "items"}
         </h2>
-        <div className="border border-[rgba(0,0,0,0.12)] rounded-[12px] divide-y divide-[rgba(0,0,0,0.08)]">
+        <div className="border border-[rgba(0,0,0,0.12)]  divide-y divide-[rgba(0,0,0,0.08)]">
           {lines.map((line) => (
             <div key={line.id} className="flex items-center gap-3 p-4">
               <div
-                className="w-10 h-12 rounded-lg flex-shrink-0"
+                className="w-10 h-12  flex-shrink-0"
                 style={{
                   background: `linear-gradient(150deg, ${line.toneFrom}, ${line.toneTo})`,
                 }}
@@ -247,12 +247,12 @@ function SummaryContent() {
 
       <button
         onClick={handlePay}
-        className="w-full h-14 bg-black text-white text-sm font-semibold rounded-[12px] hover:bg-black/90 transition-colors"
+        className="w-full h-14 bg-black text-white text-sm font-semibold  hover:bg-black/90 transition-colors"
       >
         Pay {formatPrice(total)}
       </button>
       <p className="text-xs text-muted text-center mt-3">
-        Lorem ipsum dolor sit amet. Consectetur adipiscing elit.
+        All prices include GST. Free delivery across India.
       </p>
     </div>
   );

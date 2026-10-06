@@ -17,16 +17,16 @@ export default async function AdminSetsPage() {
         <h1 className="font-display text-2xl">Sets</h1>
         <Link
           href="/admin/sets/new"
-          className="flex items-center gap-2 h-10 px-4 bg-black text-white text-sm font-semibold rounded-[12px]"
+          className="flex items-center gap-2 h-10 px-4 bg-black text-white text-sm font-semibold"
         >
           <Plus size={16} /> New set
         </Link>
       </div>
 
-      <div className="border border-[rgba(0,0,0,0.12)] rounded-[12px] overflow-hidden">
+      <div className="border border-[rgba(0,0,0,0.12)] overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-[rgba(0,0,0,0.08)] bg-surface">
+            <tr className="border-b border-[rgba(0,0,0,0.08)] bg-[#f8f8f8]">
               <th className="text-left p-3 font-medium">Name</th>
               <th className="text-left p-3 font-medium">Status</th>
               <th className="text-left p-3 font-medium">Items</th>
@@ -48,7 +48,7 @@ export default async function AdminSetsPage() {
               return (
                 <tr
                   key={set.id}
-                  className="border-b border-[rgba(0,0,0,0.04)] last:border-0 hover:bg-surface/50"
+                  className="border-b border-[rgba(0,0,0,0.04)] last:border-0 hover:bg-[#f8f8f8]/50"
                 >
                   <td className="p-3">
                     <Link
@@ -61,12 +61,12 @@ export default async function AdminSetsPage() {
                   </td>
                   <td className="p-3">
                     <span
-                      className={`text-xs px-2 py-0.5 rounded-full ${
+                      className={`text-xs px-2 py-0.5 ${
                         set.status === "live"
-                          ? "bg-green-100 text-green-800"
+                          ? "bg-black text-white"
                           : set.status === "draft"
-                            ? "bg-yellow-100 text-yellow-800"
-                            : "bg-gray-100 text-gray-600"
+                            ? "bg-[#f8f8f8] text-[#666666]"
+                            : "bg-[#f8f8f8] text-[#666666]"
                       }`}
                     >
                       {set.status}

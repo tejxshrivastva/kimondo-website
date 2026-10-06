@@ -54,7 +54,7 @@ export default function AdminSettingsPage() {
     <div className="max-w-[600px] px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display text-2xl">Settings</h1>
-        <button onClick={handleSave} disabled={saving} className="flex items-center gap-2 h-10 px-6 bg-black text-white text-sm font-semibold rounded-[12px] disabled:opacity-50">
+        <button onClick={handleSave} disabled={saving} className="flex items-center gap-2 h-10 px-6 bg-black text-white text-sm font-semibold  disabled:opacity-50">
           <Save size={16} /> {saving ? "Saving..." : "Save"}
         </button>
       </div>
@@ -62,20 +62,20 @@ export default function AdminSettingsPage() {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="text-xs font-medium text-muted block mb-1">Return window (days)</label>
-            <input type="number" value={form.returnWindowDays} onChange={(e) => setForm((p) => ({ ...p, returnWindowDays: Number(e.target.value) }))} className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black" />
+            <input type="number" value={form.returnWindowDays} onChange={(e) => setForm((p) => ({ ...p, returnWindowDays: Number(e.target.value) }))} className="w-full border border-[rgba(0,0,0,0.16)]  p-3 text-sm focus:outline-none focus:border-black" />
           </div>
           <div>
             <label className="text-xs font-medium text-muted block mb-1">Exchange window (days)</label>
-            <input type="number" value={form.exchangeWindowDays} onChange={(e) => setForm((p) => ({ ...p, exchangeWindowDays: Number(e.target.value) }))} className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black" />
+            <input type="number" value={form.exchangeWindowDays} onChange={(e) => setForm((p) => ({ ...p, exchangeWindowDays: Number(e.target.value) }))} className="w-full border border-[rgba(0,0,0,0.16)]  p-3 text-sm focus:outline-none focus:border-black" />
           </div>
         </div>
         <div>
           <label className="text-xs font-medium text-muted block mb-1">Founder email</label>
-          <input value={form.founderEmail} onChange={(e) => setForm((p) => ({ ...p, founderEmail: e.target.value }))} className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black" />
+          <input value={form.founderEmail} onChange={(e) => setForm((p) => ({ ...p, founderEmail: e.target.value }))} className="w-full border border-[rgba(0,0,0,0.16)]  p-3 text-sm focus:outline-none focus:border-black" />
         </div>
         <div>
           <label className="text-xs font-medium text-muted block mb-1">Social links (JSON)</label>
-          <textarea value={form.socialLinks} onChange={(e) => setForm((p) => ({ ...p, socialLinks: e.target.value }))} rows={4} className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-xs font-mono focus:outline-none focus:border-black resize-none" />
+          <textarea value={form.socialLinks} onChange={(e) => setForm((p) => ({ ...p, socialLinks: e.target.value }))} rows={4} className="w-full border border-[rgba(0,0,0,0.16)]  p-3 text-xs font-mono focus:outline-none focus:border-black resize-none" />
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ import { SetCard } from "@/components/product/set-card";
 
 export const metadata = {
   title: "Store — Kimondo",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  description: "Every piece carries the mark of its maker — thread, loom, time.",
 };
 
 export default async function StorePage() {
@@ -21,12 +21,11 @@ export default async function StorePage() {
         <p className="text-[9px] font-semibold tracking-[0.2em] uppercase text-muted mb-2">
           The collection
         </p>
-        <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl">
+        <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl tracking-[0.3px]">
           Store
         </h1>
-        <p className="mt-2 text-muted font-body max-w-xl">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore.
+        <p className="mt-2 text-[#666666] max-w-xl">
+          Every piece carries the mark of its maker — thread, loom, time.
         </p>
       </div>
 

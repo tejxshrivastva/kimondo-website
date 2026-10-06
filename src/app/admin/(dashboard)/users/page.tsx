@@ -17,10 +17,10 @@ export default async function AdminUsersPage() {
   return (
     <div className="px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <h1 className="font-display text-2xl mb-6">Users</h1>
-      <div className="border border-[rgba(0,0,0,0.12)] rounded-[12px] overflow-hidden">
+      <div className="border border-[rgba(0,0,0,0.12)] overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-[rgba(0,0,0,0.08)] bg-surface">
+            <tr className="border-b border-[rgba(0,0,0,0.08)] bg-[#f8f8f8]">
               <th className="text-left p-3 font-medium">Email</th>
               <th className="text-left p-3 font-medium">Name</th>
               <th className="text-left p-3 font-medium">Role</th>

@@ -92,10 +92,10 @@ export function AuthDrawer() {
       />
 
       {/* Drawer */}
-      <div className="fixed top-0 right-0 h-full w-full max-w-[430px] bg-white z-[70] shadow-xl animate-slide-in flex flex-col">
+      <div className="fixed top-0 right-0 h-full w-full max-w-[430px] bg-white z-[70] animate-slide-in flex flex-col">
         <div className="flex items-center justify-between p-4 border-b border-[rgba(0,0,0,0.1)]">
           <h2 className="font-display text-xl">
-            {step === "success" ? "" : "Sign in"}
+            {step === "success" ? "" : "Sign in to your account"}
           </h2>
           <button onClick={closeAuth} className="p-2">
             <X size={20} />
@@ -105,15 +105,15 @@ export function AuthDrawer() {
         <div className="flex-1 p-6 overflow-y-auto">
           {step === "choose" && (
             <div className="space-y-6">
-              <p className="font-body text-muted-foreground">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              <p className="text-[#666666]">
+                Your cart, sizes, and order history are tied to your account.
               </p>
 
               {hasGoogle && (
                 <>
                   <button
                     onClick={handleGoogle}
-                    className="w-full h-12 border border-[rgba(0,0,0,0.24)] rounded-[12px] text-sm font-medium flex items-center justify-center gap-3 hover:bg-surface transition-colors"
+                    className="w-full h-12 border border-[rgba(0,0,0,0.24)] text-sm font-medium flex items-center justify-center gap-3 hover:bg-[#f8f8f8] transition-colors"
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24">
                       <path
@@ -150,27 +150,27 @@ export function AuthDrawer() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email"
-                  className="w-full border border-[rgba(0,0,0,0.24)] rounded-[12px] p-3 text-base focus:outline-none focus:border-black transition-colors"
+                  className="w-full border border-[rgba(0,0,0,0.24)] p-3 text-base focus:outline-none focus:border-black transition-colors"
                   onKeyDown={(e) => e.key === "Enter" && handleSendOtp()}
                 />
                 <button
                   onClick={handleSendOtp}
                   disabled={loading || !email.trim()}
-                  className="w-full h-12 bg-black text-white text-sm font-semibold rounded-[12px] hover:bg-black/90 transition-colors disabled:opacity-50"
+                  className="w-full h-12 bg-black text-white text-sm font-semibold hover:bg-black/90 transition-colors disabled:opacity-50"
                 >
                   {loading ? "Sending..." : "Send OTP"}
                 </button>
               </div>
 
-              <p className="text-xs text-muted text-center">
-                Lorem ipsum dolor sit amet.
+              <p className="text-xs text-[#666666] text-center">
+                By continuing you agree to our terms.
               </p>
             </div>
           )}
 
           {step === "otp" && (
             <div className="space-y-6">
-              <p className="font-body text-muted-foreground">
+              <p className="text-[#666666]">
                 Enter the 6-digit code sent to{" "}
                 <span className="text-foreground font-medium">{email}</span>
               </p>
@@ -184,7 +184,7 @@ export function AuthDrawer() {
                 }}
                 placeholder="000000"
                 maxLength={6}
-                className="w-full text-center text-3xl tracking-[0.5em] border border-[rgba(0,0,0,0.24)] rounded-[12px] p-4 focus:outline-none focus:border-black transition-colors font-mono"
+                className="w-full text-center text-3xl tracking-[0.5em] border border-[rgba(0,0,0,0.24)] p-4 focus:outline-none focus:border-black transition-colors font-mono"
                 autoFocus
               />
 
@@ -204,7 +204,7 @@ export function AuthDrawer() {
               <button
                 onClick={handleVerifyOtp}
                 disabled={loading || otp.length !== 6}
-                className="w-full h-12 bg-black text-white text-sm font-semibold rounded-[12px] hover:bg-black/90 transition-colors disabled:opacity-50"
+                className="w-full h-12 bg-black text-white text-sm font-semibold  hover:bg-black/90 transition-colors disabled:opacity-50"
               >
                 {loading ? "Verifying..." : "Verify & continue"}
               </button>

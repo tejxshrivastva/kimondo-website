@@ -15,32 +15,25 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative flex flex-col items-center justify-center text-center px-4 py-24 lg:py-40">
-        <div
-          className="absolute inset-0 -z-10"
-          style={{
-            background:
-              "linear-gradient(180deg, #f5f5f5 0%, #ffffff 100%)",
-          }}
-        />
-        <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl tracking-tight max-w-3xl">
-          Lorem ipsum dolor sit amet
+      <section className="relative flex flex-col items-center justify-center text-center px-4 py-32 lg:py-48 bg-[#f8f8f8]">
+        <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl tracking-[0.3px] max-w-3xl">
+          Woven by hand. Worn with intention.
         </h1>
-        <p className="mt-4 text-muted text-lg max-w-xl font-body">
-          Consectetur adipiscing elit, sed do eiusmod tempor
+        <p className="mt-4 text-[#666666] text-lg max-w-xl">
+          Each garment begins as raw yarn on a traditional loom and arrives as a finished thought.
         </p>
         <div className="mt-8 flex flex-col sm:flex-row gap-3">
           <Link
             href="/store"
-            className="inline-flex items-center justify-center h-12 px-8 bg-black text-white text-sm font-semibold rounded-[12px] hover:bg-black/90 transition-colors"
+            className="inline-flex items-center justify-center h-12 px-8 bg-black text-white text-sm font-semibold tracking-[0.2px] hover:bg-black/90 transition-colors"
           >
-            {homepage?.ctaLabel || "Lorem ipsum"}
+            {homepage?.ctaLabel || "Enter the collection"}
           </Link>
           <Link
             href="/archive"
-            className="inline-flex items-center justify-center h-12 px-8 border border-black text-sm font-semibold rounded-[12px] hover:bg-black hover:text-white transition-colors"
+            className="inline-flex items-center justify-center h-12 px-8 border border-black text-sm font-semibold hover:bg-black hover:text-white transition-colors"
           >
-            Dolor sit amet
+            The archive
           </Link>
         </div>
       </section>
@@ -49,7 +42,7 @@ export default async function HomePage() {
       {sets.length > 0 && (
         <section className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pb-16 lg:pb-24">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-[9px] font-semibold tracking-[0.2em] uppercase text-muted">
+            <h2 className="text-[9px] font-semibold tracking-[0.3em] uppercase text-muted">
               The collection
             </h2>
             <Link

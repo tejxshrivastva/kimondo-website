@@ -32,10 +32,9 @@ export default function FounderPage() {
         <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center mx-auto mb-6">
           <Check size={24} />
         </div>
-        <h1 className="font-display text-3xl mb-3">Lorem ipsum</h1>
-        <p className="text-muted font-body">
-          Dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua.
+        <h1 className="font-display text-3xl mb-3">Message received</h1>
+        <p className="text-[#666666]">
+          We read every letter. If a reply is needed, it will come from the founder directly.
         </p>
         <button
           onClick={() => {
@@ -56,8 +55,8 @@ export default function FounderPage() {
       <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl mb-2">
         Write to the founder
       </h1>
-      <p className="text-muted font-body mb-8">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      <p className="text-[#666666] mb-8">
+        A direct line to the person behind the cloth.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -66,7 +65,7 @@ export default function FounderPage() {
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Your message..."
           rows={6}
-          className="w-full border border-[rgba(0,0,0,0.24)] rounded-[12px] p-3 text-base font-body resize-none focus:outline-none focus:border-black transition-colors"
+          className="w-full border border-[rgba(0,0,0,0.24)] p-3 text-base resize-none focus:outline-none focus:border-black transition-colors"
           required
         />
         <input
@@ -74,13 +73,13 @@ export default function FounderPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Your email"
-          className="w-full border border-[rgba(0,0,0,0.24)] rounded-[12px] p-3 text-base focus:outline-none focus:border-black transition-colors"
+          className="w-full border border-[rgba(0,0,0,0.24)] p-3 text-base focus:outline-none focus:border-black transition-colors"
           required
         />
         <button
           type="submit"
           disabled={loading || !message.trim() || !email.trim()}
-          className="w-full h-12 bg-black text-white text-sm font-semibold rounded-[12px] hover:bg-black/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+          className="w-full h-12 bg-black text-white text-sm font-semibold hover:bg-black/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
         >
           <Send size={16} />
           Send message

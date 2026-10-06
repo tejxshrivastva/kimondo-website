@@ -35,18 +35,18 @@ export default async function AdminOrderDetailPage({
             })}
           </p>
         </div>
-        <span className="text-sm px-3 py-1 bg-surface rounded-full capitalize">
+        <span className="text-sm px-3 py-1 bg-[#f8f8f8] capitalize">
           {order.status.replace(/_/g, " ")}
         </span>
       </div>
 
       <div className="grid grid-cols-2 gap-6 mb-6">
-        <div className="border border-[rgba(0,0,0,0.12)] rounded-[12px] p-4">
+        <div className="border border-[rgba(0,0,0,0.12)] p-4">
           <p className="text-xs font-semibold tracking-[0.1em] uppercase text-muted mb-2">Customer</p>
           <p className="text-sm font-medium">{order.user.name || order.user.email}</p>
           <p className="text-xs text-muted">{order.user.email}</p>
         </div>
-        <div className="border border-[rgba(0,0,0,0.12)] rounded-[12px] p-4">
+        <div className="border border-[rgba(0,0,0,0.12)] p-4">
           <p className="text-xs font-semibold tracking-[0.1em] uppercase text-muted mb-2">Delivery</p>
           <p className="text-sm">{address.fullName}</p>
           <p className="text-xs text-muted">{address.line1}{address.line2 ? `, ${address.line2}` : ""}</p>
@@ -55,10 +55,10 @@ export default async function AdminOrderDetailPage({
         </div>
       </div>
 
-      <div className="border border-[rgba(0,0,0,0.12)] rounded-[12px] mb-6">
+      <div className="border border-[rgba(0,0,0,0.12)] mb-6">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-[rgba(0,0,0,0.08)] bg-surface">
+            <tr className="border-b border-[rgba(0,0,0,0.08)] bg-[#f8f8f8]">
               <th className="text-left p-3 font-medium">Item</th>
               <th className="text-left p-3 font-medium">Size</th>
               <th className="text-center p-3 font-medium">Qty</th>
@@ -93,7 +93,7 @@ export default async function AdminOrderDetailPage({
         <div className="mt-6">
           <h2 className="text-sm font-semibold tracking-[0.1em] uppercase mb-3">Returns/Exchanges</h2>
           {order.returnRequests.map((ret) => (
-            <div key={ret.id} className="border border-[rgba(0,0,0,0.12)] rounded-[12px] p-4 mb-2">
+            <div key={ret.id} className="border border-[rgba(0,0,0,0.12)] p-4 mb-2">
               <p className="text-sm font-medium capitalize">{ret.type}</p>
               <p className="text-xs text-muted">{ret.reason}</p>
               <p className="text-xs mt-1">

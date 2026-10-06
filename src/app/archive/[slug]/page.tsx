@@ -44,15 +44,15 @@ export default async function CampaignPage({ params }: Props) {
       {/* Body */}
       <div className="max-w-[720px] mx-auto px-4 sm:px-6 py-12 lg:py-16">
         {campaign.body && (
-          <div className="font-body text-muted-foreground leading-relaxed text-lg whitespace-pre-line">
+          <div className="text-[#666666] leading-relaxed text-lg whitespace-pre-line">
             {campaign.body}
           </div>
         )}
 
         {/* Image placeholders */}
         <div className="grid grid-cols-2 gap-4 my-10">
-          <div className="aspect-[3/4] rounded-[12px] bg-surface" />
-          <div className="aspect-[3/4] rounded-[12px] bg-surface" />
+          <div className="aspect-[3/4] bg-surface" />
+          <div className="aspect-[3/4] bg-surface" />
         </div>
 
         {/* Credits */}
@@ -79,7 +79,7 @@ export default async function CampaignPage({ params }: Props) {
           <Link
             key={set.id}
             href={`/store/${set.slug}`}
-            className="mt-8 block w-full h-12 bg-black text-white text-sm font-semibold rounded-[12px] hover:bg-black/90 transition-colors flex items-center justify-center"
+            className="mt-8 block w-full h-12 bg-black text-white text-sm font-semibold hover:bg-black/90 transition-colors flex items-center justify-center"
           >
             Shop the {set.name} set
           </Link>

@@ -79,7 +79,7 @@ export default async function AdminOverview() {
   return (
     <div className="px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <div className="mb-7">
-        <div className="text-[9px] font-semibold tracking-[0.2em] uppercase text-[#8a8a86] mb-[3px]">
+        <div className="text-[9px] font-semibold tracking-[0.2em] uppercase text-[#666666] mb-[3px]">
           Dashboard
         </div>
         <div className="font-display text-[clamp(18px,2.4vw,26px)] leading-[1.05]">
@@ -91,22 +91,22 @@ export default async function AdminOverview() {
         {stats.map(({ label, value, desc }) => (
           <div
             key={label}
-            className="bg-white border border-[#e2e1de] rounded-[12px] px-[22px] py-5"
+            className="bg-white border border-[rgba(0,0,0,0.12)] px-[22px] py-5"
           >
-            <div className="text-[9px] font-semibold tracking-[0.18em] uppercase text-[#8a8a86] mb-[14px]">
+            <div className="text-[9px] font-semibold tracking-[0.18em] uppercase text-[#666666] mb-[14px]">
               {label}
             </div>
             <div className="font-display text-[clamp(30px,3.2vw,40px)] leading-none">
               {value}
             </div>
-            <div className="text-[11.5px] text-[#8a8a86] mt-[6px]">{desc}</div>
+            <div className="text-[11.5px] text-[#666666] mt-[6px]">{desc}</div>
           </div>
         ))}
       </div>
 
       <div className="grid lg:grid-cols-2 gap-5">
-        <div className="bg-white border border-[#e2e1de] rounded-[12px] overflow-x-auto">
-          <div className="px-[22px] py-[18px] border-b border-[#eeede9] flex items-center justify-between">
+        <div className="bg-white border border-[rgba(0,0,0,0.12)] overflow-x-auto">
+          <div className="px-[22px] py-[18px] border-b border-[rgba(0,0,0,0.08)] flex items-center justify-between">
             <div className="font-display text-[18px]">Orders to action</div>
             <Link
               href="/admin/orders"
@@ -116,7 +116,7 @@ export default async function AdminOverview() {
             </Link>
           </div>
           {actionOrders.length === 0 ? (
-            <div className="px-[22px] py-10 text-center text-[13px] text-[#8a8a86]">
+            <div className="px-[22px] py-10 text-center text-[13px] text-[#666666]">
               No orders need attention
             </div>
           ) : (
@@ -133,20 +133,20 @@ export default async function AdminOverview() {
                 <Link
                   key={order.id}
                   href={`/admin/orders/${order.id}`}
-                  className="flex items-center gap-4 px-[22px] py-[15px] border-b border-[#f2f1ee] last:border-0 hover:bg-[#fafaf8] transition-colors"
+                  className="flex items-center gap-4 px-[22px] py-[15px] border-b border-[rgba(0,0,0,0.06)] last:border-0 hover:bg-[#f8f8f8] transition-colors"
                 >
-                  <div className="w-10 h-[50px] rounded-lg bg-gradient-to-br from-[#d9d9d9] to-[#bcbcbc] flex-shrink-0" />
+                  <div className="w-10 h-[50px] bg-[#f8f8f8] flex-shrink-0" />
                   <div className="flex-1 min-w-0">
                     <div className="text-[13.5px] font-semibold">
                       #{order.orderNumber}
                     </div>
-                    <div className="text-[11.5px] text-[#8a8a86]">
+                    <div className="text-[11.5px] text-[#666666]">
                       {setNames.join(", ")} &middot;{" "}
                       {order.orderLines.length} item
                       {order.orderLines.length !== 1 ? "s" : ""}
                     </div>
                   </div>
-                  <span className="text-[11px] font-medium px-[10px] py-[4px] rounded-full bg-[#f0f0ee] text-[#1a1a1a]">
+                  <span className="text-[11px] font-medium px-[10px] py-[4px] bg-[#f8f8f8] text-[#1a1a1a]">
                     {displayStatus}
                   </span>
                   <span className="font-display text-[16px]">
@@ -159,33 +159,33 @@ export default async function AdminOverview() {
           )}
         </div>
 
-        <div className="bg-white border border-[#e2e1de] rounded-[12px] overflow-x-auto">
-          <div className="px-[22px] py-[18px] border-b border-[#eeede9] font-display text-[18px]">
+        <div className="bg-white border border-[rgba(0,0,0,0.12)] overflow-x-auto">
+          <div className="px-[22px] py-[18px] border-b border-[rgba(0,0,0,0.08)] font-display text-[18px]">
             Low &amp; out of stock
           </div>
           {lowStockVariants.length === 0 ? (
-            <div className="px-[22px] py-10 text-center text-[13px] text-[#8a8a86]">
+            <div className="px-[22px] py-10 text-center text-[13px] text-[#666666]">
               All variants well stocked
             </div>
           ) : (
             lowStockVariants.map((v) => (
               <div
                 key={v.id}
-                className="flex items-center gap-3 px-[22px] py-[13px] border-b border-[#f2f1ee] last:border-0"
+                className="flex items-center gap-3 px-[22px] py-[13px] border-b border-[rgba(0,0,0,0.06)] last:border-0"
               >
                 <div className="flex-1 min-w-0">
                   <div className="text-[12.5px] font-semibold">
                     {v.item.name} &middot; {v.size}
                   </div>
-                  <div className="text-[11px] text-[#8a8a86]">
+                  <div className="text-[11px] text-[#666666]">
                     {v.item.set.name}
                   </div>
                 </div>
                 <span
-                  className={`text-[11px] font-semibold px-[10px] py-[4px] rounded-full ${
+                  className={`text-[11px] font-semibold px-[10px] py-[4px] ${
                     v.stock === 0
                       ? "bg-black text-white"
-                      : "bg-[#f0f0ee] text-[#1a1a1a]"
+                      : "bg-[#f8f8f8] text-[#1a1a1a]"
                   }`}
                 >
                   {v.stock === 0 ? "Out" : `${v.stock} left`}

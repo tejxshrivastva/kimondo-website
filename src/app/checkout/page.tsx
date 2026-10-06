@@ -89,8 +89,8 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 text-center">
         <h1 className="font-display text-2xl mb-3">Your cart is empty</h1>
-        <p className="text-sm text-muted mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <button onClick={() => router.push("/store")} className="h-12 px-8 bg-black text-white text-sm font-semibold rounded-[12px]">
+        <p className="text-sm text-[#666666] mb-6">Add pieces from the collection before checking out.</p>
+        <button onClick={() => router.push("/store")} className="h-12 px-8 bg-black text-white text-sm font-semibold ">
           Browse the store
         </button>
       </div>
@@ -109,9 +109,9 @@ export default function CheckoutPage() {
             {addresses.map((addr) => (
               <label
                 key={addr.id}
-                className={`flex items-start gap-3 p-4 border rounded-[12px] cursor-pointer transition-colors ${
+                className={`flex items-start gap-3 p-4 border  cursor-pointer transition-colors ${
                   selectedAddressId === addr.id
-                    ? "border-black bg-surface"
+                    ? "border-black bg-[#f8f8f8]"
                     : "border-[rgba(0,0,0,0.12)] hover:border-[rgba(0,0,0,0.24)]"
                 }`}
               >
@@ -133,7 +133,7 @@ export default function CheckoutPage() {
                   </p>
                   <p className="text-xs text-muted">{addr.phone}</p>
                 </div>
-                <span className="text-[10px] font-medium tracking-wider uppercase text-muted border border-[rgba(0,0,0,0.12)] px-2 py-0.5 rounded-full">
+                <span className="text-[10px] font-medium tracking-wider uppercase text-muted border border-[rgba(0,0,0,0.12)] px-2 py-0.5 ">
                   {addr.label}
                 </span>
               </label>
@@ -148,7 +148,7 @@ export default function CheckoutPage() {
         )}
 
         {(addresses.length === 0 || showAddressForm) && (
-          <div className="border border-[rgba(0,0,0,0.12)] rounded-[12px] p-4 space-y-3">
+          <div className="border border-[rgba(0,0,0,0.12)]  p-4 space-y-3">
             <div className="flex items-center gap-2 mb-2">
               <MapPin size={16} className="text-muted" />
               <span className="text-sm font-medium">
@@ -160,48 +160,48 @@ export default function CheckoutPage() {
                 placeholder="Full name"
                 value={formData.fullName}
                 onChange={(e) => setFormData((p) => ({ ...p, fullName: e.target.value }))}
-                className="col-span-2 border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black"
+                className="col-span-2 border border-[rgba(0,0,0,0.16)]  p-3 text-sm focus:outline-none focus:border-black"
               />
               <input
                 placeholder="Phone"
                 value={formData.phone}
                 onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))}
-                className="col-span-2 border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black"
+                className="col-span-2 border border-[rgba(0,0,0,0.16)]  p-3 text-sm focus:outline-none focus:border-black"
               />
               <input
                 placeholder="Address line 1"
                 value={formData.line1}
                 onChange={(e) => setFormData((p) => ({ ...p, line1: e.target.value }))}
-                className="col-span-2 border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black"
+                className="col-span-2 border border-[rgba(0,0,0,0.16)]  p-3 text-sm focus:outline-none focus:border-black"
               />
               <input
                 placeholder="Line 2 (optional)"
                 value={formData.line2}
                 onChange={(e) => setFormData((p) => ({ ...p, line2: e.target.value }))}
-                className="col-span-2 border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black"
+                className="col-span-2 border border-[rgba(0,0,0,0.16)]  p-3 text-sm focus:outline-none focus:border-black"
               />
               <input
                 placeholder="City"
                 value={formData.city}
                 onChange={(e) => setFormData((p) => ({ ...p, city: e.target.value }))}
-                className="border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black"
+                className="border border-[rgba(0,0,0,0.16)]  p-3 text-sm focus:outline-none focus:border-black"
               />
               <input
                 placeholder="State"
                 value={formData.state}
                 onChange={(e) => setFormData((p) => ({ ...p, state: e.target.value }))}
-                className="border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black"
+                className="border border-[rgba(0,0,0,0.16)]  p-3 text-sm focus:outline-none focus:border-black"
               />
               <input
                 placeholder="Pincode"
                 value={formData.pincode}
                 onChange={(e) => setFormData((p) => ({ ...p, pincode: e.target.value }))}
-                className="border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black"
+                className="border border-[rgba(0,0,0,0.16)]  p-3 text-sm focus:outline-none focus:border-black"
               />
               <select
                 value={formData.label}
                 onChange={(e) => setFormData((p) => ({ ...p, label: e.target.value }))}
-                className="border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black bg-white"
+                className="border border-[rgba(0,0,0,0.16)]  p-3 text-sm focus:outline-none focus:border-black bg-white"
               >
                 <option value="Home">Home</option>
                 <option value="Work">Work</option>
@@ -212,7 +212,7 @@ export default function CheckoutPage() {
               {showAddressForm && (
                 <button
                   onClick={() => setShowAddressForm(false)}
-                  className="h-10 px-6 text-sm font-medium border border-[rgba(0,0,0,0.16)] rounded-[12px]"
+                  className="h-10 px-6 text-sm font-medium border border-[rgba(0,0,0,0.16)] "
                 >
                   Cancel
                 </button>
@@ -220,7 +220,7 @@ export default function CheckoutPage() {
               <button
                 onClick={handleSaveAddress}
                 disabled={saving}
-                className="h-10 px-6 bg-black text-white text-sm font-semibold rounded-[12px] disabled:opacity-50"
+                className="h-10 px-6 bg-black text-white text-sm font-semibold  disabled:opacity-50"
               >
                 {saving ? "Saving..." : "Save address"}
               </button>
@@ -231,11 +231,11 @@ export default function CheckoutPage() {
 
       <section className="mb-8">
         <h2 className="text-sm font-semibold tracking-[0.1em] uppercase mb-4">Order summary</h2>
-        <div className="border border-[rgba(0,0,0,0.12)] rounded-[12px] divide-y divide-[rgba(0,0,0,0.08)]">
+        <div className="border border-[rgba(0,0,0,0.12)]  divide-y divide-[rgba(0,0,0,0.08)]">
           {lines.map((line) => (
             <div key={line.id} className="flex items-center gap-3 p-4">
               <div
-                className="w-12 h-14 rounded-lg flex-shrink-0"
+                className="w-12 h-14  flex-shrink-0"
                 style={{
                   background: `linear-gradient(150deg, ${line.toneFrom}, ${line.toneTo})`,
                 }}
@@ -263,11 +263,11 @@ export default function CheckoutPage() {
             }
           }}
           disabled={!selectedAddressId}
-          className="w-full h-12 bg-black text-white text-sm font-semibold rounded-[12px] mt-6 flex items-center justify-center gap-2 hover:bg-black/90 transition-colors disabled:opacity-50"
+          className="w-full h-12 bg-black text-white text-sm font-semibold  mt-6 flex items-center justify-center gap-2 hover:bg-black/90 transition-colors disabled:opacity-50"
         >
           Continue to payment <ChevronRight size={16} />
         </button>
-        <p className="text-xs text-muted text-center mt-3">Lorem ipsum dolor sit amet.</p>
+        <p className="text-xs text-[#666666] text-center mt-3">All prices include GST. Free delivery across India.</p>
       </section>
     </div>
   );

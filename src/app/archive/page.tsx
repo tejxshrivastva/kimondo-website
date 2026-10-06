@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 
 export const metadata = {
   title: "Archive — Kimondo",
-  description: "Lorem ipsum dolor sit amet.",
+  description: "Stories behind the cloth.",
 };
 
 export default async function ArchivePage() {
@@ -14,7 +14,7 @@ export default async function ArchivePage() {
 
   return (
     <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
-      <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl mb-8 lg:mb-12">
+      <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl tracking-[0.3px] mb-8 lg:mb-12">
         The archive
       </h1>
 
@@ -25,7 +25,7 @@ export default async function ArchivePage() {
             href={`/archive/${c.slug}`}
             className="group block"
           >
-            <div className="aspect-[3/2] rounded-[12px] bg-surface mb-3" />
+            <div className="aspect-[3/2] bg-surface mb-3" />
             <h2 className="font-display text-xl group-hover:underline">
               {c.title}
             </h2>

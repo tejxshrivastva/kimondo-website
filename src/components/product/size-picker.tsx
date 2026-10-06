@@ -104,7 +104,7 @@ export function SizePicker() {
     <>
       <div className="fixed inset-0 bg-black/30 z-[75]" onClick={closePicker} />
 
-      <div className="fixed bottom-0 left-0 right-0 max-w-[460px] mx-auto bg-white z-[75] rounded-t-[16px] shadow-xl animate-slide-up max-h-[80vh] flex flex-col">
+      <div className="fixed bottom-0 left-0 right-0 max-w-[460px] mx-auto bg-white z-[75] animate-slide-up max-h-[80vh] flex flex-col">
         <div className="flex items-center justify-between p-4 border-b border-[rgba(0,0,0,0.1)]">
           <div>
             {setData && (
@@ -138,7 +138,7 @@ export function SizePicker() {
                       }
                       setSelectedSize(v.size);
                     }}
-                    className={`min-w-[48px] h-10 px-3 rounded-[12px] text-sm font-medium border transition-colors ${
+                    className={`min-w-[48px] h-10 px-3  text-sm font-medium border transition-colors ${
                       v.stock < 1
                         ? "border-[rgba(0,0,0,0.1)] text-muted line-through cursor-pointer"
                         : selectedSize === v.size
@@ -153,7 +153,7 @@ export function SizePicker() {
               <button
                 onClick={handleAddItem}
                 disabled={!selectedSize}
-                className="w-full h-12 bg-black text-white text-sm font-semibold rounded-[12px] hover:bg-black/90 transition-colors disabled:opacity-50"
+                className="w-full h-12 bg-black text-white text-sm font-semibold  hover:bg-black/90 transition-colors disabled:opacity-50"
               >
                 Add to cart
               </button>
@@ -167,7 +167,7 @@ export function SizePicker() {
                 return (
                   <div
                     key={item.id}
-                    className="p-3 border border-[rgba(0,0,0,0.1)] rounded-[12px]"
+                    className="p-3 border border-[rgba(0,0,0,0.1)] "
                   >
                     <label className="flex items-center gap-3 cursor-pointer">
                       <input
@@ -208,7 +208,7 @@ export function SizePicker() {
                                 [item.category]: v.size,
                               }));
                             }}
-                            className={`min-w-[40px] h-8 px-2 rounded-lg text-xs font-medium border transition-colors ${
+                            className={`min-w-[40px] h-8 px-2  text-xs font-medium border transition-colors ${
                               v.stock < 1
                                 ? "border-[rgba(0,0,0,0.1)] text-muted line-through"
                                 : catSizes[item.category] === v.size
@@ -232,7 +232,7 @@ export function SizePicker() {
               <button
                 onClick={handleAddSet}
                 disabled={checkedCount === 0}
-                className="w-full h-12 bg-black text-white text-sm font-semibold rounded-[12px] hover:bg-black/90 transition-colors disabled:opacity-50"
+                className="w-full h-12 bg-black text-white text-sm font-semibold  hover:bg-black/90 transition-colors disabled:opacity-50"
               >
                 Add {checkedCount} {checkedCount === 1 ? "item" : "items"} to
                 cart

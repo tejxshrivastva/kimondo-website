@@ -170,7 +170,7 @@ export function SetEditor({
         <button
           onClick={handleSave}
           disabled={saving}
-          className="flex items-center gap-2 h-10 px-6 bg-black text-white text-sm font-semibold rounded-[12px] disabled:opacity-50"
+          className="flex items-center gap-2 h-10 px-6 bg-black text-white text-sm font-semibold disabled:opacity-50"
         >
           <Save size={16} /> {saving ? "Saving..." : "Save"}
         </button>
@@ -183,7 +183,7 @@ export function SetEditor({
             <input
               value={form.name}
               onChange={(e) => updateField("name", e.target.value)}
-              className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black"
+              className="w-full border border-[rgba(0,0,0,0.16)] p-3 text-sm focus:outline-none focus:border-black"
             />
           </div>
           <div>
@@ -191,7 +191,7 @@ export function SetEditor({
             <input
               value={form.slug}
               onChange={(e) => updateField("slug", e.target.value)}
-              className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black"
+              className="w-full border border-[rgba(0,0,0,0.16)] p-3 text-sm focus:outline-none focus:border-black"
             />
           </div>
           <div>
@@ -199,7 +199,7 @@ export function SetEditor({
             <select
               value={form.status}
               onChange={(e) => updateField("status", e.target.value)}
-              className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm bg-white focus:outline-none focus:border-black"
+              className="w-full border border-[rgba(0,0,0,0.16)] p-3 text-sm bg-white focus:outline-none focus:border-black"
             >
               <option value="draft">Draft</option>
               <option value="live">Live</option>
@@ -211,7 +211,7 @@ export function SetEditor({
             <input
               value={form.tagline || ""}
               onChange={(e) => updateField("tagline", e.target.value)}
-              className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black"
+              className="w-full border border-[rgba(0,0,0,0.16)] p-3 text-sm focus:outline-none focus:border-black"
             />
           </div>
           <div className="col-span-2">
@@ -220,7 +220,7 @@ export function SetEditor({
               value={form.description || ""}
               onChange={(e) => updateField("description", e.target.value)}
               rows={3}
-              className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black resize-none"
+              className="w-full border border-[rgba(0,0,0,0.16)] p-3 text-sm focus:outline-none focus:border-black resize-none"
             />
           </div>
           <div>
@@ -229,7 +229,7 @@ export function SetEditor({
               type="color"
               value={form.toneFrom}
               onChange={(e) => updateField("toneFrom", e.target.value)}
-              className="w-full h-10 rounded-[12px] cursor-pointer"
+              className="w-full h-10 cursor-pointer"
             />
           </div>
           <div>
@@ -238,7 +238,7 @@ export function SetEditor({
               type="color"
               value={form.toneTo}
               onChange={(e) => updateField("toneTo", e.target.value)}
-              className="w-full h-10 rounded-[12px] cursor-pointer"
+              className="w-full h-10 cursor-pointer"
             />
           </div>
           <div>
@@ -246,7 +246,7 @@ export function SetEditor({
             <select
               value={form.campaignId || ""}
               onChange={(e) => updateField("campaignId", e.target.value || null)}
-              className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm bg-white focus:outline-none focus:border-black"
+              className="w-full border border-[rgba(0,0,0,0.16)] p-3 text-sm bg-white focus:outline-none focus:border-black"
             >
               <option value="">None</option>
               {campaigns.map((c) => (
@@ -259,7 +259,7 @@ export function SetEditor({
             <select
               value={form.badgeId || ""}
               onChange={(e) => updateField("badgeId", e.target.value || null)}
-              className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm bg-white focus:outline-none focus:border-black"
+              className="w-full border border-[rgba(0,0,0,0.16)] p-3 text-sm bg-white focus:outline-none focus:border-black"
             >
               <option value="">None</option>
               {badges.map((b) => (
@@ -273,7 +273,7 @@ export function SetEditor({
               value={form.productDetails || ""}
               onChange={(e) => updateField("productDetails", e.target.value)}
               rows={3}
-              className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black resize-none"
+              className="w-full border border-[rgba(0,0,0,0.16)] p-3 text-sm focus:outline-none focus:border-black resize-none"
             />
           </div>
           <div className="col-span-2">
@@ -282,7 +282,7 @@ export function SetEditor({
               value={form.careInstructions || ""}
               onChange={(e) => updateField("careInstructions", e.target.value)}
               rows={3}
-              className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black resize-none"
+              className="w-full border border-[rgba(0,0,0,0.16)] p-3 text-sm focus:outline-none focus:border-black resize-none"
             />
           </div>
         </section>
@@ -304,7 +304,7 @@ export function SetEditor({
             {form.items.map((item, idx) => (
               <div
                 key={idx}
-                className="border border-[rgba(0,0,0,0.12)] rounded-[12px] p-4"
+                className="border border-[rgba(0,0,0,0.12)] p-4"
               >
                 <div className="flex items-start gap-3 mb-3">
                   <div className="flex-1 grid grid-cols-3 gap-3">
@@ -312,12 +312,12 @@ export function SetEditor({
                       value={item.name}
                       onChange={(e) => updateItem(idx, "name", e.target.value)}
                       placeholder="Item name"
-                      className="border border-[rgba(0,0,0,0.16)] rounded-lg p-2 text-sm focus:outline-none focus:border-black"
+                      className="border border-[rgba(0,0,0,0.16)] p-2 text-sm focus:outline-none focus:border-black"
                     />
                     <select
                       value={item.category}
                       onChange={(e) => updateItem(idx, "category", e.target.value)}
-                      className="border border-[rgba(0,0,0,0.16)] rounded-lg p-2 text-sm bg-white focus:outline-none focus:border-black"
+                      className="border border-[rgba(0,0,0,0.16)] p-2 text-sm bg-white focus:outline-none focus:border-black"
                     >
                       <option value="top">Top</option>
                       <option value="bottom">Bottom</option>
@@ -328,12 +328,12 @@ export function SetEditor({
                       value={item.price}
                       onChange={(e) => updateItem(idx, "price", Number(e.target.value))}
                       placeholder="Price (paise)"
-                      className="border border-[rgba(0,0,0,0.16)] rounded-lg p-2 text-sm focus:outline-none focus:border-black"
+                      className="border border-[rgba(0,0,0,0.16)] p-2 text-sm focus:outline-none focus:border-black"
                     />
                   </div>
                   <button
                     onClick={() => removeItem(idx)}
-                    className="p-2 text-muted hover:text-red-600"
+                    className="p-2 text-muted hover:text-black"
                   >
                     <Trash2 size={16} />
                   </button>
@@ -347,24 +347,24 @@ export function SetEditor({
                         value={v.size}
                         onChange={(e) => updateVariant(idx, vi, "size", e.target.value)}
                         placeholder="Size"
-                        className="w-20 border border-[rgba(0,0,0,0.12)] rounded-lg p-1.5 text-xs focus:outline-none focus:border-black"
+                        className="w-20 border border-[rgba(0,0,0,0.12)] p-1.5 text-xs focus:outline-none focus:border-black"
                       />
                       <input
                         value={v.sku}
                         onChange={(e) => updateVariant(idx, vi, "sku", e.target.value)}
                         placeholder="SKU"
-                        className="w-28 border border-[rgba(0,0,0,0.12)] rounded-lg p-1.5 text-xs focus:outline-none focus:border-black"
+                        className="w-28 border border-[rgba(0,0,0,0.12)] p-1.5 text-xs focus:outline-none focus:border-black"
                       />
                       <input
                         type="number"
                         value={v.stock}
                         onChange={(e) => updateVariant(idx, vi, "stock", Number(e.target.value))}
                         placeholder="Stock"
-                        className="w-20 border border-[rgba(0,0,0,0.12)] rounded-lg p-1.5 text-xs focus:outline-none focus:border-black"
+                        className="w-20 border border-[rgba(0,0,0,0.12)] p-1.5 text-xs focus:outline-none focus:border-black"
                       />
                       <button
                         onClick={() => removeVariant(idx, vi)}
-                        className="p-1 text-muted hover:text-red-600"
+                        className="p-1 text-muted hover:text-black"
                       >
                         <Trash2 size={12} />
                       </button>

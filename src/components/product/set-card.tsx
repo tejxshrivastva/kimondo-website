@@ -25,7 +25,7 @@ export function SetCard({
   return (
     <Link href={`/store/${slug}`} className="group block">
       <div
-        className="aspect-[4/5] rounded-[12px] mb-3 overflow-hidden"
+        className="aspect-[4/5] mb-3 overflow-hidden"
         style={{
           background: `linear-gradient(150deg, ${toneFrom}, ${toneTo})`,
         }}

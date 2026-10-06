@@ -51,7 +51,7 @@ export default async function SetPage({ params }: Props) {
         <div className="space-y-4">
           {/* Hero image */}
           <div
-            className="aspect-[4/5] rounded-[12px] overflow-hidden"
+            className="aspect-[4/5] overflow-hidden"
             style={{
               background: `linear-gradient(150deg, ${set.toneFrom}, ${set.toneTo})`,
             }}
@@ -60,7 +60,7 @@ export default async function SetPage({ params }: Props) {
           {set.items.map((item) => (
             <div key={item.id} className="relative group">
               <div
-                className="aspect-[4/5] rounded-[12px] overflow-hidden"
+                className="aspect-[4/5] overflow-hidden"
                 style={{
                   background: `linear-gradient(150deg, ${set.toneFrom}dd, ${set.toneTo}dd)`,
                 }}
@@ -107,7 +107,7 @@ export default async function SetPage({ params }: Props) {
 
           {/* Description */}
           {set.description && (
-            <p className="font-body text-muted-foreground leading-relaxed">
+            <p className="text-[#666666] leading-relaxed">
               {set.description}
             </p>
           )}

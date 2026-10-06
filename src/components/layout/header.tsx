@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Menu, ShoppingBag, User } from "lucide-react";
 import { useOverlayStore } from "@/store/overlay-store";
+import { useCart } from "@/hooks/use-cart";
 
 const NAV_LINKS = [
   { href: "/store", label: "Store" },
@@ -18,12 +19,13 @@ export function Header() {
   const router = useRouter();
   const { data: session } = useSession();
   const { toggleMenu, openCart, openAuth } = useOverlayStore();
+  const { count } = useCart();
   const isAdmin = pathname.startsWith("/admin");
 
   if (isAdmin) return null;
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-[rgba(0,0,0,0.1)]">
+    <header className="sticky top-0 z-50 bg-white border-b border-[rgba(0,0,0,0.12)]">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Mobile menu button */}
@@ -38,9 +40,9 @@ export function Header() {
           {/* Logo */}
           <Link
             href="/"
-            className="font-display text-xl tracking-wide uppercase"
+            className="tracking-[0.3em] uppercase text-base font-medium"
           >
-            Kimondo
+            KIMONDO
           </Link>
 
           {/* Desktop nav */}
@@ -49,7 +51,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium tracking-wide transition-opacity ${
+                className={`text-sm font-medium tracking-[0.2px] transition-opacity ${
                   pathname === link.href
                     ? "opacity-100"
                     : "opacity-60 hover:opacity-100"
@@ -86,7 +88,14 @@ export function Header() {
               className="p-2 -mr-2"
               aria-label="Cart"
             >
-              <ShoppingBag size={20} />
+              <div className="relative">
+                <ShoppingBag size={20} />
+                {count > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 w-[18px] h-[18px] bg-black text-white text-[10px] font-semibold rounded-full flex items-center justify-center">
+                    {count}
+                  </span>
+                )}
+              </div>
             </button>
           </div>
         </div>

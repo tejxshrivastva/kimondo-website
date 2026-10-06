@@ -19,7 +19,7 @@ export default async function AdminDashboardLayout({
   });
 
   return (
-    <div className="min-h-screen bg-[#f2f1ef]">
+    <div className="min-h-screen bg-white">
       <AdminSidebar
         role={session.user.role || "editor"}
         userName={session.user.name || undefined}
@@ -27,7 +27,7 @@ export default async function AdminDashboardLayout({
         pendingOrderCount={pendingOrderCount}
       />
       <div className="lg:ml-[248px] min-h-screen flex flex-col">
-        <header className="sticky top-0 z-15 bg-[#f2f1ef]/[0.92] backdrop-blur-[10px] border-b border-[#e2e1de]">
+        <header className="sticky top-0 z-15 bg-white/[0.92] backdrop-blur-[10px] border-b border-[rgba(0,0,0,0.12)]">
           <div className="px-[clamp(14px,3vw,34px)] py-[11px]" />
         </header>
         <main className="flex-1 min-w-0">{children}</main>

@@ -78,7 +78,7 @@ export default function AdminCampaignEditor() {
     <div className="max-w-[600px] px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display text-2xl">{isNew ? "New campaign" : "Edit campaign"}</h1>
-        <button onClick={handleSave} disabled={saving} className="flex items-center gap-2 h-10 px-6 bg-black text-white text-sm font-semibold rounded-[12px] disabled:opacity-50">
+        <button onClick={handleSave} disabled={saving} className="flex items-center gap-2 h-10 px-6 bg-black text-white text-sm font-semibold  disabled:opacity-50">
           <Save size={16} /> {saving ? "Saving..." : "Save"}
         </button>
       </div>
@@ -95,24 +95,24 @@ export default function AdminCampaignEditor() {
             <input
               value={(form as unknown as Record<string, string>)[field]}
               onChange={(e) => updateField(field, e.target.value)}
-              className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black"
+              className="w-full border border-[rgba(0,0,0,0.16)]  p-3 text-sm focus:outline-none focus:border-black"
             />
           </div>
         ))}
         <div>
           <label className="text-xs font-medium text-muted block mb-1">Body</label>
-          <textarea value={form.body} onChange={(e) => updateField("body", e.target.value)} rows={6} className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black resize-none" />
+          <textarea value={form.body} onChange={(e) => updateField("body", e.target.value)} rows={6} className="w-full border border-[rgba(0,0,0,0.16)]  p-3 text-sm focus:outline-none focus:border-black resize-none" />
         </div>
         <div>
           <label className="text-xs font-medium text-muted block mb-1">Status</label>
-          <select value={form.status} onChange={(e) => updateField("status", e.target.value)} className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm bg-white focus:outline-none focus:border-black">
+          <select value={form.status} onChange={(e) => updateField("status", e.target.value)} className="w-full border border-[rgba(0,0,0,0.16)]  p-3 text-sm bg-white focus:outline-none focus:border-black">
             <option value="draft">Draft</option>
             <option value="published">Published</option>
           </select>
         </div>
         <div>
           <label className="text-xs font-medium text-muted block mb-1">Credits (JSON)</label>
-          <textarea value={form.credits} onChange={(e) => updateField("credits", e.target.value)} rows={3} className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-xs font-mono focus:outline-none focus:border-black resize-none" />
+          <textarea value={form.credits} onChange={(e) => updateField("credits", e.target.value)} rows={3} className="w-full border border-[rgba(0,0,0,0.16)]  p-3 text-xs font-mono focus:outline-none focus:border-black resize-none" />
         </div>
       </div>
     </div>

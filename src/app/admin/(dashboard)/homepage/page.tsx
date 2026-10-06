@@ -57,7 +57,7 @@ export default function AdminHomepagePage() {
     <div className="max-w-[600px] px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display text-2xl">Homepage</h1>
-        <button onClick={handleSave} disabled={saving} className="flex items-center gap-2 h-10 px-6 bg-black text-white text-sm font-semibold rounded-[12px] disabled:opacity-50">
+        <button onClick={handleSave} disabled={saving} className="flex items-center gap-2 h-10 px-6 bg-black text-white text-sm font-semibold  disabled:opacity-50">
           <Save size={16} /> {saving ? "Saving..." : "Save"}
         </button>
       </div>
@@ -73,7 +73,7 @@ export default function AdminHomepagePage() {
             <input
               value={(form as unknown as Record<string, string>)[field]}
               onChange={(e) => setForm((p) => ({ ...p, [field]: e.target.value }))}
-              className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-sm focus:outline-none focus:border-black"
+              className="w-full border border-[rgba(0,0,0,0.16)]  p-3 text-sm focus:outline-none focus:border-black"
             />
           </div>
         ))}
@@ -83,7 +83,7 @@ export default function AdminHomepagePage() {
             value={form.featuredSetIds}
             onChange={(e) => setForm((p) => ({ ...p, featuredSetIds: e.target.value }))}
             rows={3}
-            className="w-full border border-[rgba(0,0,0,0.16)] rounded-[12px] p-3 text-xs font-mono focus:outline-none focus:border-black resize-none"
+            className="w-full border border-[rgba(0,0,0,0.16)]  p-3 text-xs font-mono focus:outline-none focus:border-black resize-none"
           />
         </div>
       </div>

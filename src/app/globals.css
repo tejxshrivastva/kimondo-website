@@ -3,14 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --radius: 12px;
-  --color-bg: #ffffff;
-  --color-fg: #000000;
-  --color-muted: #757575;
-  --color-body: #1a1a1a;
-  --color-surface: #f5f5f5;
-  --color-border: rgba(0, 0, 0, 0.16);
-  --color-border-strong: rgba(0, 0, 0, 0.28);
+  --radius: 0px;
+  --color-ink: #000000;
+  --color-canvas: #ffffff;
+  --color-surface: #f8f8f8;
+  --color-muted: #666666;
+  --color-border: #000000;
+  --color-border-light: rgba(0, 0, 0, 0.12);
 }
 
 * {
@@ -20,8 +19,8 @@
 }
 
 body {
-  background: var(--color-bg);
-  color: var(--color-fg);
+  background: var(--color-canvas);
+  color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -70,6 +69,15 @@ a {
   }
 }
 
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 .animate-slide-in {
   animation: slide-in 0.3s ease-out;
 }
@@ -82,14 +90,16 @@ a {
   animation: fade-in 0.2s ease-out;
 }
 
+.animate-slide-in-left {
+  animation: slide-in-left 0.25s ease-out;
+}
+
 @layer utilities {
   .font-display {
-    font-family: var(--font-playfair), Georgia, serif;
+    font-family: var(--font-display), "Cormorant Garamond", "EB Garamond",
+      Georgia, serif;
   }
-  .font-body {
-    font-family: var(--font-lora), Georgia, serif;
-  }
-  .font-ui {
-    font-family: var(--font-inter), system-ui, sans-serif;
+  .font-sans {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
   }
 }
