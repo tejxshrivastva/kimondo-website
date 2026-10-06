@@ -12,8 +12,8 @@ const SECTIONS = [
   {
     heading: "Catalog",
     items: [
-      { href: "/admin/sets", label: "Products" },
-      { href: "/admin/campaigns", label: "Archive stories" },
+      { href: "/admin/sets", label: "Store" },
+      { href: "/admin/campaigns", label: "Archive" },
       { href: "/admin/badges", label: "Badges" },
     ],
   },
@@ -22,6 +22,7 @@ const SECTIONS = [
     items: [
       { href: "/admin/homepage", label: "Homepage" },
       { href: "/admin/faqs", label: "FAQ" },
+      { href: "/admin/founder", label: "Founder" },
       { href: "/admin/settings", label: "Settings", adminOnly: true },
     ],
   },

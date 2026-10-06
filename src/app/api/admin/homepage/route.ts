@@ -24,6 +24,8 @@ export async function PUT(req: Request) {
   const existing = await prisma.homepageSetting.findFirst();
 
   const data = {
+    heroTitle: body.heroTitle || "",
+    heroSubtitle: body.heroSubtitle || "",
     heroImage: body.heroImage || "",
     heroImageMobile: body.heroImageMobile || "",
     heroVideo: body.heroVideo || "",

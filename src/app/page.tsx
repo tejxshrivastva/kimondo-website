@@ -49,13 +49,13 @@ export default async function HomePage() {
             className="font-display text-4xl sm:text-5xl lg:text-7xl tracking-[0.3px] whitespace-nowrap"
             style={{ color: homepage?.heroVideo || homepage?.heroImage ? "#fff" : "#000" }}
           >
-            Headline goes here
+            {homepage?.heroTitle || "Headline goes here"}
           </h1>
           <p
             className="mt-4 text-lg"
             style={{ color: homepage?.heroVideo || homepage?.heroImage ? "rgba(255,255,255,0.8)" : "#666666" }}
           >
-            Subtext placeholder for the hero section
+            {homepage?.heroSubtitle || "Subtext placeholder for the hero section"}
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
             <Link

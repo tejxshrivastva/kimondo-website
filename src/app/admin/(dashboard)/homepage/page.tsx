@@ -5,6 +5,8 @@ import { Save } from "lucide-react";
 import { toast } from "sonner";
 
 interface HomepageSettings {
+  heroTitle: string;
+  heroSubtitle: string;
   heroImage: string;
   heroImageMobile: string;
   heroVideo: string;
@@ -15,6 +17,8 @@ interface HomepageSettings {
 
 export default function AdminHomepagePage() {
   const [form, setForm] = useState<HomepageSettings>({
+    heroTitle: "",
+    heroSubtitle: "",
     heroImage: "",
     heroImageMobile: "",
     heroVideo: "",
@@ -31,6 +35,8 @@ export default function AdminHomepagePage() {
       .then((d) => {
         if (d.settings) {
           setForm({
+            heroTitle: d.settings.heroTitle || "",
+            heroSubtitle: d.settings.heroSubtitle || "",
             heroImage: d.settings.heroImage || "",
             heroImageMobile: d.settings.heroImageMobile || "",
             heroVideo: d.settings.heroVideo || "",
@@ -85,7 +91,31 @@ export default function AdminHomepagePage() {
       </div>
       <div className="space-y-6">
         <section>
-          <h2 className="text-sm font-semibold tracking-[0.1em] uppercase mb-1">Hero section</h2>
+          <h2 className="text-sm font-semibold tracking-[0.1em] uppercase mb-3">Hero text</h2>
+          <div className="space-y-3">
+            <div>
+              <label className="text-xs font-medium text-muted block mb-1">Headline</label>
+              <input
+                value={form.heroTitle}
+                onChange={(e) => setForm((p) => ({ ...p, heroTitle: e.target.value }))}
+                placeholder="e.g. Woven by hand"
+                className="w-full border border-[rgba(0,0,0,0.16)] p-3 text-sm focus:outline-none focus:border-black"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-muted block mb-1">Subtext</label>
+              <input
+                value={form.heroSubtitle}
+                onChange={(e) => setForm((p) => ({ ...p, heroSubtitle: e.target.value }))}
+                placeholder="e.g. Each garment begins as raw yarn"
+                className="w-full border border-[rgba(0,0,0,0.16)] p-3 text-sm focus:outline-none focus:border-black"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-sm font-semibold tracking-[0.1em] uppercase mb-1">Hero media</h2>
           <p className="text-xs text-[#666666] mb-4">Upload a background video or image for the full-screen hero. Video takes priority over image.</p>
 
           <div className="space-y-4">

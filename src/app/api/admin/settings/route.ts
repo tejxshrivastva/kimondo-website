@@ -27,6 +27,8 @@ export async function PUT(req: Request) {
     returnWindowDays: body.returnWindowDays ?? 14,
     exchangeWindowDays: body.exchangeWindowDays ?? 14,
     founderEmail: body.founderEmail || "",
+    founderPageTitle: body.founderPageTitle || "",
+    founderPageSubtitle: body.founderPageSubtitle || "",
     socialLinks: JSON.stringify(body.socialLinks || {}),
   };
 

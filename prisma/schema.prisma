@@ -303,10 +303,12 @@ model NotifyRequest {
 
 model HomepageSetting {
   id              String @id @default(cuid())
+  heroTitle       String @default("")
+  heroSubtitle    String @default("")
   heroImage       String?
   heroImageMobile String?
   heroVideo       String?
-  ctaLabel        String @default("Shop the collection")
+  ctaLabel        String @default("Shop now")
   ctaTarget       String @default("/store")
   featuredSetIds  String @default("[]")
   updatedAt       DateTime @updatedAt
@@ -321,10 +323,12 @@ model Policy {
 }
 
 model SiteSettings {
-  id                 String @id @default(cuid())
-  returnWindowDays   Int    @default(7)
-  exchangeWindowDays Int    @default(14)
-  founderEmail       String @default("")
-  socialLinks        String @default("[]")
-  updatedAt          DateTime @updatedAt
+  id                    String @id @default(cuid())
+  returnWindowDays      Int    @default(7)
+  exchangeWindowDays    Int    @default(14)
+  founderEmail          String @default("")
+  founderPageTitle      String @default("")
+  founderPageSubtitle   String @default("")
+  socialLinks           String @default("[]")
+  updatedAt             DateTime @updatedAt
 }
