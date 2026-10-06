@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { checkServiceability } from "@/lib/shiprocket";
 
-const PICKUP_PINCODE = "452001";
+const PICKUP_PINCODE = "226012";
 
 export async function POST(req: Request) {
   try {
