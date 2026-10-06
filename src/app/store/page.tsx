@@ -29,19 +29,21 @@ export default async function StorePage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-        {sets.map((set) => (
-          <SetCard
-            key={set.id}
-            slug={set.slug}
-            name={set.name}
-            tagline={set.tagline}
-            coverImage={set.coverImage || undefined}
-            toneFrom={set.toneFrom}
-            toneTo={set.toneTo}
-            showPrice={false}
-          />
-        ))}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 lg:gap-x-6 lg:gap-y-10">
+        {sets.map((set) => {
+          const prices = set.items.map((i) => i.price);
+          const minPrice = prices.length > 0 ? Math.min(...prices) : undefined;
+          return (
+            <SetCard
+              key={set.id}
+              slug={set.slug}
+              name={set.name}
+              coverImage={set.coverImage || undefined}
+              minPrice={minPrice}
+              showPrice={true}
+            />
+          );
+        })}
       </div>
     </div>
   );

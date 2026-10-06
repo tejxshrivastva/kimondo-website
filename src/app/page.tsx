@@ -61,12 +61,8 @@ export default async function HomePage() {
                   key={set.id}
                   slug={set.slug}
                   name={set.name}
-                  tagline={set.tagline}
                   coverImage={set.coverImage || undefined}
-                  toneFrom={set.toneFrom}
-                  toneTo={set.toneTo}
                   minPrice={minPrice}
-                  itemCount={set.items.length}
                 />
               );
             })}
