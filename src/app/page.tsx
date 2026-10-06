@@ -109,6 +109,7 @@ export default async function HomePage() {
                   name={set.name}
                   coverImage={set.coverImage || undefined}
                   minPrice={minPrice}
+                  showPrice={false}
                 />
               );
             })}

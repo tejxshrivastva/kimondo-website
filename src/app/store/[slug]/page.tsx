@@ -163,6 +163,7 @@ export default async function SetPage({ params }: Props) {
                   name={rec.name}
                   coverImage={rec.coverImage || undefined}
                   minPrice={recMin}
+                  showPrice={false}
                 />
               );
             })}
