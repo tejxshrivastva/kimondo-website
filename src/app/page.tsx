@@ -46,7 +46,7 @@ export default async function HomePage() {
             Kimondo
           </p>
           <h1
-            className="font-display text-4xl sm:text-5xl lg:text-7xl tracking-[0.3px] whitespace-nowrap"
+            className="font-display text-4xl sm:text-5xl lg:text-7xl tracking-[0.3px]"
             style={{ color: homepage?.heroVideo || homepage?.heroImage ? "#fff" : "#000" }}
           >
             {homepage?.heroTitle || "Headline goes here"}
@@ -89,7 +89,7 @@ export default async function HomePage() {
               View all
             </Link>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-6 lg:gap-x-4 lg:gap-y-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-6 lg:gap-x-4 lg:gap-y-8">
             {sets.map((set) => {
               const prices = set.items.map((i) => i.price);
               const minPrice = prices.length > 0 ? Math.min(...prices) : undefined;

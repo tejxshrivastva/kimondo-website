@@ -198,7 +198,7 @@ export default function ProfilePage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 mb-6 border-b border-[rgba(0,0,0,0.08)]">
+      <div className="flex gap-1 mb-6 border-b border-[rgba(0,0,0,0.08)] overflow-x-auto scrollbar-none" style={{ scrollbarWidth: "none" }}>
         {[
           { key: "orders" as const, label: "Orders", icon: Package },
           { key: "badges" as const, label: "Badges", icon: Award },
@@ -208,7 +208,7 @@ export default function ProfilePage() {
           <button
             key={key}
             onClick={() => setTab(key)}
-            className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+            className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
               tab === key
                 ? "border-black text-black"
                 : "border-transparent text-muted hover:text-black"

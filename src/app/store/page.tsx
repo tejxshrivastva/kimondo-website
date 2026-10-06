@@ -32,7 +32,7 @@ export default async function StorePage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-6 lg:gap-x-4 lg:gap-y-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-6 lg:gap-x-4 lg:gap-y-8">
         {sets.map((set) => {
           const prices = set.items.map((i) => i.price);
           const minPrice = prices.length > 0 ? Math.min(...prices) : undefined;

@@ -4,9 +4,10 @@ import { useRef, useState, useEffect, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
+  className?: string;
 }
 
-export function ProductDetailsColumn({ children }: Props) {
+export function ProductDetailsColumn({ children, className }: Props) {
   const colRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
@@ -41,7 +42,7 @@ export function ProductDetailsColumn({ children }: Props) {
   return (
     <div
       ref={colRef}
-      className="lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto scrollbar-none"
+      className={`lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto scrollbar-none ${className || ""}`}
       style={{ scrollbarWidth: "none" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

@@ -56,7 +56,7 @@ export default function AdminFaqsPage() {
   };
 
   return (
-    <div className="max-w-[700px] px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
+    <div className="max-w-[1200px] px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display text-2xl">FAQ</h1>
         <div className="flex gap-2">

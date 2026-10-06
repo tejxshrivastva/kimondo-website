@@ -59,12 +59,12 @@ export default async function SetPage({ params }: Props) {
         </Link>
       </div>
 
-      <div className="lg:grid lg:grid-cols-3 gap-1 px-4 sm:px-6 lg:px-8 pb-16">
-        {/* Column 1: Static hero image - sticky, matches first slider image height */}
-        <div className="lg:sticky lg:top-16 lg:self-start pb-8">
+      <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-1 px-4 sm:px-6 lg:px-8 pb-16">
+        {/* Cover image */}
+        <div className="order-1 lg:order-1 lg:sticky lg:top-16 lg:self-start">
           <div
-            className="w-full overflow-hidden bg-[#f0f0f0]"
-            style={{ aspectRatio: "4/5", ...(!set.coverImage ? { background: `linear-gradient(150deg, ${set.toneFrom}, ${set.toneTo})` } : {}) }}
+            className="w-full overflow-hidden bg-[#f0f0f0] aspect-[3/4] lg:aspect-auto lg:h-[calc(100vh-5rem)]"
+            style={!set.coverImage ? { background: `linear-gradient(150deg, ${set.toneFrom}, ${set.toneTo})` } : undefined}
           >
             {set.coverImage ? (
               <img src={set.coverImage} alt={set.name} className="w-full h-full object-cover" />
@@ -76,10 +76,10 @@ export default async function SetPage({ params }: Props) {
           </div>
         </div>
 
-        {/* Column 2: Vertical image scroll - 3 product slider images */}
-        <div className="flex flex-col gap-1">
+        {/* Slider images - below details on mobile, full row on tablet, col 2 on desktop */}
+        <div className="order-3 lg:order-2 md:col-span-2 lg:col-span-1 flex flex-col md:grid md:grid-cols-3 lg:flex lg:flex-col gap-1 mt-1 md:mt-0">
           {sliderSlots.map((i) => (
-            <div key={i} className="w-full overflow-hidden" style={{ aspectRatio: "4/5" }}>
+            <div key={i} className="w-full overflow-hidden" style={{ aspectRatio: "3/4" }}>
               {setImages[i] ? (
                 <img
                   src={setImages[i]}
@@ -95,8 +95,8 @@ export default async function SetPage({ params }: Props) {
           ))}
         </div>
 
-        {/* Column 3: Product details - sticky until hovered, then scrollable */}
-        <ProductDetailsColumn>
+        {/* Product details - right after cover on mobile */}
+        <ProductDetailsColumn className="order-2 lg:order-3">
           <div className="px-6 lg:px-8 py-8 space-y-6">
             <div>
               <p className="text-[9px] font-semibold tracking-[0.2em] uppercase text-muted mb-2">
@@ -152,7 +152,7 @@ export default async function SetPage({ params }: Props) {
           <h2 className="text-[9px] font-semibold tracking-[0.3em] uppercase text-muted mb-8">
             You may also like
           </h2>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-6 lg:gap-x-4 lg:gap-y-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-6 lg:gap-x-4 lg:gap-y-8">
             {recommendations.map((rec) => {
               const recPrices = rec.items.map((i) => i.price);
               const recMin = recPrices.length > 0 ? Math.min(...recPrices) : undefined;

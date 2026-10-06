@@ -1,8 +1,10 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
+import { Menu, X } from "lucide-react";
 
 const SECTIONS = [
   {
@@ -54,22 +56,45 @@ export function AdminSidebar({
   pendingOrderCount,
 }: AdminSidebarProps) {
   const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  return (
-    <aside className="w-[248px] bg-white text-black flex-shrink-0 hidden lg:flex flex-col fixed top-0 left-0 bottom-0 z-40 border-r border-[rgba(0,0,0,0.12)]">
-      <div className="px-6 pt-[22px] pb-5 border-b border-[rgba(0,0,0,0.12)]">
-        <div
-          className="text-[21px] font-medium tracking-[0.28em]"
-          style={{ paddingLeft: "0.28em" }}
-        >
-          KIMONDO
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
+  const sidebarContent = (
+    <>
+      <div className="px-6 pt-[22px] pb-5 border-b border-[rgba(0,0,0,0.12)] flex items-center justify-between">
+        <div>
+          <div
+            className="text-[21px] font-medium tracking-[0.28em]"
+            style={{ paddingLeft: "0.28em" }}
+          >
+            KIMONDO
+          </div>
+          <div
+            className="text-[9px] font-semibold tracking-[0.34em] uppercase text-[#666666] mt-[5px]"
+            style={{ paddingLeft: "0.34em" }}
+          >
+            Studio
+          </div>
         </div>
-        <div
-          className="text-[9px] font-semibold tracking-[0.34em] uppercase text-[#666666] mt-[5px]"
-          style={{ paddingLeft: "0.34em" }}
+        <button
+          onClick={() => setMobileOpen(false)}
+          className="lg:hidden p-1.5 text-[#666666] hover:text-black"
+          aria-label="Close menu"
         >
-          Studio
-        </div>
+          <X size={20} />
+        </button>
       </div>
 
       <nav className="flex-1 overflow-y-auto px-[14px] py-4">
@@ -179,6 +204,36 @@ export function AdminSidebar({
           Sign out
         </button>
       </div>
-    </aside>
+    </>
+  );
+
+  return (
+    <>
+      {/* Mobile hamburger */}
+      <button
+        onClick={() => setMobileOpen(true)}
+        className="lg:hidden fixed top-[10px] left-3 z-40 p-2 bg-white border border-[rgba(0,0,0,0.12)]"
+        aria-label="Open menu"
+      >
+        <Menu size={18} />
+      </button>
+
+      {/* Mobile backdrop */}
+      <div
+        className={`lg:hidden fixed inset-0 bg-black/30 z-40 transition-opacity duration-200 ${
+          mobileOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setMobileOpen(false)}
+      />
+
+      {/* Sidebar */}
+      <aside
+        className={`w-[248px] bg-white text-black flex-shrink-0 flex flex-col fixed top-0 left-0 bottom-0 z-50 border-r border-[rgba(0,0,0,0.12)] transition-transform duration-200 ease-out ${
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        } lg:translate-x-0`}
+      >
+        {sidebarContent}
+      </aside>
+    </>
   );
 }

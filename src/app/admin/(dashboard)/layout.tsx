@@ -32,7 +32,7 @@ export default async function AdminDashboardLayout({
       />
       <div className="lg:ml-[248px] min-h-screen flex flex-col">
         <header className="sticky top-0 z-15 bg-white/[0.92] backdrop-blur-[10px] border-b border-[rgba(0,0,0,0.12)]">
-          <div className="px-[clamp(14px,3vw,34px)] py-[11px]" />
+          <div className="pl-14 lg:pl-[clamp(14px,3vw,34px)] pr-[clamp(14px,3vw,34px)] py-[11px]" />
         </header>
         <main className="flex-1 min-w-0">{children}</main>
       </div>

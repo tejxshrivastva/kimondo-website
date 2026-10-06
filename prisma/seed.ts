@@ -146,14 +146,14 @@ async function main() {
   // ── FAQ ──
   await prisma.faq.createMany({
     data: [
-      { question: "What does handloom mean?", answer: "Every Kimondo garment is woven on a manually operated loom. No electricity, no automation. The weaver controls the tension, the pattern, and the pace. This is what gives handloom cloth its distinctive texture and slight irregularity.", section: "The cloth", sortOrder: 0 },
-      { question: "Are your dyes natural?", answer: "Most of our dyes are plant-derived: indigo from the indigofera leaf, ochre from iron-rich earth, yellow from pomegranate rind. Some sets use azo-free synthetic dyes where colour fastness requires it. Each product page specifies the dye method used.", section: "The cloth", sortOrder: 1 },
-      { question: "How should I care for handloom garments?", answer: "Hand wash in cold water with a mild detergent. Do not wring. Press gently and lay flat to dry. Handloom fabrics soften with each wash. Specific care instructions are listed on every product page and printed on the garment label.", section: "Care", sortOrder: 2 },
-      { question: "Do you offer free shipping?", answer: "Yes. All orders ship free across India. We use a domestic courier partner with tracking. Delivery typically takes 5–7 business days depending on your location.", section: "Orders", sortOrder: 3 },
-      { question: "What is your return policy?", answer: "We accept returns within 7 days of delivery and exchanges within 14 days, provided the garment is unworn, unwashed, and in its original packaging. Return shipping is on us. Refunds are processed to the original payment method within 5 business days.", section: "Orders", sortOrder: 4 },
-      { question: "How do sizes work?", answer: "Each product page includes a size guide with measurements in inches. If you are between sizes, we recommend sizing up. Handloom cloth does not stretch. You can save your size profile in your account for faster checkout.", section: "Fit", sortOrder: 5 },
-      { question: "Can I buy individual pieces from a set?", answer: "Yes. Every item in a product is sold individually. You can buy the full set or any single piece - a top on its own, a scarf without the kurta. The product page lists each piece with its own price.", section: "Orders", sortOrder: 6 },
-      { question: "What are badges?", answer: "When you purchase from a product, you earn that product's badge. Badges solidify after the return window closes and live permanently on your profile. They are a record of the cloth you have chosen to wear.", section: "Your account", sortOrder: 7 },
+      { question: "Here lies question 1", answer: "Here lies answer 1", section: "General", sortOrder: 0 },
+      { question: "Here lies question 2", answer: "Here lies answer 2", section: "General", sortOrder: 1 },
+      { question: "Here lies question 3", answer: "Here lies answer 3", section: "General", sortOrder: 2 },
+      { question: "Here lies question 4", answer: "Here lies answer 4", section: "General", sortOrder: 3 },
+      { question: "Here lies question 5", answer: "Here lies answer 5", section: "General", sortOrder: 4 },
+      { question: "Here lies question 6", answer: "Here lies answer 6", section: "General", sortOrder: 5 },
+      { question: "Here lies question 7", answer: "Here lies answer 7", section: "General", sortOrder: 6 },
+      { question: "Here lies question 8", answer: "Here lies answer 8", section: "General", sortOrder: 7 },
     ],
   });
 
