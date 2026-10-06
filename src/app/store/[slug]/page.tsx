@@ -151,20 +151,16 @@ export default async function SetPage({ params }: Props) {
           <h2 className="text-[9px] font-semibold tracking-[0.3em] uppercase text-muted mb-8">
             You may also like
           </h2>
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-6 lg:gap-x-4 lg:gap-y-8">
-            {recommendations.map((rec) => {
-              const recPrices = rec.items.map((i) => i.price);
-              const recMin = recPrices.length > 0 ? Math.min(...recPrices) : undefined;
-              return (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-6 lg:gap-x-4 lg:gap-y-8">
+            {recommendations.map((rec) => (
                 <SetCard
                   key={rec.id}
                   slug={rec.slug}
                   name={rec.name}
                   coverImage={rec.coverImage || undefined}
-                  minPrice={recMin}
+                  showPrice={false}
                 />
-              );
-            })}
+            ))}
           </div>
         </section>
       )}

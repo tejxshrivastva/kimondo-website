@@ -15,7 +15,7 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero - full viewport, video/image background */}
-      <section className="relative min-h-[100dvh] -mt-16 pt-16 flex flex-col items-center justify-center text-center px-4 overflow-hidden">
+      <section className="relative min-h-[100dvh] -mt-16 pt-16 flex flex-col items-center justify-center text-center px-6 overflow-hidden">
         {/* Background: video if uploaded, image if uploaded, gray fallback */}
         {homepage?.heroVideo ? (
           <video
@@ -37,48 +37,41 @@ export default async function HomePage() {
           <div className="absolute inset-0 bg-[#f8f8f8]" />
         )}
 
-        {/* Overlay for text legibility when video/image is present */}
         {(homepage?.heroVideo || homepage?.heroImage) && (
           <div className="absolute inset-0 bg-black/30" />
         )}
 
-        {/* Content */}
         <div className="relative z-10">
           <p className="text-[9px] font-semibold tracking-[0.3em] uppercase mb-6" style={{ color: homepage?.heroVideo || homepage?.heroImage ? "rgba(255,255,255,0.7)" : "#757575" }}>
             Kimondo
           </p>
           <h1
-            className="font-display text-4xl sm:text-5xl lg:text-7xl tracking-[0.3px] max-w-3xl"
+            className="font-display text-4xl sm:text-5xl lg:text-7xl tracking-[0.3px] whitespace-nowrap"
             style={{ color: homepage?.heroVideo || homepage?.heroImage ? "#fff" : "#000" }}
           >
-            Woven by hand. Worn with intention.
+            Headline goes here
           </h1>
           <p
-            className="mt-4 text-lg max-w-xl mx-auto"
+            className="mt-4 text-lg"
             style={{ color: homepage?.heroVideo || homepage?.heroImage ? "rgba(255,255,255,0.8)" : "#666666" }}
           >
-            Each garment begins as raw yarn on a traditional loom and arrives as a finished thought.
+            Subtext placeholder for the hero section
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              href="/store"
-              className="inline-flex items-center justify-center h-12 px-8 bg-white text-black text-sm font-semibold tracking-[0.2px] hover:bg-white/90 transition-colors rounded-lg"
+              href={homepage?.ctaTarget || "/store"}
+              className="inline-flex items-center justify-center h-12 px-8 bg-black text-white text-sm font-semibold tracking-[0.2px] hover:bg-black/90 transition-colors"
             >
-              {homepage?.ctaLabel || "Enter the collection"}
+              {homepage?.ctaLabel || "Shop now"}
             </Link>
             <Link
               href="/archive"
-              className="inline-flex items-center justify-center h-12 px-8 border border-white text-sm font-semibold transition-colors rounded-lg"
+              className="inline-flex items-center justify-center h-12 px-8 border text-sm font-semibold transition-colors"
               style={{ color: homepage?.heroVideo || homepage?.heroImage ? "#fff" : "#000", borderColor: homepage?.heroVideo || homepage?.heroImage ? "rgba(255,255,255,0.5)" : "#000" }}
             >
               The archive
             </Link>
           </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-          <div className="w-[1px] h-8 bg-current opacity-30 animate-pulse" style={{ color: homepage?.heroVideo || homepage?.heroImage ? "#fff" : "#000" }} />
         </div>
       </section>
 
@@ -96,20 +89,16 @@ export default async function HomePage() {
               View all
             </Link>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-6 lg:gap-x-4 lg:gap-y-8">
-            {sets.map((set) => {
-              const prices = set.items.map((i) => i.price);
-              const minPrice = prices.length > 0 ? Math.min(...prices) : 0;
-              return (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-6 lg:gap-x-4 lg:gap-y-8">
+            {sets.map((set) => (
                 <SetCard
                   key={set.id}
                   slug={set.slug}
                   name={set.name}
                   coverImage={set.coverImage || undefined}
-                  minPrice={minPrice}
+                  showPrice={false}
                 />
-              );
-            })}
+            ))}
           </div>
         </section>
       )}

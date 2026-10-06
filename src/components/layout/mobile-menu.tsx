@@ -8,7 +8,7 @@ import { useOverlayStore } from "@/store/overlay-store";
 const NAV_LINKS = [
   { href: "/store", label: "Store" },
   { href: "/archive", label: "Archive" },
-  { href: "/founder", label: "Write to the founder" },
+  { href: "/founder", label: "Founder" },
   { href: "/faq", label: "FAQ" },
 ];
 

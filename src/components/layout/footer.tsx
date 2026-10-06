@@ -19,7 +19,7 @@ const FOOTER_LINKS = {
     { href: "/policy/terms", label: "Terms" },
   ],
   Connect: [
-    { href: "/founder", label: "Write to the founder" },
+    { href: "/founder", label: "Founder" },
     { href: "https://instagram.com/kimondo", label: "Instagram" },
   ],
 };
@@ -63,7 +63,7 @@ export function Footer() {
             KIMONDO
           </Link>
           <p className="text-xs text-[#666666]">
-            Handloom cloth, made with intention.
+            Kimondo
           </p>
         </div>
       </div>

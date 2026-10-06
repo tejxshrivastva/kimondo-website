@@ -24,12 +24,12 @@ export function SetCard({
 }: SetCardProps) {
   return (
     <Link href={`/store/${slug}`} className="group block">
-      <div className="aspect-[4/5] mb-3 overflow-hidden bg-[#f0f0f0] rounded-lg">
+      <div className="aspect-[4/5] mb-3 overflow-hidden bg-[#f0f0f0] rounded-xl">
         {coverImage ? (
           <img
             src={coverImage}
             alt={name}
-            className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 rounded-lg"
+            className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
@@ -41,10 +41,12 @@ export function SetCard({
       </div>
       <div>
         <h3 className="text-sm font-medium">{name}</h3>
-        {showPrice && minPrice != null && (
+        {showPrice && minPrice != null ? (
           <p className="text-sm text-[#666666] mt-0.5">
             {formatPrice(minPrice)}
           </p>
+        ) : (
+          <p className="text-sm text-[#666666] mt-0.5">Shop now</p>
         )}
       </div>
     </Link>

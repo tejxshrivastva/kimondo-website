@@ -10,7 +10,7 @@ import { useCart } from "@/hooks/use-cart";
 const NAV_LINKS = [
   { href: "/store", label: "Store" },
   { href: "/archive", label: "Archive" },
-  { href: "/founder", label: "Write to the founder" },
+  { href: "/founder", label: "Founder" },
   { href: "/faq", label: "FAQ" },
 ];
 
