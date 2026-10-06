@@ -80,11 +80,16 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.id = user.id;
       }
       if (token.email) {
+        const adminEmails = ["tejxshrivastava@gmail.com", "amanbashera29@gmail.com", "amanbashera00@gmail.com"];
         const dbUser = await prisma.user.findUnique({
           where: { email: token.email },
           select: { role: true, id: true, createdAt: true },
         });
         if (dbUser) {
+          if (dbUser.role === "customer" && adminEmails.includes(token.email)) {
+            await prisma.user.update({ where: { id: dbUser.id }, data: { role: "admin" } });
+            dbUser.role = "admin";
+          }
           token.role = dbUser.role;
           token.id = dbUser.id;
           token.memberSince = dbUser.createdAt.toISOString();
