@@ -76,7 +76,7 @@ async function main() {
         slug: `archive-${i}`,
         title: `Archive ${i}`,
         subtitle: `Subtitle for Archive ${i}`,
-        body: `Body content for Archive ${i} — replace this with your editorial story.`,
+        body: `Body content for Archive ${i} - replace this with your editorial story.`,
         credits: JSON.stringify([
           { role: "Photography", name: "Photographer name" },
           { role: "Words", name: "Writer name" },
@@ -108,7 +108,7 @@ async function main() {
             : SIZES_BOTTOM.map((sz) => ({ size: sz, sku: `${skuPrefix}-${sz}-B${j}`, stock: randomStock() }));
 
       return {
-        name: `Product ${n} — ${CATEGORY_LABEL[tmpl.category]}`,
+        name: `Product ${n} - ${CATEGORY_LABEL[tmpl.category]}`,
         category: tmpl.category,
         price: tmpl.priceBase,
         sortOrder: j,
@@ -121,8 +121,8 @@ async function main() {
         slug: `product-${n}`,
         name: `Product ${n}`,
         tagline: `Tagline for Product ${n}`,
-        description: `Description for Product ${n} — replace this with your product story.`,
-        productDetails: `Product details for Product ${n} — material, origin, technique.`,
+        description: `Description for Product ${n} - replace this with your product story.`,
+        productDetails: `Product details for Product ${n} - material, origin, technique.`,
         careInstructions: `Care instructions for Product ${n}.`,
         toneFrom: tone.from,
         toneTo: tone.to,
@@ -146,13 +146,13 @@ async function main() {
   // ── FAQ ──
   await prisma.faq.createMany({
     data: [
-      { question: "What does handloom mean?", answer: "Every Kimondo garment is woven on a manually operated loom — no electricity, no automation. The weaver controls the tension, the pattern, and the pace. This is what gives handloom cloth its distinctive texture and slight irregularity.", section: "The cloth", sortOrder: 0 },
+      { question: "What does handloom mean?", answer: "Every Kimondo garment is woven on a manually operated loom. No electricity, no automation. The weaver controls the tension, the pattern, and the pace. This is what gives handloom cloth its distinctive texture and slight irregularity.", section: "The cloth", sortOrder: 0 },
       { question: "Are your dyes natural?", answer: "Most of our dyes are plant-derived: indigo from the indigofera leaf, ochre from iron-rich earth, yellow from pomegranate rind. Some sets use azo-free synthetic dyes where colour fastness requires it. Each product page specifies the dye method used.", section: "The cloth", sortOrder: 1 },
-      { question: "How should I care for handloom garments?", answer: "Hand wash in cold water with a mild detergent. Do not wring — press gently and lay flat to dry. Handloom fabrics soften with each wash. Specific care instructions are listed on every product page and printed on the garment label.", section: "Care", sortOrder: 2 },
+      { question: "How should I care for handloom garments?", answer: "Hand wash in cold water with a mild detergent. Do not wring. Press gently and lay flat to dry. Handloom fabrics soften with each wash. Specific care instructions are listed on every product page and printed on the garment label.", section: "Care", sortOrder: 2 },
       { question: "Do you offer free shipping?", answer: "Yes. All orders ship free across India. We use a domestic courier partner with tracking. Delivery typically takes 5–7 business days depending on your location.", section: "Orders", sortOrder: 3 },
       { question: "What is your return policy?", answer: "We accept returns within 7 days of delivery and exchanges within 14 days, provided the garment is unworn, unwashed, and in its original packaging. Return shipping is on us. Refunds are processed to the original payment method within 5 business days.", section: "Orders", sortOrder: 4 },
-      { question: "How do sizes work?", answer: "Each product page includes a size guide with measurements in inches. If you are between sizes, we recommend sizing up — handloom cloth does not stretch. You can save your size profile in your account for faster checkout.", section: "Fit", sortOrder: 5 },
-      { question: "Can I buy individual pieces from a set?", answer: "Yes. Every item in a product is sold individually. You can buy the full set or any single piece — a top on its own, a scarf without the kurta. The product page lists each piece with its own price.", section: "Orders", sortOrder: 6 },
+      { question: "How do sizes work?", answer: "Each product page includes a size guide with measurements in inches. If you are between sizes, we recommend sizing up. Handloom cloth does not stretch. You can save your size profile in your account for faster checkout.", section: "Fit", sortOrder: 5 },
+      { question: "Can I buy individual pieces from a set?", answer: "Yes. Every item in a product is sold individually. You can buy the full set or any single piece - a top on its own, a scarf without the kurta. The product page lists each piece with its own price.", section: "Orders", sortOrder: 6 },
       { question: "What are badges?", answer: "When you purchase from a product, you earn that product's badge. Badges solidify after the return window closes and live permanently on your profile. They are a record of the cloth you have chosen to wear.", section: "Your account", sortOrder: 7 },
     ],
   });
@@ -162,9 +162,9 @@ async function main() {
     data: [
       { slug: "privacy", title: "Privacy Policy", body: "Kimondo collects your name, email address, phone number, and delivery address when you create an account or place an order. This information is used solely to process orders, communicate delivery updates, and improve your experience on the site.\n\nWe do not sell, rent, or share your personal information with third parties for marketing purposes. Payment processing is handled by Razorpay; we do not store card details on our servers.\n\nCookies are used to maintain your session and remember your preferences. You may disable cookies in your browser settings, though this may affect site functionality.\n\nFor questions about your data, write to hello@kimondo.in." },
       { slug: "terms", title: "Terms of Service", body: "By using kimondo.in, you agree to these terms. Kimondo is operated by Aman Bashera as a sole proprietorship registered in India.\n\nAll prices are listed in Indian Rupees and are inclusive of GST. Prices may change without notice, but confirmed orders are honoured at the price shown at checkout.\n\nProduct images are representative. Due to the handmade nature of our garments, slight variations in colour, texture, and pattern are inherent and expected. These are not defects.\n\nKimondo reserves the right to cancel orders in cases of pricing errors, suspected fraud, or stock discrepancies. In such cases, a full refund will be issued." },
-      { slug: "shipping", title: "Shipping Policy", body: "All orders ship free within India. We dispatch within 2 business days of order confirmation.\n\nDelivery typically takes 5–7 business days, depending on your location. Remote pincodes may take up to 10 business days.\n\nOnce shipped, you will receive a tracking reference by email. You can also track your order from your profile page.\n\nWe do not currently ship internationally. If you are outside India and interested in Kimondo, write to the founder — we may be able to arrange something." },
+      { slug: "shipping", title: "Shipping Policy", body: "All orders ship free within India. We dispatch within 2 business days of order confirmation.\n\nDelivery typically takes 5–7 business days, depending on your location. Remote pincodes may take up to 10 business days.\n\nOnce shipped, you will receive a tracking reference by email. You can also track your order from your profile page.\n\nWe do not currently ship internationally. If you are outside India and interested in Kimondo, write to the founder. We may be able to arrange something." },
       { slug: "returns", title: "Returns Policy", body: "We accept returns within 7 days of delivery. The garment must be unworn, unwashed, and returned in its original packaging with all tags attached.\n\nTo initiate a return, go to your profile, find the order, and select 'Return'. We will arrange a reverse pickup at no cost to you.\n\nRefunds are processed within 5 business days of receiving the returned item, to the original payment method.\n\nItems purchased during a sale or at a reduced price are eligible for exchange only, not refund." },
-      { slug: "cancellation", title: "Cancellation Policy", body: "Orders can be cancelled before they are dispatched. Once an order has shipped, it cannot be cancelled — you may return it after delivery under our returns policy.\n\nTo cancel, write to hello@kimondo.in with your order number. If the order has not yet been handed to the courier, we will cancel it and issue a full refund within 3 business days." },
+      { slug: "cancellation", title: "Cancellation Policy", body: "Orders can be cancelled before they are dispatched. Once an order has shipped, it cannot be cancelled. You may return it after delivery under our returns policy.\n\nTo cancel, write to hello@kimondo.in with your order number. If the order has not yet been handed to the courier, we will cancel it and issue a full refund within 3 business days." },
     ],
   });
 
@@ -199,7 +199,7 @@ async function main() {
   });
 
   const campaignCount = await prisma.campaign.count();
-  console.log(`Seed complete — ${PRODUCT_COUNT} products, ${campaignCount} archive stories, 8 FAQs, 5 policies.`);
+  console.log(`Seed complete - ${PRODUCT_COUNT} products, ${campaignCount} archive stories, 8 FAQs, 5 policies.`);
 }
 
 main()

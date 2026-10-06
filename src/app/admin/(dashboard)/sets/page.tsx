@@ -76,7 +76,7 @@ export default async function AdminSetsPage() {
                   <td className="p-3 text-muted">{totalStock}</td>
                   <td className="p-3 text-right">
                     {minPrice === Infinity
-                      ? "—"
+                      ? "-"
                       : `₹${(minPrice / 100).toLocaleString("en-IN")}`}
                   </td>
                 </tr>

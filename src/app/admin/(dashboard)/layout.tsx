@@ -3,6 +3,10 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { AdminSidebar } from "@/components/layout/admin-sidebar";
 
+export const metadata = {
+  title: { default: "Kimondo Studio", template: "%s | Kimondo Studio" },
+};
+
 export default async function AdminDashboardLayout({
   children,
 }: {

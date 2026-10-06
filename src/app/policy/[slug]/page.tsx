@@ -10,8 +10,8 @@ interface Props {
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const policy = await prisma.policy.findUnique({ where: { slug } });
-  if (!policy) return { title: "Not Found — Kimondo" };
-  return { title: `${policy.title} — Kimondo` };
+  if (!policy) return { title: "Not Found | Kimondo" };
+  return { title: `${policy.title} | Kimondo` };
 }
 
 export default async function PolicyPage({ params }: Props) {

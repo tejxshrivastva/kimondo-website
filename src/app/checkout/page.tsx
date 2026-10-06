@@ -129,7 +129,7 @@ export default function CheckoutPage() {
                     {addr.line2 ? `, ${addr.line2}` : ""}
                   </p>
                   <p className="text-xs text-muted">
-                    {addr.city}, {addr.state} — {addr.pincode}
+                    {addr.city}, {addr.state} - {addr.pincode}
                   </p>
                   <p className="text-xs text-muted">{addr.phone}</p>
                 </div>

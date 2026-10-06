@@ -4,8 +4,8 @@ import { prisma } from "@/lib/prisma";
 import { SetCard } from "@/components/product/set-card";
 
 export const metadata = {
-  title: "Store — Kimondo",
-  description: "Every piece carries the mark of its maker — thread, loom, time.",
+  title: "Store | Kimondo",
+  description: "Every piece carries the mark of its maker. Thread, loom, time.",
 };
 
 export default async function StorePage() {
@@ -25,11 +25,11 @@ export default async function StorePage() {
           Store
         </h1>
         <p className="mt-2 text-[#666666] max-w-xl">
-          Every piece carries the mark of its maker — thread, loom, time.
+          Every piece carries the mark of its maker. Thread, loom, time.
         </p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 lg:gap-x-6 lg:gap-y-10">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-6 lg:gap-x-4 lg:gap-y-8">
         {sets.map((set) => {
           const prices = set.items.map((i) => i.price);
           const minPrice = prices.length > 0 ? Math.min(...prices) : undefined;

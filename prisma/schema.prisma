@@ -305,6 +305,7 @@ model HomepageSetting {
   id              String @id @default(cuid())
   heroImage       String?
   heroImageMobile String?
+  heroVideo       String?
   ctaLabel        String @default("Shop the collection")
   ctaTarget       String @default("/store")
   featuredSetIds  String @default("[]")

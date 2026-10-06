@@ -50,7 +50,7 @@ export default async function AdminOrderDetailPage({
           <p className="text-xs font-semibold tracking-[0.1em] uppercase text-muted mb-2">Delivery</p>
           <p className="text-sm">{address.fullName}</p>
           <p className="text-xs text-muted">{address.line1}{address.line2 ? `, ${address.line2}` : ""}</p>
-          <p className="text-xs text-muted">{address.city}, {address.state} — {address.pincode}</p>
+          <p className="text-xs text-muted">{address.city}, {address.state} - {address.pincode}</p>
           <p className="text-xs text-muted">{address.phone}</p>
         </div>
       </div>

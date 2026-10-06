@@ -24,12 +24,12 @@ export function SetCard({
 }: SetCardProps) {
   return (
     <Link href={`/store/${slug}`} className="group block">
-      <div className="aspect-[4/5] mb-3 overflow-hidden bg-[#f0f0f0]">
+      <div className="aspect-[4/5] mb-3 overflow-hidden bg-[#f0f0f0] rounded-lg">
         {coverImage ? (
           <img
             src={coverImage}
             alt={name}
-            className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+            className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 rounded-lg"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">

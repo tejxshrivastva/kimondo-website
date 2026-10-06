@@ -66,7 +66,7 @@ export function AdminSidebar({
           className="text-[9px] font-semibold tracking-[0.34em] uppercase text-[#666666] mt-[5px]"
           style={{ paddingLeft: "0.34em" }}
         >
-          Content System
+          Studio
         </div>
       </div>
 

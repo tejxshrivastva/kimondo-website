@@ -32,7 +32,7 @@ export default async function AdminUsersPage() {
             {users.map((user) => (
               <tr key={user.id} className="border-b border-[rgba(0,0,0,0.04)] last:border-0">
                 <td className="p-3">{user.email}</td>
-                <td className="p-3 text-muted">{user.name || "—"}</td>
+                <td className="p-3 text-muted">{user.name || "-"}</td>
                 <td className="p-3">
                   <RoleSelector userId={user.id} currentRole={user.role} />
                 </td>

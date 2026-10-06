@@ -204,7 +204,7 @@ function SummaryContent() {
           <p className="text-xs text-muted mt-1">
             {address.line1}{address.line2 ? `, ${address.line2}` : ""}
           </p>
-          <p className="text-xs text-muted">{address.city}, {address.state} — {address.pincode}</p>
+          <p className="text-xs text-muted">{address.city}, {address.state} - {address.pincode}</p>
           <p className="text-xs text-muted">{address.phone}</p>
           <button
             onClick={() => router.push("/checkout")}

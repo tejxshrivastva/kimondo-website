@@ -200,7 +200,7 @@ export function SetEditor({
     <div className="max-w-[800px] px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display text-2xl">
-          {form.id ? `Edit: ${form.name}` : "New set"}
+          {form.id ? `Edit: ${form.name}` : "New product"}
         </h1>
         <button
           onClick={handleSave}
@@ -214,7 +214,9 @@ export function SetEditor({
       <div className="space-y-6">
         {/* Cover image */}
         <section>
-          <label className="text-xs font-medium text-muted block mb-2">Cover image (shown on store cards)</label>
+          <h2 className="text-sm font-semibold tracking-[0.1em] uppercase mb-1">Product images</h2>
+          <p className="text-xs text-[#666666] mb-3">The cover image appears on the store grid. Each item below has its own image slot for the product page slider.</p>
+          <label className="text-xs font-medium text-muted block mb-2">Cover image</label>
           <label className="block cursor-pointer">
             {form.coverImage ? (
               <div className="relative aspect-[4/5] max-w-[300px] overflow-hidden border border-[rgba(0,0,0,0.12)]">
@@ -230,7 +232,7 @@ export function SetEditor({
             ) : (
               <div className="aspect-[4/5] max-w-[300px] border border-dashed border-[rgba(0,0,0,0.2)] flex items-center justify-center hover:bg-[#f8f8f8] transition-colors">
                 <span className="text-sm text-[#666666]">
-                  {uploading === "cover" ? "Uploading..." : "Cover image — click to upload"}
+                  {uploading === "cover" ? "Uploading..." : "Cover image (click to upload)"}
                 </span>
               </div>
             )}
@@ -239,8 +241,9 @@ export function SetEditor({
         </section>
 
         <section className="grid grid-cols-2 gap-4">
+          <h2 className="col-span-2 text-sm font-semibold tracking-[0.1em] uppercase">Product details</h2>
           <div className="col-span-2">
-            <label className="text-xs font-medium text-muted block mb-1">Name</label>
+            <label className="text-xs font-medium text-muted block mb-1">Product name</label>
             <input
               value={form.name}
               onChange={(e) => updateField("name", e.target.value)}
@@ -383,7 +386,7 @@ export function SetEditor({
                   ) : (
                     <div className="aspect-[4/5] max-w-[160px] border border-dashed border-[rgba(0,0,0,0.2)] flex items-center justify-center hover:bg-[#f8f8f8] transition-colors">
                       <span className="text-xs text-[#666666] text-center px-2">
-                        {uploading === `item-${idx}` ? "Uploading..." : "Item image — click to upload"}
+                        {uploading === `item-${idx}` ? "Uploading..." : "Item image (click to upload)"}
                       </span>
                     </div>
                   )}

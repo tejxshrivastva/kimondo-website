@@ -26,6 +26,7 @@ export async function PUT(req: Request) {
   const data = {
     heroImage: body.heroImage || "",
     heroImageMobile: body.heroImageMobile || "",
+    heroVideo: body.heroVideo || "",
     ctaLabel: body.ctaLabel || "",
     ctaTarget: body.ctaTarget || "",
     featuredSetIds: JSON.stringify(body.featuredSetIds || []),
