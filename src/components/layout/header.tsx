@@ -27,43 +27,43 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-[rgba(0,0,0,0.12)]">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Mobile menu button */}
-          <button
-            onClick={toggleMenu}
-            className="lg:hidden p-2 -ml-2"
-            aria-label="Menu"
-          >
-            <Menu size={20} />
-          </button>
+        <div className="flex items-center h-16">
+          {/* Left — hamburger (mobile) / nav (desktop) */}
+          <div className="flex-1 flex items-center">
+            <button
+              onClick={toggleMenu}
+              className="lg:hidden p-2 -ml-2"
+              aria-label="Menu"
+            >
+              <Menu size={20} />
+            </button>
+            <nav className="hidden lg:flex items-center gap-8">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-sm font-medium tracking-[0.2px] transition-opacity ${
+                    pathname === link.href
+                      ? "opacity-100"
+                      : "opacity-60 hover:opacity-100"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
 
-          {/* Logo */}
+          {/* Logo — always centered */}
           <Link
             href="/"
-            className="tracking-[0.3em] uppercase text-base font-medium"
+            className="tracking-[0.3em] uppercase text-base font-medium shrink-0"
           >
             KIMONDO
           </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-medium tracking-[0.2px] transition-opacity ${
-                  pathname === link.href
-                    ? "opacity-100"
-                    : "opacity-60 hover:opacity-100"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
           {/* Right actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex-1 flex items-center justify-end gap-3">
             <button
               onClick={() => {
                 if (session?.user) {
