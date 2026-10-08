@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
-export const metadata = { title: "Sign in | Kimondo Studio" };
+export const metadata = { title: "Sign in | Kimondo Admin" };
 
 export default async function AdminAuthLayout({
   children,
