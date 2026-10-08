@@ -10,8 +10,8 @@ interface Props {
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const campaign = await prisma.campaign.findUnique({ where: { slug } });
-  if (!campaign) return { title: "Not Found | Kimondo" };
-  return { title: `${campaign.title} | Kimondo` };
+  if (!campaign) return { title: "Not Found" };
+  return { title: campaign.title };
 }
 
 export default async function CampaignPage({ params }: Props) {

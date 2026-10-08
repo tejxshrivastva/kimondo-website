@@ -59,7 +59,7 @@ export default function AdminSettingsPage() {
         </button>
       </div>
       <div className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="text-xs font-medium text-muted block mb-1">Return window (days)</label>
             <input type="number" value={form.returnWindowDays} onChange={(e) => setForm((p) => ({ ...p, returnWindowDays: Number(e.target.value) }))} className="w-full border border-[rgba(0,0,0,0.16)]  p-3 text-sm focus:outline-none focus:border-black" />

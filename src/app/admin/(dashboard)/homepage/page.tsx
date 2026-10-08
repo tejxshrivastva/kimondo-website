@@ -188,7 +188,7 @@ export default function AdminHomepagePage() {
 
         <section>
           <h2 className="text-sm font-semibold tracking-[0.1em] uppercase mb-3">Call to action</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="text-xs font-medium text-muted block mb-1">Button label</label>
               <input value={form.ctaLabel} onChange={(e) => setForm((p) => ({ ...p, ctaLabel: e.target.value }))} className="w-full border border-[rgba(0,0,0,0.16)] p-3 text-sm focus:outline-none focus:border-black" />

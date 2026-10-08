@@ -91,7 +91,7 @@ export default async function AdminOverview() {
         {stats.map(({ label, value, desc }) => (
           <div
             key={label}
-            className="bg-white border border-[rgba(0,0,0,0.12)] px-[22px] py-5"
+            className="bg-white border border-[rgba(0,0,0,0.12)] px-4 sm:px-[22px] py-4 sm:py-5"
           >
             <div className="text-[9px] font-semibold tracking-[0.18em] uppercase text-[#666666] mb-[14px]">
               {label}
@@ -133,23 +133,23 @@ export default async function AdminOverview() {
                 <Link
                   key={order.id}
                   href={`/admin/orders/${order.id}`}
-                  className="flex items-center gap-4 px-[22px] py-[15px] border-b border-[rgba(0,0,0,0.06)] last:border-0 hover:bg-[#f8f8f8] transition-colors"
+                  className="flex items-center gap-3 sm:gap-4 px-4 sm:px-[22px] py-[15px] border-b border-[rgba(0,0,0,0.06)] last:border-0 hover:bg-[#f8f8f8] transition-colors"
                 >
-                  <div className="w-10 h-[50px] bg-[#f8f8f8] flex-shrink-0" />
+                  <div className="w-10 h-[50px] bg-[#f8f8f8] flex-shrink-0 hidden sm:block" />
                   <div className="flex-1 min-w-0">
                     <div className="text-[13.5px] font-semibold">
                       #{order.orderNumber}
                     </div>
-                    <div className="text-[11.5px] text-[#666666]">
+                    <div className="text-[11.5px] text-[#666666] truncate">
                       {setNames.join(", ")} &middot;{" "}
                       {order.orderLines.length} item
                       {order.orderLines.length !== 1 ? "s" : ""}
                     </div>
                   </div>
-                  <span className="text-[11px] font-medium px-[10px] py-[4px] bg-[#f8f8f8] text-[#1a1a1a]">
+                  <span className="text-[11px] font-medium px-[10px] py-[4px] bg-[#f8f8f8] text-[#1a1a1a] flex-shrink-0">
                     {displayStatus}
                   </span>
-                  <span className="font-display text-[16px]">
+                  <span className="font-display text-[16px] flex-shrink-0 hidden sm:block">
                     &#8377;
                     {(order.totalMinor / 100).toLocaleString("en-IN")}
                   </span>

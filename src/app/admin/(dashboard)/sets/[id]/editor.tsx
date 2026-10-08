@@ -264,7 +264,7 @@ export function SetEditor({
           </label>
 
           <label className="text-xs font-medium text-muted block mb-2 mt-4">Slider images (product detail page)</label>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {[0, 1, 2].map((slotIdx) => {
               const imgs = getSliderImages();
               const imgUrl = imgs[slotIdx] || "";
@@ -295,9 +295,9 @@ export function SetEditor({
           </div>
         </section>
 
-        <section className="grid grid-cols-2 gap-4">
-          <h2 className="col-span-2 text-sm font-semibold tracking-[0.1em] uppercase">Product details</h2>
-          <div className="col-span-2">
+        <section className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <h2 className="sm:col-span-2 text-sm font-semibold tracking-[0.1em] uppercase">Product details</h2>
+          <div className="sm:col-span-2">
             <label className="text-xs font-medium text-muted block mb-1">Product name</label>
             <input
               value={form.name}
@@ -325,7 +325,7 @@ export function SetEditor({
               <option value="archived">Archived</option>
             </select>
           </div>
-          <div className="col-span-2">
+          <div className="sm:col-span-2">
             <label className="text-xs font-medium text-muted block mb-1">Tagline</label>
             <input
               value={form.tagline || ""}
@@ -333,7 +333,7 @@ export function SetEditor({
               className="w-full border border-[rgba(0,0,0,0.16)] p-3 text-sm focus:outline-none focus:border-black"
             />
           </div>
-          <div className="col-span-2">
+          <div className="sm:col-span-2">
             <label className="text-xs font-medium text-muted block mb-1">Description</label>
             <textarea
               value={form.description || ""}
@@ -386,7 +386,7 @@ export function SetEditor({
               ))}
             </select>
           </div>
-          <div className="col-span-2">
+          <div className="sm:col-span-2">
             <label className="text-xs font-medium text-muted block mb-1">Product details</label>
             <textarea
               value={form.productDetails || ""}
@@ -395,7 +395,7 @@ export function SetEditor({
               className="w-full border border-[rgba(0,0,0,0.16)] p-3 text-sm focus:outline-none focus:border-black resize-none"
             />
           </div>
-          <div className="col-span-2">
+          <div className="sm:col-span-2">
             <label className="text-xs font-medium text-muted block mb-1">Care instructions</label>
             <textarea
               value={form.careInstructions || ""}
@@ -449,7 +449,7 @@ export function SetEditor({
                 </label>
 
                 <div className="flex items-start gap-3 mb-3">
-                  <div className="flex-1 grid grid-cols-3 gap-3">
+                  <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <input
                       value={item.name}
                       onChange={(e) => updateItem(idx, "name", e.target.value)}
@@ -484,7 +484,7 @@ export function SetEditor({
                 <div className="ml-4 space-y-2">
                   <p className="text-xs text-muted">Variants:</p>
                   {item.variants.map((v, vi) => (
-                    <div key={vi} className="flex items-center gap-2">
+                    <div key={vi} className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
                       <input
                         value={v.size}
                         onChange={(e) => updateVariant(idx, vi, "size", e.target.value)}

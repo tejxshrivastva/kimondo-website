@@ -74,7 +74,7 @@ export default function AdminLoginPage() {
             Kimondo
           </p>
           <p className="text-[11px] tracking-[0.2em] uppercase text-muted mt-1">
-            Studio
+            Admin
           </p>
         </div>
 

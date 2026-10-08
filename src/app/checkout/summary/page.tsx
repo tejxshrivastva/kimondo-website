@@ -161,7 +161,7 @@ function SummaryContent() {
         <h2 className="font-display text-3xl mb-2">Order placed</h2>
         <p className="text-[#666666] mb-1">Your order has been confirmed. You will receive updates by email.</p>
         <p className="text-sm font-mono font-medium mb-8">{orderNumber}</p>
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-3">
           <button
             onClick={() => router.push("/profile")}
             className="h-12 px-8 bg-black text-white text-sm font-semibold "

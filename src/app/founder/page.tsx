@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { FounderForm } from "./client";
 
 export const metadata = {
-  title: "Founder | Kimondo",
+  title: "Founder",
 };
 
 export default async function FounderPage() {

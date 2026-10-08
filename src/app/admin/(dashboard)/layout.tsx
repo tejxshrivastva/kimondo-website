@@ -4,7 +4,10 @@ import { prisma } from "@/lib/prisma";
 import { AdminSidebar } from "@/components/layout/admin-sidebar";
 
 export const metadata = {
-  title: { default: "Kimondo Admin", template: "%s | Kimondo Admin" },
+  title: {
+    absolute: "Kimondo Admin",
+    template: "%s | Kimondo Admin",
+  },
 };
 
 export default async function AdminDashboardLayout({

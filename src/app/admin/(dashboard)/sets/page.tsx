@@ -23,8 +23,8 @@ export default async function AdminSetsPage() {
         </Link>
       </div>
 
-      <div className="border border-[rgba(0,0,0,0.12)] overflow-hidden">
-        <table className="w-full text-sm">
+      <div className="border border-[rgba(0,0,0,0.12)] overflow-x-auto -mx-[clamp(14px,3vw,34px)] sm:mx-0 border-x-0 sm:border-x">
+        <table className="w-full text-sm min-w-[540px]">
           <thead>
             <tr className="border-b border-[rgba(0,0,0,0.08)] bg-[#f8f8f8]">
               <th className="text-left p-3 font-medium">Name</th>

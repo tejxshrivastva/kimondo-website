@@ -13,9 +13,9 @@ interface Props {
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const set = await prisma.set.findUnique({ where: { slug } });
-  if (!set) return { title: "Not Found | Kimondo" };
+  if (!set) return { title: "Not Found" };
   return {
-    title: `${set.name} | Kimondo`,
+    title: set.name,
     description: set.description?.slice(0, 160) || `The ${set.name} set.`,
   };
 }
@@ -76,8 +76,8 @@ export default async function SetPage({ params }: Props) {
           </div>
         </div>
 
-        {/* Slider images - below details on mobile, full row on tablet, col 2 on desktop */}
-        <div className="order-3 lg:order-2 md:col-span-2 lg:col-span-1 flex flex-col md:grid md:grid-cols-3 lg:flex lg:flex-col gap-1 mt-1 md:mt-0">
+        {/* Slider images - 2-col grid on mobile, 3-col row on tablet, stacked col on desktop */}
+        <div className="order-3 lg:order-2 md:col-span-2 lg:col-span-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-1 mt-1 md:mt-0">
           {sliderSlots.map((i) => (
             <div key={i} className="w-full overflow-hidden" style={{ aspectRatio: "3/4" }}>
               {setImages[i] ? (

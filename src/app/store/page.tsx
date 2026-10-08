@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { SetCard } from "@/components/product/set-card";
 
 export const metadata = {
-  title: "Store | Kimondo",
+  title: "Store",
   description: "Browse the Kimondo collection.",
 };
 

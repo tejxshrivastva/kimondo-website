@@ -2,7 +2,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
 export const metadata = {
-  title: "Archive | Kimondo",
+  title: "Archive",
   description: "Browse the Kimondo archive.",
 };
 

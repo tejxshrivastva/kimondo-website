@@ -43,7 +43,7 @@ export default async function AdminOrderDetailPage({
         </span>
       </div>
 
-      <div className="grid grid-cols-2 gap-6 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6">
         <div className="border border-[rgba(0,0,0,0.12)] p-4">
           <p className="text-xs font-semibold tracking-[0.1em] uppercase text-muted mb-2">Customer</p>
           <p className="text-sm font-medium">{order.user.name || order.user.email}</p>
@@ -58,8 +58,8 @@ export default async function AdminOrderDetailPage({
         </div>
       </div>
 
-      <div className="border border-[rgba(0,0,0,0.12)] mb-6">
-        <table className="w-full text-sm">
+      <div className="border border-[rgba(0,0,0,0.12)] mb-6 overflow-x-auto -mx-[clamp(14px,3vw,34px)] sm:mx-0 border-x-0 sm:border-x">
+        <table className="w-full text-sm min-w-[420px]">
           <thead>
             <tr className="border-b border-[rgba(0,0,0,0.08)] bg-[#f8f8f8]">
               <th className="text-left p-3 font-medium">Item</th>

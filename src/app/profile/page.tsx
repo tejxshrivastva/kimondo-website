@@ -176,7 +176,7 @@ export default function ProfilePage() {
           {session.user.name || session.user.email}
         </h1>
         <p className="text-xs text-white/60">{session.user.email}</p>
-        <div className="flex items-center gap-6 mt-4 pt-4 border-t border-white/10">
+        <div className="flex items-center gap-4 sm:gap-6 mt-4 pt-4 border-t border-white/10 flex-wrap">
           <div>
             <p className="text-xs text-white/60">Member since</p>
             <p className="text-sm font-medium">
@@ -239,10 +239,10 @@ export default function ProfilePage() {
                   onClick={() =>
                     setExpandedOrder(expandedOrder === order.id ? null : order.id)
                   }
-                  className="w-full flex items-center justify-between p-4"
+                  className="w-full flex items-center justify-between p-4 gap-2"
                 >
-                  <div className="text-left">
-                    <p className="text-sm font-mono font-medium">{order.orderNumber}</p>
+                  <div className="text-left min-w-0">
+                    <p className="text-sm font-mono font-medium truncate">{order.orderNumber}</p>
                     <p className="text-xs text-muted mt-0.5">
                       {new Date(order.createdAt).toLocaleDateString("en-IN", {
                         day: "numeric",
@@ -251,8 +251,8 @@ export default function ProfilePage() {
                       })}
                     </p>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-xs font-medium px-2 py-1 bg-[#f8f8f8] capitalize">
+                  <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+                    <span className="text-xs font-medium px-2 py-1 bg-[#f8f8f8] capitalize hidden sm:inline">
                       {STATUS_LABELS[order.status] || order.status}
                     </span>
                     <span className="text-sm font-medium">{formatPrice(order.totalMinor)}</span>
@@ -261,6 +261,9 @@ export default function ProfilePage() {
                 </button>
                 {expandedOrder === order.id && (
                   <div className="border-t border-[rgba(0,0,0,0.08)] p-4 space-y-2">
+                    <p className="text-xs font-medium capitalize sm:hidden mb-2">
+                      Status: {STATUS_LABELS[order.status] || order.status}
+                    </p>
                     {order.lines.map((line) => (
                       <div key={line.id} className="flex justify-between text-sm">
                         <span>
