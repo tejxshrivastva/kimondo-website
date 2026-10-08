@@ -209,14 +209,17 @@ export function AdminSidebar({
 
   return (
     <>
-      {/* Mobile hamburger */}
-      <button
-        onClick={() => setMobileOpen(true)}
-        className="lg:hidden fixed top-[10px] left-3 z-40 p-2 bg-white border border-[rgba(0,0,0,0.12)]"
-        aria-label="Open menu"
-      >
-        <Menu size={18} />
-      </button>
+      {/* Mobile top bar */}
+      <div className="lg:hidden sticky top-0 z-30 bg-white border-b border-[rgba(0,0,0,0.12)] flex items-center h-12 px-3">
+        <button
+          onClick={() => setMobileOpen(true)}
+          className="p-2 -ml-2"
+          aria-label="Open menu"
+        >
+          <Menu size={18} />
+        </button>
+        <span className="text-[13px] font-semibold tracking-[0.15em] uppercase ml-2">Kimondo Admin</span>
+      </div>
 
       {/* Mobile backdrop */}
       <div
