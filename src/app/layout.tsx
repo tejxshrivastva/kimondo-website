@@ -8,18 +8,18 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: { default: "Kimondo", template: "%s | Kimondo" },
-  description: "Handloom clothing, woven by hand. Each garment begins as raw yarn and is crafted into something you'll want to keep.",
-  metadataBase: new URL("https://kimondo-website.vercel.app"),
+  description: "Clothing crafted with intention.",
+  metadataBase: new URL("https://kimondo.in"),
   openGraph: {
     type: "website",
     siteName: "Kimondo",
     title: "Kimondo",
-    description: "Handloom clothing, woven by hand.",
+    description: "Clothing crafted with intention.",
   },
   twitter: {
     card: "summary",
     title: "Kimondo",
-    description: "Handloom clothing, woven by hand.",
+    description: "Clothing crafted with intention.",
   },
   icons: {
     icon: "/favicon.svg",

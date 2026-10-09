@@ -22,7 +22,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "File size exceeds 10MB limit" }, { status: 400 });
     }
 
-    const ext = file.name.split(".").pop() || "jpg";
     const safeName = file.name
       .replace(/[^a-zA-Z0-9.-]/g, "-")
       .replace(/-+/g, "-")

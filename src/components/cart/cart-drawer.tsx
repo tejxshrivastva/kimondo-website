@@ -1,10 +1,67 @@
 "use client";
 
-import { X, Plus, Minus, ShoppingBag } from "lucide-react";
+import { useState, useCallback } from "react";
+import { X, Plus, Minus, ShoppingBag, MapPin, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useOverlayStore } from "@/store/overlay-store";
 import { useCart } from "@/hooks/use-cart";
 import { formatPrice } from "@/lib/utils";
+
+function PincodeEstimator() {
+  const [pincode, setPincode] = useState("");
+  const [estimate, setEstimate] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const checkPincode = useCallback(async () => {
+    if (pincode.length !== 6) return;
+    setLoading(true);
+    setError(null);
+    setEstimate(null);
+    try {
+      const res = await fetch(`/api/shipping/estimate?pincode=${pincode}`);
+      const data = await res.json();
+      if (data.serviceable) {
+        setEstimate(`Delivery in ${data.estimatedDays || "3–7"} days`);
+      } else {
+        setError("Not serviceable at this pincode");
+      }
+    } catch {
+      setError("Could not check delivery");
+    } finally {
+      setLoading(false);
+    }
+  }, [pincode]);
+
+  return (
+    <div className="space-y-1.5">
+      <div className="flex gap-2">
+        <div className="flex-1 flex items-center gap-2 border border-[rgba(0,0,0,0.16)] px-3 h-9">
+          <MapPin size={14} className="text-muted shrink-0" />
+          <input
+            type="text"
+            inputMode="numeric"
+            maxLength={6}
+            placeholder="Enter pincode"
+            value={pincode}
+            onChange={(e) => setPincode(e.target.value.replace(/\D/g, ""))}
+            onKeyDown={(e) => e.key === "Enter" && checkPincode()}
+            className="flex-1 text-sm bg-transparent outline-none"
+          />
+        </div>
+        <button
+          onClick={checkPincode}
+          disabled={pincode.length !== 6 || loading}
+          className="h-9 px-4 text-xs font-semibold uppercase tracking-wider border border-black disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          {loading ? <Loader2 size={14} className="animate-spin" /> : "Check"}
+        </button>
+      </div>
+      {estimate && <p className="text-xs text-[#666666]">{estimate}</p>}
+      {error && <p className="text-xs text-red-600">{error}</p>}
+    </div>
+  );
+}
 
 export function CartDrawer() {
   const { cartOpen, closeCart } = useOverlayStore();
@@ -102,6 +159,7 @@ export function CartDrawer() {
                   {formatPrice(total)}
                 </span>
               </div>
+              <PincodeEstimator />
               <p className="text-xs text-[#666666]">
                 All prices are final and inclusive of GST. No shipping charges.
               </p>

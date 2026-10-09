@@ -32,8 +32,8 @@ const SECTIONS = [
   {
     heading: "Operations",
     items: [
-      { href: "/admin/orders", label: "Orders", showBadge: true },
-      { href: "/admin/notify-requests", label: "Restock requests" },
+      { href: "/admin/orders", label: "Orders", showBadge: true, adminOnly: true },
+      { href: "/admin/notify-requests", label: "Restock requests", adminOnly: true },
     ],
   },
   {

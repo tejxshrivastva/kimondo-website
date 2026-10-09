@@ -14,14 +14,30 @@ export async function GET() {
     orderBy: { grantedAt: "desc" },
   });
 
+  const now = new Date();
+  const toSolidify = awards.filter(
+    (a) => a.state === "pending" && a.solidifiesAt && a.solidifiesAt <= now
+  );
+
+  if (toSolidify.length > 0) {
+    await prisma.badgeAward.updateMany({
+      where: { id: { in: toSolidify.map((a) => a.id) } },
+      data: { state: "solidified" },
+    });
+  }
+
   return NextResponse.json({
-    awards: awards.map((a) => ({
-      id: a.id,
-      state: a.state,
-      badge: {
-        name: a.badge.name,
-        artwork: a.badge.artwork,
-      },
-    })),
+    awards: awards.map((a) => {
+      const solidified =
+        a.state === "pending" && a.solidifiesAt && a.solidifiesAt <= now;
+      return {
+        id: a.id,
+        state: solidified ? "solidified" : a.state,
+        badge: {
+          name: a.badge.name,
+          artwork: a.badge.artwork,
+        },
+      };
+    }),
   });
 }

@@ -329,19 +329,21 @@ export default function ProfilePage() {
               {badges.map((award) => (
                 <div
                   key={award.id}
-                  className={`border  p-4 text-center ${
-                    award.state === "solidified"
-                      ? "border-black"
-                      : "border-[rgba(0,0,0,0.12)] opacity-60"
+                  className={`border p-4 text-center ${
+                    award.state === "revoked"
+                      ? "border-[rgba(0,0,0,0.12)] opacity-40"
+                      : "border-black"
                   }`}
                 >
                   <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-[#f8f8f8] flex items-center justify-center text-2xl">
                     {award.badge.artwork || "🏷"}
                   </div>
                   <p className="text-sm font-medium">{award.badge.name}</p>
-                  <p className="text-[10px] text-muted uppercase tracking-wider mt-1">
-                    {award.state}
-                  </p>
+                  {award.state === "revoked" && (
+                    <p className="text-[10px] text-muted uppercase tracking-wider mt-1">
+                      Returned
+                    </p>
+                  )}
                 </div>
               ))}
             </div>
