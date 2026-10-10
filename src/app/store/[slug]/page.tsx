@@ -5,6 +5,7 @@ import { formatPrice } from "@/lib/utils";
 import { SetDetailClient } from "./client";
 import { ProductDetailsColumn } from "./product-details-column";
 import { SetCard } from "@/components/product/set-card";
+import { WaitlistForm } from "@/components/product/waitlist-form";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -99,34 +100,18 @@ export default async function SetPage({ params }: Props) {
         <ProductDetailsColumn className="order-2 lg:order-3">
           <div className="px-6 lg:px-8 py-8 space-y-6">
             <div>
-              <p className="text-[9px] font-semibold tracking-[0.2em] uppercase text-muted mb-2">
-                {set.items.length} {set.items.length === 1 ? "piece" : "pieces"}
-              </p>
-              <h1 className="font-display text-3xl lg:text-4xl">{set.name}</h1>
-              <p className="mt-2 text-lg">From {formatPrice(minPrice)}</p>
+              <div className="flex items-baseline justify-between gap-4">
+                <h1 className="font-display text-3xl lg:text-4xl">{set.name}</h1>
+                <p className="text-lg whitespace-nowrap">{formatPrice(minPrice)}</p>
+              </div>
+              {(set.tagline || set.description) && (
+                <p className="mt-3 text-sm text-[#666666] leading-relaxed">
+                  {set.tagline || set.description}
+                </p>
+              )}
             </div>
 
-            <SetDetailClient action="setButton" setSlug={set.slug} />
-
-            <div className="space-y-2">
-              {set.items.map((item) => (
-                <SetDetailClient
-                  key={item.id}
-                  action="itemRow"
-                  setSlug={set.slug}
-                  itemId={item.id}
-                  itemName={item.name}
-                  itemCategory={item.category}
-                  itemPrice={item.price}
-                />
-              ))}
-            </div>
-
-            {set.description && (
-              <p className="text-[#666666] leading-relaxed text-sm">
-                {set.description}
-              </p>
-            )}
+            <WaitlistForm />
 
             <SetDetailClient
               action="accordions"

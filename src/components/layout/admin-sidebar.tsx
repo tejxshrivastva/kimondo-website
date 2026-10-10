@@ -9,7 +9,11 @@ import { Menu, X } from "lucide-react";
 const SECTIONS = [
   {
     heading: "",
-    items: [{ href: "/admin", label: "Overview" }],
+    items: [
+      { href: "/admin", label: "Overview" },
+      { href: "/admin/orders", label: "Orders", showBadge: true, adminOnly: true },
+      { href: "/admin/notify-requests", label: "Restock requests", adminOnly: true },
+    ],
   },
   {
     heading: "Catalog",
@@ -27,13 +31,6 @@ const SECTIONS = [
       { href: "/admin/faqs", label: "FAQ" },
       { href: "/admin/founder", label: "Founder" },
       { href: "/admin/settings", label: "Settings", adminOnly: true },
-    ],
-  },
-  {
-    heading: "Operations",
-    items: [
-      { href: "/admin/orders", label: "Orders", showBadge: true, adminOnly: true },
-      { href: "/admin/notify-requests", label: "Restock requests", adminOnly: true },
     ],
   },
   {

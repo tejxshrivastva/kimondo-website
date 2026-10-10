@@ -6,21 +6,13 @@ export default async function AdminOverview() {
     toAcceptCount,
     inFulfilmentCount,
     returnCount,
-    restockAlertCount,
     actionOrders,
-    lowStockVariants,
   ] = await Promise.all([
     prisma.order.count({ where: { status: "confirmed" } }),
     prisma.order.count({
       where: { status: { in: ["accepted", "shipped"] } },
     }),
     prisma.returnRequest.count({ where: { status: "pending" } }),
-    prisma.variant.count({
-      where: {
-        stock: { lte: 3 },
-        item: { set: { status: "live" } },
-      },
-    }),
     prisma.order.findMany({
       where: {
         status: { in: ["confirmed", "accepted", "shipped"] },
@@ -30,22 +22,6 @@ export default async function AdminOverview() {
       include: {
         orderLines: { select: { setName: true } },
         returnRequests: { where: { status: "pending" }, select: { id: true } },
-      },
-    }),
-    prisma.variant.findMany({
-      where: {
-        stock: { lte: 3 },
-        item: { set: { status: "live" } },
-      },
-      take: 8,
-      orderBy: { stock: "asc" },
-      include: {
-        item: {
-          select: {
-            name: true,
-            set: { select: { name: true } },
-          },
-        },
       },
     }),
   ]);
@@ -58,11 +34,6 @@ export default async function AdminOverview() {
       desc: "Accepted → out for delivery",
     },
     { label: "Returns", value: returnCount, desc: "Awaiting action" },
-    {
-      label: "Restock alerts",
-      value: restockAlertCount,
-      desc: "Variants with waitlists",
-    },
   ];
 
   const statusLabel: Record<string, string> = {
@@ -87,7 +58,7 @@ export default async function AdminOverview() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-7">
+      <div className="grid grid-cols-3 gap-4 mb-7">
         {stats.map(({ label, value, desc }) => (
           <div
             key={label}
@@ -104,96 +75,58 @@ export default async function AdminOverview() {
         ))}
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-5">
-        <div className="bg-white border border-[rgba(0,0,0,0.12)] overflow-x-auto">
-          <div className="px-[22px] py-[18px] border-b border-[rgba(0,0,0,0.08)] flex items-center justify-between">
-            <div className="font-display text-[18px]">Orders to action</div>
-            <Link
-              href="/admin/orders"
-              className="text-[10px] font-semibold tracking-[0.14em] uppercase"
-            >
-              All orders &rarr;
-            </Link>
-          </div>
-          {actionOrders.length === 0 ? (
-            <div className="px-[22px] py-10 text-center text-[13px] text-[#666666]">
-              No orders need attention
-            </div>
-          ) : (
-            actionOrders.map((order) => {
-              const setNames = [
-                ...new Set(order.orderLines.map((l) => l.setName)),
-              ];
-              const hasReturn = order.returnRequests.length > 0;
-              const displayStatus = hasReturn
-                ? "Return"
-                : statusLabel[order.status] || order.status;
-
-              return (
-                <Link
-                  key={order.id}
-                  href={`/admin/orders/${order.id}`}
-                  className="flex items-center gap-3 sm:gap-4 px-4 sm:px-[22px] py-[15px] border-b border-[rgba(0,0,0,0.06)] last:border-0 hover:bg-[#f8f8f8] transition-colors"
-                >
-                  <div className="w-10 h-[50px] bg-[#f8f8f8] flex-shrink-0 hidden sm:block" />
-                  <div className="flex-1 min-w-0">
-                    <div className="text-[13.5px] font-semibold">
-                      #{order.orderNumber}
-                    </div>
-                    <div className="text-[11.5px] text-[#666666] truncate">
-                      {setNames.join(", ")} &middot;{" "}
-                      {order.orderLines.length} item
-                      {order.orderLines.length !== 1 ? "s" : ""}
-                    </div>
-                  </div>
-                  <span className="text-[11px] font-medium px-[10px] py-[4px] bg-[#f8f8f8] text-[#1a1a1a] flex-shrink-0">
-                    {displayStatus}
-                  </span>
-                  <span className="font-display text-[16px] flex-shrink-0 hidden sm:block">
-                    &#8377;
-                    {(order.totalMinor / 100).toLocaleString("en-IN")}
-                  </span>
-                </Link>
-              );
-            })
-          )}
+      <div className="bg-white border border-[rgba(0,0,0,0.12)] overflow-x-auto">
+        <div className="px-[22px] py-[18px] border-b border-[rgba(0,0,0,0.08)] flex items-center justify-between">
+          <div className="font-display text-[18px]">Orders to action</div>
+          <Link
+            href="/admin/orders"
+            className="text-[10px] font-semibold tracking-[0.14em] uppercase"
+          >
+            All orders &rarr;
+          </Link>
         </div>
-
-        <div className="bg-white border border-[rgba(0,0,0,0.12)] overflow-x-auto">
-          <div className="px-[22px] py-[18px] border-b border-[rgba(0,0,0,0.08)] font-display text-[18px]">
-            Low &amp; out of stock
+        {actionOrders.length === 0 ? (
+          <div className="px-[22px] py-10 text-center text-[13px] text-[#666666]">
+            No orders need attention
           </div>
-          {lowStockVariants.length === 0 ? (
-            <div className="px-[22px] py-10 text-center text-[13px] text-[#666666]">
-              All variants well stocked
-            </div>
-          ) : (
-            lowStockVariants.map((v) => (
-              <div
-                key={v.id}
-                className="flex items-center gap-3 px-[22px] py-[13px] border-b border-[rgba(0,0,0,0.06)] last:border-0"
+        ) : (
+          actionOrders.map((order) => {
+            const setNames = [
+              ...new Set(order.orderLines.map((l) => l.setName)),
+            ];
+            const hasReturn = order.returnRequests.length > 0;
+            const displayStatus = hasReturn
+              ? "Return"
+              : statusLabel[order.status] || order.status;
+
+            return (
+              <Link
+                key={order.id}
+                href={`/admin/orders/${order.id}`}
+                className="flex items-center gap-3 sm:gap-4 px-4 sm:px-[22px] py-[15px] border-b border-[rgba(0,0,0,0.06)] last:border-0 hover:bg-[#f8f8f8] transition-colors"
               >
+                <div className="w-10 h-[50px] bg-[#f8f8f8] flex-shrink-0 hidden sm:block" />
                 <div className="flex-1 min-w-0">
-                  <div className="text-[12.5px] font-semibold">
-                    {v.item.name} &middot; {v.size}
+                  <div className="text-[13.5px] font-semibold">
+                    #{order.orderNumber}
                   </div>
-                  <div className="text-[11px] text-[#666666]">
-                    {v.item.set.name}
+                  <div className="text-[11.5px] text-[#666666] truncate">
+                    {setNames.join(", ")} &middot;{" "}
+                    {order.orderLines.length} item
+                    {order.orderLines.length !== 1 ? "s" : ""}
                   </div>
                 </div>
-                <span
-                  className={`text-[11px] font-semibold px-[10px] py-[4px] ${
-                    v.stock === 0
-                      ? "bg-black text-white"
-                      : "bg-[#f8f8f8] text-[#1a1a1a]"
-                  }`}
-                >
-                  {v.stock === 0 ? "Out" : `${v.stock} left`}
+                <span className="text-[11px] font-medium px-[10px] py-[4px] bg-[#f8f8f8] text-[#1a1a1a] flex-shrink-0">
+                  {displayStatus}
                 </span>
-              </div>
-            ))
-          )}
-        </div>
+                <span className="font-display text-[16px] flex-shrink-0 hidden sm:block">
+                  &#8377;
+                  {(order.totalMinor / 100).toLocaleString("en-IN")}
+                </span>
+              </Link>
+            );
+          })
+        )}
       </div>
     </div>
   );

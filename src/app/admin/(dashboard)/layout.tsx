@@ -26,7 +26,7 @@ export default async function AdminDashboardLayout({
   });
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white font-admin text-[15px]">
       <AdminSidebar
         role={session.user.role || "editor"}
         userName={session.user.name || undefined}

@@ -102,6 +102,9 @@ a {
   .font-sans {
     font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
   }
+  .font-admin {
+    font-family: var(--font-admin), "Hanken Grotesk", system-ui, sans-serif;
+  }
   .scrollbar-none {
     -ms-overflow-style: none;
     scrollbar-width: none;

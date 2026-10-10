@@ -338,3 +338,14 @@ model SiteSettings {
   socialLinks           String @default("[]")
   updatedAt             DateTime @updatedAt
 }
+
+// ── WAITLIST ────────────────────────────────────────
+
+model WaitlistSignup {
+  id        String   @id @default(cuid())
+  email     String
+  phone     String?
+  createdAt DateTime @default(now())
+
+  @@unique([email])
+}

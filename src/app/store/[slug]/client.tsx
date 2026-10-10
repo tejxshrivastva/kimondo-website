@@ -28,6 +28,8 @@ export function SetDetailClient({
 }: SetDetailClientProps) {
   const { openSetPicker, openItemPicker, openSizeGuide } = useOverlayStore();
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const [sizingOpen, setSizingOpen] = useState(false);
+  const [materialOpen, setMaterialOpen] = useState(false);
   const [careOpen, setCareOpen] = useState(false);
   if (action === "setButton") {
     return (
@@ -72,7 +74,7 @@ export function SetDetailClient({
               onClick={() => setDetailsOpen(!detailsOpen)}
               className="w-full flex items-center justify-between py-4 text-sm font-medium"
             >
-              Product details
+              Details
               <ChevronDown
                 size={16}
                 className={`transition-transform ${detailsOpen ? "rotate-180" : ""}`}
@@ -85,13 +87,52 @@ export function SetDetailClient({
             )}
           </div>
         )}
+        <div>
+          <button
+            onClick={() => setSizingOpen(!sizingOpen)}
+            className="w-full flex items-center justify-between py-4 text-sm font-medium"
+          >
+            Sizing
+            <ChevronDown
+              size={16}
+              className={`transition-transform ${sizingOpen ? "rotate-180" : ""}`}
+            />
+          </button>
+          {sizingOpen && (
+            <div className="pb-4">
+              <button
+                onClick={openSizeGuide}
+                className="text-sm text-[#666666] underline underline-offset-4 hover:text-black transition-colors"
+              >
+                View size guide
+              </button>
+            </div>
+          )}
+        </div>
+        <div>
+          <button
+            onClick={() => setMaterialOpen(!materialOpen)}
+            className="w-full flex items-center justify-between py-4 text-sm font-medium"
+          >
+            Material
+            <ChevronDown
+              size={16}
+              className={`transition-transform ${materialOpen ? "rotate-180" : ""}`}
+            />
+          </button>
+          {materialOpen && (
+            <p className="pb-4 text-sm text-[#666666] leading-relaxed">
+              Details coming soon.
+            </p>
+          )}
+        </div>
         {careInstructions && (
           <div>
             <button
               onClick={() => setCareOpen(!careOpen)}
               className="w-full flex items-center justify-between py-4 text-sm font-medium"
             >
-              Care instructions
+              Care
               <ChevronDown
                 size={16}
                 className={`transition-transform ${careOpen ? "rotate-180" : ""}`}
@@ -104,15 +145,6 @@ export function SetDetailClient({
             )}
           </div>
         )}
-        <div>
-          <button
-            onClick={openSizeGuide}
-            className="w-full flex items-center justify-between py-4 text-sm font-medium"
-          >
-            Size guide
-            <ChevronDown size={16} />
-          </button>
-        </div>
       </div>
     );
   }

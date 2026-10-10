@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { cormorant } from "@/styles/fonts";
+import { cormorant, hankenGrotesk } from "@/styles/fonts";
 import { Toaster } from "sonner";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cormorant.variable}
+      className={`${cormorant.variable} ${hankenGrotesk.variable}`}
       suppressHydrationWarning
     >
       <body className="font-sans min-h-screen flex flex-col">
