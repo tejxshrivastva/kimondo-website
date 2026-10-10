@@ -92,13 +92,25 @@ export function SizePicker() {
         variant = item.variants.find((v) => v.size === selectedSizeForCat);
       }
       if (!variant || variant.stock < 1) continue;
-      await addItem(variant.id, setData.id, item.name);
-      addedAny = true;
+      const success = await addItem(variant.id, setData.id, item.name);
+      if (success) {
+        addedAny = true;
+      } else {
+        break;
+      }
     }
     if (addedAny) closePicker();
   };
 
   const checkedCount = Object.values(checkedItems).filter(Boolean).length;
+
+  const allSizesSelected = setData
+    ? setData.items.every((item) => {
+        if (!checkedItems[item.id]) return true;
+        if (item.category === "accessory") return true;
+        return !!catSizes[item.category];
+      })
+    : false;
 
   return (
     <>
@@ -231,11 +243,14 @@ export function SizePicker() {
               })}
               <button
                 onClick={handleAddSet}
-                disabled={checkedCount === 0}
+                disabled={checkedCount === 0 || !allSizesSelected}
                 className="w-full h-12 bg-black text-white text-sm font-semibold  hover:bg-black/90 transition-colors disabled:opacity-50"
               >
-                Add {checkedCount} {checkedCount === 1 ? "item" : "items"} to
-                cart
+                {checkedCount === 0
+                  ? "Select items"
+                  : !allSizesSelected
+                    ? "Select sizes"
+                    : `Add ${checkedCount} ${checkedCount === 1 ? "item" : "items"} to cart`}
               </button>
             </div>
           )}
