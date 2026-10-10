@@ -2,6 +2,7 @@
 
 import useSWR from "swr";
 import { toast } from "sonner";
+import { useOverlayStore } from "@/store/overlay-store";
 
 interface CartLine {
   id: string;
@@ -25,6 +26,7 @@ export function useCart() {
     "/api/cart",
     fetcher
   );
+  const { openAuth } = useOverlayStore();
 
   const lines = data?.lines ?? [];
   const count = lines.reduce((sum, l) => sum + l.quantity, 0);
@@ -38,6 +40,10 @@ export function useCart() {
         body: JSON.stringify({ variantId, setId }),
       });
       if (!res.ok) {
+        if (res.status === 401) {
+          openAuth(() => addItem(variantId, setId, itemName));
+          return false;
+        }
         const data = await res.json();
         toast.error(data.error || "Could not add to cart");
         return false;
