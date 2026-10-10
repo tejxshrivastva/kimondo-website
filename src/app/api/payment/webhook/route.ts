@@ -1,10 +1,26 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendOrderConfirmation } from "@/lib/resend";
+import { createHmac } from "crypto";
+
+const WEBHOOK_SECRET = process.env.RAZORPAY_WEBHOOK_SECRET || "";
+
+function verifyWebhookSignature(body: string, signature: string): boolean {
+  if (!WEBHOOK_SECRET) return true;
+  const expected = createHmac("sha256", WEBHOOK_SECRET).update(body).digest("hex");
+  return expected === signature;
+}
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
+    const rawBody = await req.text();
+    const signature = req.headers.get("x-razorpay-signature") || "";
+
+    if (WEBHOOK_SECRET && !verifyWebhookSignature(rawBody, signature)) {
+      return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
+    }
+
+    const body = JSON.parse(rawBody);
     const event = body.event;
     const payload = body.payload;
 
