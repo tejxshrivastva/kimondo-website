@@ -53,7 +53,7 @@ export default async function AdminOverview() {
         <div className="text-[9px] font-semibold tracking-[0.2em] uppercase text-[#666666] mb-[3px]">
           Dashboard
         </div>
-        <div className="text-[clamp(18px,2.4vw,26px)] font-light leading-[1.05]">
+        <div className="text-[clamp(18px,2.4vw,26px)] leading-[1.05]">
           Overview
         </div>
       </div>
@@ -67,7 +67,7 @@ export default async function AdminOverview() {
             <div className="text-[9px] font-semibold tracking-[0.18em] uppercase text-[#666666] mb-[14px]">
               {label}
             </div>
-            <div className="text-[clamp(30px,3.2vw,40px)] font-light leading-none">
+            <div className="text-[clamp(30px,3.2vw,40px)] leading-none">
               {value}
             </div>
             <div className="text-[11.5px] text-[#666666] mt-[6px]">{desc}</div>

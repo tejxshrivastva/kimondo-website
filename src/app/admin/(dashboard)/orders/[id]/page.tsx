@@ -29,7 +29,7 @@ export default async function AdminOrderDetailPage({
     <div className="max-w-[1200px] px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-light">{order.orderNumber}</h1>
+          <h1 className="text-2xl font-medium">{order.orderNumber}</h1>
           <p className="text-xs text-muted mt-1">
             {order.createdAt.toLocaleDateString("en-IN", {
               day: "numeric",

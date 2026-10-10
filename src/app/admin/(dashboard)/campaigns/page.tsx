@@ -11,7 +11,7 @@ export default async function AdminCampaignsPage() {
   return (
     <div className="px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-light">Archive stories</h1>
+        <h1 className="text-2xl font-medium">Archive stories</h1>
         <Link
           href="/admin/campaigns/new"
           className="flex items-center gap-2 h-10 px-4 bg-black text-white text-sm font-semibold"

@@ -10,7 +10,7 @@ export default async function AdminBadgesPage() {
 
   return (
     <div className="px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
-      <h1 className="text-2xl font-light mb-6">Badges</h1>
+      <h1 className="text-2xl font-medium mb-6">Badges</h1>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         {badges.map((badge) => (
           <div key={badge.id} className="border border-[rgba(0,0,0,0.12)] p-4 text-center">

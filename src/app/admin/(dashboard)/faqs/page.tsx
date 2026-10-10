@@ -58,7 +58,7 @@ export default function AdminFaqsPage() {
   return (
     <div className="max-w-[1200px] px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-light">FAQ</h1>
+        <h1 className="text-2xl font-medium">FAQ</h1>
         <div className="flex gap-2">
           <button onClick={addFaq} className="flex items-center gap-1 h-10 px-4 border border-[rgba(0,0,0,0.16)] text-sm font-medium">
             <Plus size={16} /> Add

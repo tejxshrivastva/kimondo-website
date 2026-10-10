@@ -17,7 +17,7 @@ export default async function AdminNotifyPage() {
 
   return (
     <div className="px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
-      <h1 className="text-2xl font-light mb-6">Restock requests</h1>
+      <h1 className="text-2xl font-medium mb-6">Restock requests</h1>
       <div className="border border-[rgba(0,0,0,0.12)] overflow-x-auto -mx-[clamp(14px,3vw,34px)] sm:mx-0 border-x-0 sm:border-x">
         <table className="w-full text-sm min-w-[520px]">
           <thead>
