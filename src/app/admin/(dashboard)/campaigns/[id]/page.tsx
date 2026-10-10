@@ -77,7 +77,7 @@ export default function AdminCampaignEditor() {
   return (
     <div className="max-w-[1200px] px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="font-display text-2xl">{isNew ? "New campaign" : "Edit campaign"}</h1>
+        <h1 className="text-2xl font-light">{isNew ? "New campaign" : "Edit campaign"}</h1>
         <button onClick={handleSave} disabled={saving} className="flex items-center gap-2 h-10 px-6 bg-black text-white text-sm font-semibold  disabled:opacity-50">
           <Save size={16} /> {saving ? "Saving..." : "Save"}
         </button>

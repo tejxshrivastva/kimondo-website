@@ -53,7 +53,7 @@ export default async function AdminOverview() {
         <div className="text-[9px] font-semibold tracking-[0.2em] uppercase text-[#666666] mb-[3px]">
           Dashboard
         </div>
-        <div className="font-display text-[clamp(18px,2.4vw,26px)] leading-[1.05]">
+        <div className="text-[clamp(18px,2.4vw,26px)] font-light leading-[1.05]">
           Overview
         </div>
       </div>
@@ -67,7 +67,7 @@ export default async function AdminOverview() {
             <div className="text-[9px] font-semibold tracking-[0.18em] uppercase text-[#666666] mb-[14px]">
               {label}
             </div>
-            <div className="font-display text-[clamp(30px,3.2vw,40px)] leading-none">
+            <div className="text-[clamp(30px,3.2vw,40px)] font-light leading-none">
               {value}
             </div>
             <div className="text-[11.5px] text-[#666666] mt-[6px]">{desc}</div>
@@ -77,7 +77,7 @@ export default async function AdminOverview() {
 
       <div className="bg-white border border-[rgba(0,0,0,0.12)] overflow-x-auto">
         <div className="px-[22px] py-[18px] border-b border-[rgba(0,0,0,0.08)] flex items-center justify-between">
-          <div className="font-display text-[18px]">Orders to action</div>
+          <div className="text-[18px] font-medium">Orders to action</div>
           <Link
             href="/admin/orders"
             className="text-[10px] font-semibold tracking-[0.14em] uppercase"
@@ -119,7 +119,7 @@ export default async function AdminOverview() {
                 <span className="text-[11px] font-medium px-[10px] py-[4px] bg-[#f8f8f8] text-[#1a1a1a] flex-shrink-0">
                   {displayStatus}
                 </span>
-                <span className="font-display text-[16px] flex-shrink-0 hidden sm:block">
+                <span className="text-[16px] font-medium flex-shrink-0 hidden sm:block">
                   &#8377;
                   {(order.totalMinor / 100).toLocaleString("en-IN")}
                 </span>

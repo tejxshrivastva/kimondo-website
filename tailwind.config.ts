@@ -22,6 +22,12 @@ const config: Config = {
           "Calibri",
           "sans-serif",
         ],
+        admin: [
+          "var(--font-admin)",
+          "Hanken Grotesk",
+          "system-ui",
+          "sans-serif",
+        ],
       },
       colors: {
         ink: "#000000",

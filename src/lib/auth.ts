@@ -75,12 +75,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      if (url.startsWith(baseUrl)) return url;
+      return baseUrl;
+    },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
       }
       if (token.email) {
-        const adminEmails = ["tejxshrivastava@gmail.com", "amanbashera29@gmail.com", "amanbashera00@gmail.com", "hemant@alignai.co"];
+        const adminEmails = ["tejxshrivastava@gmail.com", "amanbashera29@gmail.com", "amanbashera00@gmail.com"];
         const dbUser = await prisma.user.findUnique({
           where: { email: token.email },
           select: { role: true, id: true, createdAt: true },

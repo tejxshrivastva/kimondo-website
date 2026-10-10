@@ -29,7 +29,7 @@ export default async function AdminOrderDetailPage({
     <div className="max-w-[1200px] px-[clamp(14px,3vw,34px)] py-[clamp(18px,3vw,30px)]">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="font-display text-2xl">{order.orderNumber}</h1>
+          <h1 className="text-2xl font-light">{order.orderNumber}</h1>
           <p className="text-xs text-muted mt-1">
             {order.createdAt.toLocaleDateString("en-IN", {
               day: "numeric",
@@ -84,7 +84,7 @@ export default async function AdminOrderDetailPage({
           <tfoot>
             <tr className="border-t border-[rgba(0,0,0,0.08)]">
               <td colSpan={3} className="p-3 font-medium text-right">Total</td>
-              <td className="p-3 text-right font-display text-lg">₹{(order.totalMinor / 100).toLocaleString("en-IN")}</td>
+              <td className="p-3 text-right text-lg font-medium">₹{(order.totalMinor / 100).toLocaleString("en-IN")}</td>
             </tr>
           </tfoot>
         </table>
