@@ -80,7 +80,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.id = user.id;
       }
       if (token.email) {
-        const adminEmails = ["tejxshrivastava@gmail.com", "amanbashera29@gmail.com", "amanbashera00@gmail.com"];
+        const adminEmails = ["tejxshrivastava@gmail.com", "amanbashera29@gmail.com", "amanbashera00@gmail.com", "hemant@alignai.co"];
         const dbUser = await prisma.user.findUnique({
           where: { email: token.email },
           select: { role: true, id: true, createdAt: true },
