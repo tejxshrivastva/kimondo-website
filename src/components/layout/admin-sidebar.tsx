@@ -12,6 +12,7 @@ const SECTIONS = [
     items: [
       { href: "/admin", label: "Overview" },
       { href: "/admin/orders", label: "Orders", showBadge: true, adminOnly: true },
+      { href: "/admin/waitlist", label: "Waitlist", adminOnly: true },
       { href: "/admin/notify-requests", label: "Restock requests", adminOnly: true },
     ],
   },
