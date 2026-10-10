@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { signOut } from "next-auth/react";
 import { Menu, X } from "lucide-react";
+import { adminSignOut } from "@/app/admin/actions";
 
 const SECTIONS = [
   {
@@ -194,12 +194,14 @@ export function AdminSidebar({
             </div>
           </div>
         )}
-        <button
-          onClick={() => signOut({ callbackUrl: "/admin/login" })}
-          className="w-full mt-3 px-3 py-[9px] text-[12px] text-[#666666] hover:text-black hover:bg-[#f8f8f8] transition-colors text-left"
-        >
-          Sign out
-        </button>
+        <form action={adminSignOut}>
+          <button
+            type="submit"
+            className="w-full mt-3 px-3 py-[9px] text-[12px] text-[#666666] hover:text-black hover:bg-[#f8f8f8] transition-colors text-left"
+          >
+            Sign out
+          </button>
+        </form>
       </div>
     </>
   );
