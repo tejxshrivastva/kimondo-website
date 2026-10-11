@@ -234,8 +234,8 @@ export function ProductPageClient({ set }: { set: SetData }) {
             </div>
           </div>
 
-          {/* Center — Hero image spans both rows (content + footer) */}
-          <div className="relative overflow-hidden row-span-2">
+          {/* Center — Hero image, same row as left/right columns */}
+          <div className="relative overflow-hidden">
             {allImages.length > 0 ? (
               <img
                 key={activeImage}
@@ -253,7 +253,7 @@ export function ProductPageClient({ set }: { set: SetData }) {
           </div>
 
           {/* Right column */}
-          <div className="flex flex-col justify-between px-6 xl:px-10 py-6 min-h-0 overflow-hidden row-span-1">
+          <div className="flex flex-col justify-between px-6 xl:px-10 py-6 min-h-0 overflow-hidden">
             <div>
               <div className="flex items-baseline justify-between gap-4 mb-4">
                 <h1 className="text-[clamp(24px,2.2vw,38px)] font-light leading-[1.1]">
@@ -303,18 +303,14 @@ export function ProductPageClient({ set }: { set: SetData }) {
             </div>
           </div>
 
-          {/* Footer bar — inside grid, left column footer row */}
-          <div className="flex items-center px-6 xl:px-10 py-3 border-t border-[rgba(0,0,0,0.08)]">
+          {/* Footer bar — spans all 3 columns */}
+          <div className="col-span-3 flex items-center justify-between px-6 xl:px-10 py-3 border-t border-[rgba(0,0,0,0.08)]">
             <div className="flex items-center gap-8">
               <Link href="/policy/terms" className="text-[11px] text-[#666666] hover:text-black transition-colors">Terms</Link>
               <Link href="/policy/privacy" className="text-[11px] text-[#666666] hover:text-black transition-colors">Privacy</Link>
               <Link href="/policy/shipping" className="text-[11px] text-[#666666] hover:text-black transition-colors">Shipping &amp; returns</Link>
               <Link href="/faq" className="text-[11px] text-[#666666] hover:text-black transition-colors">FAQs</Link>
             </div>
-          </div>
-          {/* Center footer cell is taken by row-span-2 image */}
-          {/* Right column footer row */}
-          <div className="flex items-center justify-end px-6 xl:px-10 py-3 border-t border-[rgba(0,0,0,0.08)]">
             <p className="text-[11px] text-[#666666] tracking-[0.12em]">KIMONDO — MADE IN BHARAT</p>
           </div>
         </div>
