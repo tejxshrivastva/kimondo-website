@@ -27,6 +27,7 @@ const FOOTER_LINKS = {
 export function Footer() {
   const pathname = usePathname();
   if (pathname.startsWith("/admin")) return null;
+  if (pathname.match(/^\/store\/.+/)) return null;
 
   return (
     <footer className="bg-[#f8f8f8] text-black mt-auto">

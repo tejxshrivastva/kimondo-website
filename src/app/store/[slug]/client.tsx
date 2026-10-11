@@ -1,153 +1,47 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
-import { useOverlayStore } from "@/store/overlay-store";
-import { formatPrice } from "@/lib/utils";
 
-interface SetDetailClientProps {
-  action: "setButton" | "itemButton" | "itemRow" | "accordions";
-  setSlug?: string;
-  itemId?: string;
-  itemName?: string;
-  itemCategory?: string;
-  itemPrice?: number;
+interface ProductAccordionsProps {
   productDetails?: string | null;
   careInstructions?: string | null;
 }
 
-export function SetDetailClient({
-  action,
-  setSlug,
-  itemId,
-  itemName,
-  itemCategory,
-  itemPrice,
+export function ProductAccordions({
   productDetails,
   careInstructions,
-}: SetDetailClientProps) {
-  const { openSetPicker, openItemPicker, openSizeGuide } = useOverlayStore();
-  const [detailsOpen, setDetailsOpen] = useState(false);
-  const [sizingOpen, setSizingOpen] = useState(false);
-  const [materialOpen, setMaterialOpen] = useState(false);
-  const [careOpen, setCareOpen] = useState(false);
-  if (action === "setButton") {
-    return (
-      <button
-        onClick={() => openSetPicker(setSlug!)}
-        className="w-full h-12 bg-black text-white text-sm font-semibold hover:bg-black/90 transition-colors"
-      >
-        Shop the set
-      </button>
-    );
-  }
+}: ProductAccordionsProps) {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  if (action === "itemButton") {
-    return (
-      <button
-        onClick={() => openItemPicker(setSlug!, itemId!)}
-        className="h-10 px-5 bg-white text-black text-sm font-semibold border border-[rgba(0,0,0,0.16)] hover:bg-black hover:text-white transition-colors"
-      >
-        Shop {itemName}
-      </button>
-    );
-  }
+  const sections = [
+    { label: "Details", content: productDetails || null },
+    { label: "Sizing", content: "View size guide for measurements." },
+    { label: "Material", content: "Details coming soon." },
+    { label: "Care", content: careInstructions || null },
+  ].filter((s) => s.content);
 
-  if (action === "itemRow") {
-    return (
-      <button
-        onClick={() => openItemPicker(setSlug!, itemId!)}
-        className="w-full flex items-center justify-between p-3 border border-[rgba(0,0,0,0.16)] hover:border-black transition-colors text-left"
-      >
-        <span className="text-sm font-medium">{itemName}</span>
-        <span className="text-sm">{formatPrice(itemPrice!)}</span>
-      </button>
-    );
-  }
+  const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
 
-  if (action === "accordions") {
-    return (
-      <div className="border-t border-[rgba(0,0,0,0.1)] divide-y divide-[rgba(0,0,0,0.1)]">
-        {productDetails && (
-          <div>
-            <button
-              onClick={() => setDetailsOpen(!detailsOpen)}
-              className="w-full flex items-center justify-between py-4 text-sm font-medium"
-            >
-              Details
-              <ChevronDown
-                size={16}
-                className={`transition-transform ${detailsOpen ? "rotate-180" : ""}`}
-              />
-            </button>
-            {detailsOpen && (
-              <p className="pb-4 text-sm text-[#666666] leading-relaxed">
-                {productDetails}
-              </p>
-            )}
-          </div>
-        )}
-        <div>
+  return (
+    <div className="space-y-1">
+      {sections.map((section, i) => (
+        <div key={section.label}>
           <button
-            onClick={() => setSizingOpen(!sizingOpen)}
-            className="w-full flex items-center justify-between py-4 text-sm font-medium"
+            onClick={() => toggle(i)}
+            className="flex items-center gap-3 py-2 text-sm font-medium w-full text-left"
           >
-            Sizing
-            <ChevronDown
-              size={16}
-              className={`transition-transform ${sizingOpen ? "rotate-180" : ""}`}
-            />
+            <span className="text-xs text-[#666666] w-5 text-center shrink-0">
+              ({openIndex === i ? "−" : "+"})
+            </span>
+            {section.label}
           </button>
-          {sizingOpen && (
-            <div className="pb-4">
-              <button
-                onClick={openSizeGuide}
-                className="text-sm text-[#666666] underline underline-offset-4 hover:text-black transition-colors"
-              >
-                View size guide
-              </button>
-            </div>
-          )}
-        </div>
-        <div>
-          <button
-            onClick={() => setMaterialOpen(!materialOpen)}
-            className="w-full flex items-center justify-between py-4 text-sm font-medium"
-          >
-            Material
-            <ChevronDown
-              size={16}
-              className={`transition-transform ${materialOpen ? "rotate-180" : ""}`}
-            />
-          </button>
-          {materialOpen && (
-            <p className="pb-4 text-sm text-[#666666] leading-relaxed">
-              Details coming soon.
+          {openIndex === i && section.content && (
+            <p className="pl-8 pb-3 text-xs text-[#666666] leading-relaxed max-w-[280px]">
+              {section.content}
             </p>
           )}
         </div>
-        {careInstructions && (
-          <div>
-            <button
-              onClick={() => setCareOpen(!careOpen)}
-              className="w-full flex items-center justify-between py-4 text-sm font-medium"
-            >
-              Care
-              <ChevronDown
-                size={16}
-                className={`transition-transform ${careOpen ? "rotate-180" : ""}`}
-              />
-            </button>
-            {careOpen && (
-              <p className="pb-4 text-sm text-[#666666] leading-relaxed">
-                {careInstructions}
-              </p>
-            )}
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  return null;
+      ))}
+    </div>
+  );
 }
