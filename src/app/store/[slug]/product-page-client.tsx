@@ -142,7 +142,7 @@ export function ProductPageClient({ set }: { set: SetData }) {
             <div className="px-6 pt-6 pb-4 md:px-8 md:py-10">
               {/* Name + Price + Edition */}
               <div className="flex items-baseline gap-4 flex-wrap mb-8">
-                <h1 className="text-2xl md:text-3xl font-light leading-tight">{set.name}</h1>
+                <h1 className="text-2xl md:text-3xl font-medium leading-tight">{set.name}</h1>
                 <p className="text-base md:text-lg">{formatPrice(set.minPrice)}</p>
                 {set.campaign && (
                   <p className="text-[10px] md:text-[11px] text-[#666666] leading-tight ml-auto">
@@ -256,7 +256,7 @@ export function ProductPageClient({ set }: { set: SetData }) {
           <div className="flex flex-col justify-between px-6 xl:px-10 py-6 min-h-0 overflow-hidden">
             <div>
               <div className="flex items-baseline justify-between gap-4 mb-4">
-                <h1 className="text-[clamp(24px,2.2vw,38px)] font-light leading-[1.1]">
+                <h1 className="text-[clamp(24px,2.2vw,38px)] font-medium leading-[1.1]">
                   {set.name}
                 </h1>
                 <p className="text-base whitespace-nowrap">
