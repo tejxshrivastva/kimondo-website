@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useOverlayStore } from "@/store/overlay-store";
 
 interface ProductAccordionsProps {
   productDetails?: string | null;
@@ -12,15 +13,16 @@ export function ProductAccordions({
   careInstructions,
 }: ProductAccordionsProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { openSizeGuide } = useOverlayStore();
 
-  const sections = [
+  const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
+
+  const sections: { label: string; content: string | null; isSizing?: boolean }[] = [
     { label: "Details", content: productDetails || null },
-    { label: "Sizing", content: "View size guide for measurements." },
+    { label: "Sizing", content: "sizing", isSizing: true },
     { label: "Material", content: "Details coming soon." },
     { label: "Care", content: careInstructions || null },
   ].filter((s) => s.content);
-
-  const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
 
   return (
     <div className="space-y-1">
@@ -35,10 +37,21 @@ export function ProductAccordions({
             </span>
             {section.label}
           </button>
-          {openIndex === i && section.content && (
-            <p className="pl-8 pb-3 text-xs text-[#666666] leading-relaxed max-w-[280px]">
-              {section.content}
-            </p>
+          {openIndex === i && (
+            <div className="pl-8 pb-3">
+              {section.isSizing ? (
+                <button
+                  onClick={openSizeGuide}
+                  className="text-xs text-[#666666] underline underline-offset-4 hover:text-black transition-colors"
+                >
+                  View size guide
+                </button>
+              ) : (
+                <p className="text-xs text-[#666666] leading-relaxed max-w-[280px]">
+                  {section.content}
+                </p>
+              )}
+            </div>
           )}
         </div>
       ))}
