@@ -25,20 +25,20 @@ export function ProductAccordions({
   ].filter((s) => s.content);
 
   return (
-    <div className="space-y-1">
+    <div>
       {sections.map((section, i) => (
         <div key={section.label}>
           <button
             onClick={() => toggle(i)}
-            className="flex items-center gap-3 py-2 text-sm font-medium w-full text-left"
+            className="flex items-center gap-3 py-2.5 text-sm font-medium w-full text-left group min-h-[44px] lg:min-h-0"
           >
-            <span className="text-xs text-[#666666] w-5 text-center shrink-0">
+            <span className="text-xs text-[#888888] w-5 text-center shrink-0 transition-colors group-hover:text-black">
               ({openIndex === i ? "−" : "+"})
             </span>
-            {section.label}
+            <span className="transition-colors group-hover:text-black">{section.label}</span>
           </button>
           {openIndex === i && (
-            <div className="pl-8 pb-3">
+            <div className="pl-8 pb-2 max-h-[80px] overflow-y-auto">
               {section.isSizing ? (
                 <button
                   onClick={openSizeGuide}
@@ -47,7 +47,7 @@ export function ProductAccordions({
                   View size guide
                 </button>
               ) : (
-                <p className="text-xs text-[#666666] leading-relaxed max-w-[280px]">
+                <p className="text-xs text-[#666666] leading-relaxed max-w-[280px] md:max-w-[360px]">
                   {section.content}
                 </p>
               )}

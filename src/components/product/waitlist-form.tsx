@@ -53,7 +53,7 @@ export function WaitlistForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="w-full border-b border-[rgba(0,0,0,0.24)] pb-2 text-[11px] tracking-[0.15em] uppercase placeholder:text-[#999999] focus:outline-none focus:border-black transition-colors bg-transparent"
+          className="w-full border-b border-[rgba(0,0,0,0.24)] pb-2 pt-2 min-h-[44px] text-[11px] tracking-[0.15em] uppercase placeholder:text-[#999999] focus:outline-none focus:border-black transition-colors bg-transparent"
         />
       </div>
       <div>
@@ -62,7 +62,7 @@ export function WaitlistForm() {
           placeholder="ENTER PHONE NUMBER (OPTIONAL)"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className="w-full border-b border-[rgba(0,0,0,0.24)] pb-2 text-[11px] tracking-[0.15em] uppercase placeholder:text-[#999999] focus:outline-none focus:border-black transition-colors bg-transparent"
+          className="w-full border-b border-[rgba(0,0,0,0.24)] pb-2 pt-2 min-h-[44px] text-[11px] tracking-[0.15em] uppercase placeholder:text-[#999999] focus:outline-none focus:border-black transition-colors bg-transparent"
         />
       </div>
       <button

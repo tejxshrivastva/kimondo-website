@@ -62,79 +62,129 @@ export function ProductPageClient({ set }: { set: SetData }) {
 
   return (
     <>
-      {/* ── Mobile Layout ── */}
+      {/* ── Mobile + Tablet Layout (below lg:1024px) ── */}
       <div className="lg:hidden min-h-screen flex flex-col">
-        {/* Swipeable image carousel */}
-        {allImages.length > 1 ? (
-          <div>
-            <div
-              ref={scrollRef}
-              className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none"
-              style={{ scrollbarWidth: "none" }}
-            >
-              {allImages.map((img, i) => (
-                <div
-                  key={i}
-                  className="w-full flex-shrink-0 snap-center aspect-[4/5] bg-[#f0f0f0]"
-                >
-                  {renderImage(img, `${set.name} — ${i + 1}`)}
-                </div>
-              ))}
-            </div>
-            {/* Slide indicator */}
-            <div className="px-6 pt-6">
-              <div className="flex h-[2px]">
-                {allImages.map((_, i) => (
+        {/* On tablet (md+), side-by-side grid; on mobile, stacked */}
+        <div className="md:grid md:grid-cols-2 md:min-h-[calc(100vh-64px)]">
+          {/* Image section */}
+          <div className="md:sticky md:top-16 md:h-[calc(100vh-64px)] md:overflow-hidden">
+            {/* Mobile: swipeable carousel / Tablet: single image with thumbnails below */}
+            {allImages.length > 1 ? (
+              <div className="h-full flex flex-col">
+                {/* Mobile carousel */}
+                <div className="md:hidden">
                   <div
-                    key={i}
-                    className="flex-1 transition-colors duration-200"
-                    style={{ background: i === activeImage ? "#000" : "#e0e0e0" }}
-                  />
-                ))}
+                    ref={scrollRef}
+                    className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none"
+                    style={{ scrollbarWidth: "none" }}
+                  >
+                    {allImages.map((img, i) => (
+                      <div
+                        key={i}
+                        className="w-full flex-shrink-0 snap-center aspect-[4/5] bg-[#f0f0f0]"
+                      >
+                        {renderImage(img, `${set.name} — ${i + 1}`)}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="px-6 pt-6">
+                    <div className="flex h-[2px]">
+                      {allImages.map((_, i) => (
+                        <div
+                          key={i}
+                          className="flex-1 transition-colors duration-200"
+                          style={{ background: i === activeImage ? "#000" : "#e0e0e0" }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                {/* Tablet: main image + thumbnails */}
+                <div className="hidden md:flex md:flex-col md:h-full">
+                  <div className="flex-1 bg-[#f0f0f0]">
+                    {renderImage(allImages[activeImage], `${set.name} — ${activeImage + 1}`)}
+                  </div>
+                  <div className="flex gap-2 p-4">
+                    {allImages.slice(0, 4).map((img, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setActiveImage(i)}
+                        className={`w-16 h-16 overflow-hidden bg-[#f0f0f0] flex-shrink-0 transition-opacity ${
+                          i === activeImage
+                            ? "opacity-100 ring-1 ring-black"
+                            : "opacity-60 hover:opacity-100"
+                        }`}
+                      >
+                        <img
+                          src={img}
+                          alt={`${set.name} — ${i + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        ) : (
-          <div>
-            <div className="w-full aspect-[4/5] bg-[#f0f0f0]">
-              {renderImage(allImages[0], set.name)}
-            </div>
-            <div className="px-6 pt-6">
-              <div className="w-12 h-[2px] bg-black" />
-            </div>
-          </div>
-        )}
-
-        {/* Product info */}
-        <div className="px-6 pt-6 pb-4">
-          {/* Name + Price + Edition row */}
-          <div className="flex items-baseline gap-4 flex-wrap mb-8">
-            <h1 className="font-display text-2xl leading-tight">{set.name}</h1>
-            <p className="text-base">{formatPrice(set.minPrice)}</p>
-            {set.campaign && (
-              <p className="text-[10px] text-[#666666] leading-tight ml-auto">
-                Shot on film
-                <br />
-                in {set.campaign.location || "Leh, Ladakh"}
-                {set.campaign.date ? ` · ${set.campaign.date}` : ""}
-                <br />
-                Edition: 001 / 040
-              </p>
+            ) : (
+              <div className="h-full flex flex-col">
+                <div className="w-full aspect-[4/5] md:aspect-auto md:flex-1 bg-[#f0f0f0]">
+                  {renderImage(allImages[0], set.name)}
+                </div>
+                <div className="px-6 pt-6 md:hidden">
+                  <div className="w-12 h-[2px] bg-black" />
+                </div>
+              </div>
             )}
           </div>
 
-          <WaitlistForm />
+          {/* Product info — scrollable on tablet */}
+          <div className="flex flex-col md:overflow-y-auto">
+            <div className="px-6 pt-6 pb-4 md:px-8 md:py-10">
+              {/* Name + Price + Edition */}
+              <div className="flex items-baseline gap-4 flex-wrap mb-8">
+                <h1 className="font-display text-2xl md:text-3xl leading-tight">{set.name}</h1>
+                <p className="text-base md:text-lg">{formatPrice(set.minPrice)}</p>
+                {set.campaign && (
+                  <p className="text-[10px] md:text-[11px] text-[#666666] leading-tight ml-auto">
+                    Shot on film
+                    <br />
+                    in {set.campaign.location || "Leh, Ladakh"}
+                    {set.campaign.date ? ` · ${set.campaign.date}` : ""}
+                    <br />
+                    Edition: 001 / 040
+                  </p>
+                )}
+              </div>
 
-          <Link
-            href="/archive"
-            className="flex items-center justify-center w-full mt-4 h-12 border border-black text-[11px] font-semibold tracking-[0.2em] uppercase hover:bg-black hover:text-white transition-colors"
-          >
-            View archive
-          </Link>
+              {/* Tablet: show description above form */}
+              {(set.description || set.tagline) && (
+                <p className="hidden md:block text-[13px] text-[#444444] leading-relaxed mb-8 max-w-[400px]">
+                  {set.tagline || set.description}
+                </p>
+              )}
+
+              <WaitlistForm />
+
+              <Link
+                href="/archive"
+                className="flex items-center justify-center w-full mt-4 h-12 border border-black text-[11px] font-semibold tracking-[0.2em] uppercase hover:bg-black hover:text-white transition-colors"
+              >
+                View archive
+              </Link>
+
+              {/* Tablet: show accordions in the info column */}
+              <div className="hidden md:block mt-10">
+                <ProductAccordions
+                  productDetails={set.productDetails}
+                  careInstructions={set.careInstructions}
+                />
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Mobile footer */}
-        <div className="mt-auto px-6 py-8 flex justify-between items-start">
+        {/* Mobile/Tablet footer */}
+        <div className="mt-auto px-6 md:px-8 py-8 flex justify-between items-start">
           <div>
             <p className="text-sm font-bold tracking-[0.08em]">
               KIMONDO<sup className="text-[7px] ml-[1px]">&reg;</sup>
@@ -150,17 +200,17 @@ export function ProductPageClient({ set }: { set: SetData }) {
       </div>
 
       {/* ── Desktop Layout ── */}
-      <div className="hidden lg:flex lg:flex-col min-h-[calc(100vh-64px)]">
-        <div className="flex-1 grid grid-cols-[minmax(260px,1fr)_minmax(400px,2fr)_minmax(260px,1fr)]">
+      <div className="hidden lg:flex lg:flex-col h-[calc(100vh-64px)] overflow-hidden">
+        <div className="flex-1 min-h-0 grid grid-cols-[minmax(200px,1fr)_minmax(340px,2fr)_minmax(200px,1fr)] xl:grid-cols-[minmax(260px,1fr)_minmax(400px,2fr)_minmax(260px,1fr)]">
           {/* Left column */}
-          <div className="flex flex-col justify-between px-10 py-12">
+          <div className="flex flex-col justify-between px-6 xl:px-10 py-6 min-h-0 overflow-hidden">
             <p className="text-[13px] leading-[1.7] text-[#333333] max-w-[320px]">
               {introText}
             </p>
 
-            <div>
+            <div className="min-h-0">
               {set.campaign && (
-                <div className="mb-10">
+                <div className="mb-6">
                   <p className="text-[11px] text-[#666666] mb-3">
                     {set.campaign.subtitle || `Edition 001 — shot on film in ${set.campaign.location || "Leh, Ladakh"}`}
                   </p>
@@ -178,15 +228,11 @@ export function ProductPageClient({ set }: { set: SetData }) {
                 careInstructions={set.careInstructions}
               />
             </div>
-
-            <p className="text-[11px] tracking-[0.12em] uppercase text-[#999999]">
-              KIMONDO — MADE IN BHARAT
-            </p>
           </div>
 
           {/* Center — Hero image (switches on thumbnail click) */}
           <div className="relative overflow-hidden">
-            <div className="sticky top-16 h-[calc(100vh-64px)]">
+            <div className="h-full">
               {allImages.length > 0 ? (
                 <img
                   key={activeImage}
@@ -205,10 +251,10 @@ export function ProductPageClient({ set }: { set: SetData }) {
           </div>
 
           {/* Right column */}
-          <div className="flex flex-col justify-between px-10 py-12">
+          <div className="flex flex-col justify-between px-6 xl:px-10 py-6 min-h-0 overflow-hidden">
             <div>
-              <div className="flex items-baseline justify-between gap-4 mb-4">
-                <h1 className="font-display text-[clamp(28px,2.5vw,38px)] leading-[1.1]">
+              <div className="flex items-baseline justify-between gap-4 mb-3">
+                <h1 className="font-display text-[clamp(24px,2.2vw,38px)] leading-[1.1]">
                   {set.name}
                 </h1>
                 <p className="text-base whitespace-nowrap font-display">
@@ -227,13 +273,13 @@ export function ProductPageClient({ set }: { set: SetData }) {
             </div>
 
             {/* Clickable thumbnail gallery strip */}
-            <div className="flex gap-3">
+            <div className="grid grid-cols-4 gap-2 flex-shrink-0">
               {allImages.length > 0
                 ? allImages.slice(0, 4).map((img, i) => (
                     <button
                       key={i}
                       onClick={() => setActiveImage(i)}
-                      className={`w-[72px] h-[72px] overflow-hidden bg-[#f0f0f0] flex-shrink-0 transition-opacity ${
+                      className={`aspect-square overflow-hidden bg-[#f0f0f0] transition-opacity ${
                         i === activeImage
                           ? "opacity-100 ring-1 ring-black"
                           : "opacity-60 hover:opacity-100"
@@ -249,7 +295,7 @@ export function ProductPageClient({ set }: { set: SetData }) {
                 : [0, 1, 2, 3].map((i) => (
                     <div
                       key={i}
-                      className="w-[72px] h-[72px] bg-[#f0f0f0] flex-shrink-0"
+                      className="aspect-square bg-[#f0f0f0]"
                     />
                   ))}
             </div>
@@ -257,14 +303,14 @@ export function ProductPageClient({ set }: { set: SetData }) {
         </div>
 
         {/* Page footer bar */}
-        <div className="flex items-center justify-between px-10 py-5 border-t border-[rgba(0,0,0,0.08)]">
+        <div className="flex items-center justify-between px-6 xl:px-10 py-3 border-t border-[rgba(0,0,0,0.08)] flex-shrink-0">
           <div className="flex items-center gap-8">
-            <Link href="/policy/terms" className="text-[11px] text-[#666666] hover:text-black underline underline-offset-2">Terms</Link>
-            <Link href="/policy/privacy" className="text-[11px] text-[#666666] hover:text-black underline underline-offset-2">Privacy</Link>
-            <Link href="/policy/shipping" className="text-[11px] text-[#666666] hover:text-black underline underline-offset-2">Shipping &amp; returns</Link>
-            <Link href="/faq" className="text-[11px] text-[#666666] hover:text-black underline underline-offset-2">FAQs</Link>
+            <Link href="/policy/terms" className="text-[11px] text-[#666666] hover:text-black transition-colors">Terms</Link>
+            <Link href="/policy/privacy" className="text-[11px] text-[#666666] hover:text-black transition-colors">Privacy</Link>
+            <Link href="/policy/shipping" className="text-[11px] text-[#666666] hover:text-black transition-colors">Shipping &amp; returns</Link>
+            <Link href="/faq" className="text-[11px] text-[#666666] hover:text-black transition-colors">FAQs</Link>
           </div>
-          <p className="text-[11px] text-[#666666]">KIMONDO — MADE IN BHARAT</p>
+          <p className="text-[11px] text-[#666666] tracking-[0.12em]">KIMONDO — MADE IN BHARAT</p>
         </div>
       </div>
     </>
