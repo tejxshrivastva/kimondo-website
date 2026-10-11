@@ -46,7 +46,7 @@ export function MobileMenu() {
               key={link.href}
               href={link.href}
               onClick={closeMenu}
-              className={`font-display text-lg tracking-wide py-3 transition-opacity ${
+              className={`text-lg tracking-wide py-3 transition-opacity ${
                 pathname === link.href
                   ? "opacity-100"
                   : "opacity-60 hover:opacity-100"

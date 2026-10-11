@@ -23,7 +23,7 @@ export default async function ArchivePage() {
         <p className="text-[9px] font-semibold tracking-[0.2em] uppercase text-muted mb-2">
           Stories behind the cloth
         </p>
-        <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl tracking-[0.3px]">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl tracking-[0.3px]">
           {settings?.archivePageTitle || "The Archive"}
         </h1>
         {settings?.archivePageSubtitle && (
@@ -57,7 +57,7 @@ export default async function ArchivePage() {
               <p className="text-[9px] font-semibold tracking-[0.2em] uppercase text-[#999] mb-1">
                 {[c.location, c.date].filter(Boolean).join(" · ")}
               </p>
-              <h2 className="font-display text-xl">{c.title}</h2>
+              <h2 className="text-xl">{c.title}</h2>
               {c.subtitle && (
                 <p className="text-xs text-[#999] mt-1 line-clamp-2">{c.subtitle}</p>
               )}

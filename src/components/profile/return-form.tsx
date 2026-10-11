@@ -54,7 +54,7 @@ export function ReturnForm() {
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
         <div className="bg-white  w-full max-w-[420px] p-6 pointer-events-auto ">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-display text-lg">{title}</h2>
+            <h2 className="text-lg">{title}</h2>
             <button
               onClick={closeReturnForm}
               className="p-1 text-muted hover:text-black"

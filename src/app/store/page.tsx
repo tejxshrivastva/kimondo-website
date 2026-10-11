@@ -24,7 +24,7 @@ export default async function StorePage() {
         <p className="text-[9px] font-semibold tracking-[0.2em] uppercase text-muted mb-2">
           The collection
         </p>
-        <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl tracking-[0.3px]">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl tracking-[0.3px]">
           {settings?.storePageTitle || "Store"}
         </h1>
         <p className="mt-2 text-[#666666] max-w-xl">

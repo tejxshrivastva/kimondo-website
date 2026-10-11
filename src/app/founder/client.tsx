@@ -37,7 +37,7 @@ export function FounderForm({ title, subtitle }: FounderFormProps) {
         <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center mx-auto mb-6">
           <Check size={24} />
         </div>
-        <h1 className="font-display text-3xl mb-3">Message received</h1>
+        <h1 className="text-3xl mb-3">Message received</h1>
         <p className="text-[#666666]">
           We read every letter. If a reply is needed, it will come from the founder directly.
         </p>
@@ -57,7 +57,7 @@ export function FounderForm({ title, subtitle }: FounderFormProps) {
 
   return (
     <div className="max-w-[600px] mx-auto px-4 sm:px-6 py-8 lg:py-12">
-      <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl mb-2">
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl mb-2">
         {title}
       </h1>
       <p className="text-[#666666] mb-8">{subtitle}</p>

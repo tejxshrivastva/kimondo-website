@@ -88,7 +88,7 @@ export default function CheckoutPage() {
   if (count === 0) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 text-center">
-        <h1 className="font-display text-2xl mb-3">Your cart is empty</h1>
+        <h1 className="text-2xl mb-3">Your cart is empty</h1>
         <p className="text-sm text-[#666666] mb-6">Add pieces from the collection before checking out.</p>
         <button onClick={() => router.push("/store")} className="h-12 px-8 bg-black text-white text-sm font-semibold ">
           Browse the store
@@ -99,7 +99,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="max-w-[720px] mx-auto px-4 py-8">
-      <h1 className="font-display text-3xl mb-8">Checkout</h1>
+      <h1 className="text-3xl mb-8">Checkout</h1>
 
       <section className="mb-8">
         <h2 className="text-sm font-semibold tracking-[0.1em] uppercase mb-4">Delivery address</h2>
@@ -253,7 +253,7 @@ export default function CheckoutPage() {
       <section className="border-t border-[rgba(0,0,0,0.12)] pt-6">
         <div className="flex justify-between items-center">
           <span className="font-medium">Total ({count} {count === 1 ? "item" : "items"})</span>
-          <span className="font-display text-xl">{formatPrice(total)}</span>
+          <span className="text-xl">{formatPrice(total)}</span>
         </div>
 
         <button

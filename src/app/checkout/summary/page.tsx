@@ -146,7 +146,7 @@ function SummaryContent() {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center text-center p-6">
         <Loader2 size={48} className="animate-spin mb-4" />
-        <h2 className="font-display text-2xl mb-2">Processing your payment</h2>
+        <h2 className="text-2xl mb-2">Processing your payment</h2>
         <p className="text-sm text-[#666666]">Processing your payment</p>
       </div>
     );
@@ -158,7 +158,7 @@ function SummaryContent() {
         <div className="w-16 h-16 rounded-full bg-black text-white flex items-center justify-center mb-6">
           <Check size={32} />
         </div>
-        <h2 className="font-display text-3xl mb-2">Order placed</h2>
+        <h2 className="text-3xl mb-2">Order placed</h2>
         <p className="text-[#666666] mb-1">Your order has been confirmed. You will receive updates by email.</p>
         <p className="text-sm font-mono font-medium mb-8">{orderNumber}</p>
         <div className="flex flex-col sm:flex-row gap-3">
@@ -185,7 +185,7 @@ function SummaryContent() {
         <div className="w-16 h-16 rounded-full bg-black text-white flex items-center justify-center mb-6">
           <XIcon size={32} />
         </div>
-        <h2 className="font-display text-3xl mb-2">Payment failed</h2>
+        <h2 className="text-3xl mb-2">Payment failed</h2>
         <p className="text-sm text-[#666666] mb-6">Payment could not be completed. No amount has been charged.</p>
         <button
           onClick={() => setPaymentState("idle")}
@@ -199,7 +199,7 @@ function SummaryContent() {
 
   return (
     <div className="max-w-[720px] mx-auto px-4 py-8">
-      <h1 className="font-display text-3xl mb-8">Confirm & pay</h1>
+      <h1 className="text-3xl mb-8">Confirm & pay</h1>
 
       <section className="mb-6">
         <h2 className="text-sm font-semibold tracking-[0.1em] uppercase mb-3">Delivering to</h2>
@@ -245,7 +245,7 @@ function SummaryContent() {
       <section className="border-t border-[rgba(0,0,0,0.12)] pt-4 mb-6">
         <div className="flex justify-between items-center">
           <span className="font-medium">Total ({count} {count === 1 ? "item" : "items"})</span>
-          <span className="font-display text-xl">{formatPrice(total)}</span>
+          <span className="text-xl">{formatPrice(total)}</span>
         </div>
       </section>
 

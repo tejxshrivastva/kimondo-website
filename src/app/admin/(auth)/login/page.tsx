@@ -70,7 +70,7 @@ export default function AdminLoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-[#f8f8f8]">
       <div className="w-full max-w-[380px] mx-4">
         <div className="text-center mb-10">
-          <p className="font-display text-2xl tracking-[0.25em] uppercase">
+          <p className="text-2xl tracking-[0.25em] uppercase">
             Kimondo
           </p>
           <p className="text-[11px] tracking-[0.2em] uppercase text-muted mt-1">

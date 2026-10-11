@@ -55,7 +55,7 @@ export default async function CampaignPage({ params }: Props) {
           <p className="text-[9px] font-semibold tracking-[0.3em] uppercase text-white/50 mb-3">
             {[campaign.location, campaign.date].filter(Boolean).join(" · ") || "The Archive"}
           </p>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl text-white max-w-4xl">
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl text-white max-w-4xl">
             {campaign.title}
           </h1>
           {campaign.subtitle && (
@@ -77,7 +77,7 @@ export default async function CampaignPage({ params }: Props) {
                 key={i}
                 className={`text-[#444] leading-[1.8] text-lg mb-6 last:mb-0 ${
                   i === 0
-                    ? "first-letter:text-5xl first-letter:font-display first-letter:float-left first-letter:mr-2 first-letter:mt-1 first-letter:leading-[0.8] first-letter:text-black"
+                    ? "first-letter:text-5xl first-letter:first-letter:float-left first-letter:mr-2 first-letter:mt-1 first-letter:leading-[0.8] first-letter:text-black"
                     : ""
                 }`}
               >

@@ -44,7 +44,7 @@ export function NotifyModal() {
           <div className="w-12 h-12 bg-[#f8f8f8] flex items-center justify-center mb-4">
             <Bell size={24} />
           </div>
-          <h3 className="font-display text-lg mb-2">Notify me</h3>
+          <h3 className="text-lg mb-2">Notify me</h3>
           <p className="text-sm text-muted mb-6">
             This size is currently unavailable. We will email you when it returns.
           </p>

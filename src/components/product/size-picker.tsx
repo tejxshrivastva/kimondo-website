@@ -124,7 +124,7 @@ export function SizePicker() {
                 {setData.name}
               </p>
             )}
-            <h3 className="font-display text-lg">
+            <h3 className="text-lg">
               {pickerMode === "item" && item
                 ? item.name
                 : `Build your ${setData?.name || ""} set`}

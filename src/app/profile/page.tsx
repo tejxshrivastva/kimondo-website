@@ -172,7 +172,7 @@ export default function ProfilePage() {
         <p className="text-[9px] font-semibold tracking-[0.3em] uppercase text-white/60 mb-1">
           KIMONDO MEMBER
         </p>
-        <h1 className="font-display text-2xl mb-1">
+        <h1 className="text-2xl mb-1">
           {session.user.name || session.user.email}
         </h1>
         <p className="text-xs text-white/60">{session.user.email}</p>
@@ -226,7 +226,7 @@ export default function ProfilePage() {
           {orders.length === 0 ? (
             <div className="text-center py-12">
               <Package size={40} className="mx-auto text-muted mb-3" />
-              <p className="font-display text-lg mb-1">No orders placed</p>
+              <p className="text-lg mb-1">No orders placed</p>
               <p className="text-sm text-[#666666] mb-4">Your order history will appear here.</p>
               <button onClick={() => router.push("/store")} className="text-sm font-medium underline">
                 Browse the store
@@ -319,7 +319,7 @@ export default function ProfilePage() {
           {badges.length === 0 ? (
             <div className="text-center py-12">
               <Award size={40} className="mx-auto text-muted mb-3" />
-              <p className="font-display text-lg mb-1">No badges yet</p>
+              <p className="text-lg mb-1">No badges yet</p>
               <p className="text-sm text-[#666666]">
                 Badges are earned with each set you wear.
               </p>
@@ -436,7 +436,7 @@ export default function ProfilePage() {
           {addresses.length === 0 ? (
             <div className="text-center py-12">
               <MapPin size={40} className="mx-auto text-muted mb-3" />
-              <p className="font-display text-lg mb-1">No saved addresses</p>
+              <p className="text-lg mb-1">No saved addresses</p>
               <p className="text-sm text-[#666666]">Add an address for effortless checkout.</p>
             </div>
           ) : (

@@ -75,7 +75,7 @@ export function CartDrawer() {
 
       <div className="fixed top-0 right-0 h-full w-full max-w-[430px] bg-white z-[60] animate-slide-in flex flex-col">
         <div className="flex items-center justify-between p-4 border-b border-[rgba(0,0,0,0.1)]">
-          <h2 className="font-display text-xl">Cart</h2>
+          <h2 className="text-xl">Cart</h2>
           <button onClick={closeCart} className="p-2">
             <X size={20} />
           </button>
@@ -84,7 +84,7 @@ export function CartDrawer() {
         {lines.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
             <ShoppingBag size={48} className="text-muted mb-4" />
-            <p className="font-display text-lg mb-2">Nothing here yet</p>
+            <p className="text-lg mb-2">Nothing here yet</p>
             <p className="text-sm text-[#666666] mb-6">
               Your selections will appear here.
             </p>
@@ -155,7 +155,7 @@ export function CartDrawer() {
             <div className="border-t border-[rgba(0,0,0,0.1)] p-4 space-y-4">
               <div className="flex justify-between items-center">
                 <span className="font-medium">Total</span>
-                <span className="font-display text-xl">
+                <span className="text-xl">
                   {formatPrice(total)}
                 </span>
               </div>

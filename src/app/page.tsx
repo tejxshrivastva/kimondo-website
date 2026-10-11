@@ -55,7 +55,7 @@ export default async function HomePage() {
             Kimondo
           </p>
           <h1
-            className="font-display text-4xl sm:text-5xl lg:text-7xl tracking-[0.3px]"
+            className="text-4xl sm:text-5xl lg:text-7xl tracking-[0.3px]"
             style={{ color: homepage?.heroVideo || homepage?.heroImage ? "#fff" : "#000" }}
           >
             {homepage?.heroTitle || "Headline goes here"}

@@ -94,7 +94,7 @@ export function AuthDrawer() {
       {/* Drawer */}
       <div className="fixed top-0 right-0 h-full w-full max-w-[430px] bg-white z-[70] animate-slide-in flex flex-col">
         <div className="flex items-center justify-between p-4 border-b border-[rgba(0,0,0,0.1)]">
-          <h2 className="font-display text-xl">
+          <h2 className="text-xl">
             {step === "success" ? "" : "Sign in to your account"}
           </h2>
           <button onClick={closeAuth} className="p-2">
@@ -216,7 +216,7 @@ export function AuthDrawer() {
               <div className="w-16 h-16 rounded-full bg-black text-white flex items-center justify-center mb-6">
                 <Check size={32} />
               </div>
-              <h3 className="font-display text-2xl mb-2">You&apos;re in</h3>
+              <h3 className="text-2xl mb-2">You&apos;re in</h3>
               <p className="text-sm text-muted">{email}</p>
             </div>
           )}

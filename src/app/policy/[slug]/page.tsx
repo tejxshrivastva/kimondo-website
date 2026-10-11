@@ -32,7 +32,7 @@ export default async function PolicyPage({ params }: Props) {
 
   return (
     <div className="max-w-[680px] mx-auto px-4 sm:px-6 py-8 lg:py-12">
-      <h1 className="font-display text-3xl sm:text-4xl mb-8">{policy.title}</h1>
+      <h1 className="text-3xl sm:text-4xl mb-8">{policy.title}</h1>
 
       <div className="text-[#666666] leading-relaxed whitespace-pre-line">
         {policy.body}

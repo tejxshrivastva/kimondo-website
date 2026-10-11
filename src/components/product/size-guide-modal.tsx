@@ -31,7 +31,7 @@ export function SizeGuideModal() {
           <X size={18} />
         </button>
 
-        <h3 className="font-display text-lg mb-4">Size guide</h3>
+        <h3 className="text-lg mb-4">Size guide</h3>
 
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
