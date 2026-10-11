@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function formatPrice(paise: number): string {
   const rupees = paise / 100;
-  return `₹${rupees.toLocaleString("en-IN")}`;
+  return `₹ ${rupees.toLocaleString("en-IN")}`;
 }
 
 export function slugify(text: string): string {

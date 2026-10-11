@@ -87,8 +87,8 @@ export function ProductPageClient({ set }: { set: SetData }) {
                       </div>
                     ))}
                   </div>
-                  <div className="px-6 pt-6">
-                    <div className="flex h-[2px]">
+                  <div className="px-6 pt-3">
+                    <div className="flex gap-[3px] h-[2px]">
                       {allImages.map((_, i) => (
                         <div
                           key={i}
@@ -130,7 +130,7 @@ export function ProductPageClient({ set }: { set: SetData }) {
                 <div className="w-full aspect-[4/5] md:aspect-auto md:flex-1 bg-[#f0f0f0]">
                   {renderImage(allImages[0], set.name)}
                 </div>
-                <div className="px-6 pt-6 md:hidden">
+                <div className="px-6 pt-3 md:hidden">
                   <div className="w-12 h-[2px] bg-black" />
                 </div>
               </div>
@@ -142,7 +142,7 @@ export function ProductPageClient({ set }: { set: SetData }) {
             <div className="px-6 pt-6 pb-4 md:px-8 md:py-10">
               {/* Name + Price + Edition */}
               <div className="flex items-baseline gap-4 flex-wrap mb-8">
-                <h1 className="font-display text-2xl md:text-3xl leading-tight">{set.name}</h1>
+                <h1 className="text-2xl md:text-3xl font-light leading-tight">{set.name}</h1>
                 <p className="text-base md:text-lg">{formatPrice(set.minPrice)}</p>
                 {set.campaign && (
                   <p className="text-[10px] md:text-[11px] text-[#666666] leading-tight ml-auto">
@@ -200,10 +200,10 @@ export function ProductPageClient({ set }: { set: SetData }) {
       </div>
 
       {/* ── Desktop Layout ── */}
-      <div className="hidden lg:flex lg:flex-col h-[calc(100vh-64px)] overflow-hidden">
-        <div className="flex-1 min-h-0 grid grid-cols-[minmax(200px,1fr)_minmax(340px,2fr)_minmax(200px,1fr)] xl:grid-cols-[minmax(260px,1fr)_minmax(400px,2fr)_minmax(260px,1fr)]">
+      <div className="hidden lg:block h-[calc(100vh-64px)] overflow-hidden relative">
+        <div className="h-full grid grid-cols-[minmax(200px,1fr)_minmax(340px,2fr)_minmax(200px,1fr)] xl:grid-cols-[minmax(260px,1fr)_minmax(400px,2fr)_minmax(260px,1fr)] grid-rows-[1fr_auto]">
           {/* Left column */}
-          <div className="flex flex-col justify-between px-6 xl:px-10 py-6 min-h-0 overflow-hidden">
+          <div className="flex flex-col justify-between px-6 xl:px-10 py-6 min-h-0 overflow-hidden row-span-1">
             <p className="text-[13px] leading-[1.7] text-[#333333] max-w-[320px]">
               {introText}
             </p>
@@ -216,7 +216,7 @@ export function ProductPageClient({ set }: { set: SetData }) {
                   </p>
                   <Link
                     href={`/archive/${set.campaign.slug}`}
-                    className="inline-flex items-center justify-center h-11 px-10 border border-black text-[10px] font-medium tracking-[0.25em] uppercase hover:bg-black hover:text-white transition-colors"
+                    className="flex items-center justify-center w-full h-11 border border-black text-[10px] font-medium tracking-[0.25em] uppercase hover:bg-black hover:text-white transition-colors"
                   >
                     View campaign
                   </Link>
@@ -227,42 +227,44 @@ export function ProductPageClient({ set }: { set: SetData }) {
                 productDetails={set.productDetails}
                 careInstructions={set.careInstructions}
               />
+
+              <p className="text-[11px] text-[#666666] tracking-[0.12em] mt-6">
+                KIMONDO — MADE IN BHARAT
+              </p>
             </div>
           </div>
 
-          {/* Center — Hero image (switches on thumbnail click) */}
-          <div className="relative overflow-hidden">
-            <div className="h-full">
-              {allImages.length > 0 ? (
-                <img
-                  key={activeImage}
-                  src={allImages[activeImage]}
-                  alt={`${set.name} — ${activeImage + 1}`}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center bg-[#f0f0f0]">
-                  <span className="text-[#c0c0c0] text-xs tracking-[0.15em] uppercase">
-                    Product image
-                  </span>
-                </div>
-              )}
-            </div>
+          {/* Center — Hero image spans both rows (content + footer) */}
+          <div className="relative overflow-hidden row-span-2">
+            {allImages.length > 0 ? (
+              <img
+                key={activeImage}
+                src={allImages[activeImage]}
+                alt={`${set.name} — ${activeImage + 1}`}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-[#f0f0f0]">
+                <span className="text-[#c0c0c0] text-xs tracking-[0.15em] uppercase">
+                  Product image
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Right column */}
-          <div className="flex flex-col justify-between px-6 xl:px-10 py-6 min-h-0 overflow-hidden">
+          <div className="flex flex-col justify-between px-6 xl:px-10 py-6 min-h-0 overflow-hidden row-span-1">
             <div>
-              <div className="flex items-baseline justify-between gap-4 mb-3">
-                <h1 className="font-display text-[clamp(24px,2.2vw,38px)] leading-[1.1]">
+              <div className="flex items-baseline justify-between gap-4 mb-4">
+                <h1 className="text-[clamp(24px,2.2vw,38px)] font-light leading-[1.1]">
                   {set.name}
                 </h1>
-                <p className="text-base whitespace-nowrap font-display">
+                <p className="text-base whitespace-nowrap">
                   {formatPrice(set.minPrice)}
                 </p>
               </div>
               {(set.tagline || set.description) && (
-                <p className="text-[13px] text-[#444444] leading-relaxed">
+                <p className="text-[13px] text-[#444444] leading-[1.75] max-w-[320px]">
                   {set.tagline || set.description}
                 </p>
               )}
@@ -300,17 +302,21 @@ export function ProductPageClient({ set }: { set: SetData }) {
                   ))}
             </div>
           </div>
-        </div>
 
-        {/* Page footer bar */}
-        <div className="flex items-center justify-between px-6 xl:px-10 py-3 border-t border-[rgba(0,0,0,0.08)] flex-shrink-0">
-          <div className="flex items-center gap-8">
-            <Link href="/policy/terms" className="text-[11px] text-[#666666] hover:text-black transition-colors">Terms</Link>
-            <Link href="/policy/privacy" className="text-[11px] text-[#666666] hover:text-black transition-colors">Privacy</Link>
-            <Link href="/policy/shipping" className="text-[11px] text-[#666666] hover:text-black transition-colors">Shipping &amp; returns</Link>
-            <Link href="/faq" className="text-[11px] text-[#666666] hover:text-black transition-colors">FAQs</Link>
+          {/* Footer bar — inside grid, left column footer row */}
+          <div className="flex items-center px-6 xl:px-10 py-3 border-t border-[rgba(0,0,0,0.08)]">
+            <div className="flex items-center gap-8">
+              <Link href="/policy/terms" className="text-[11px] text-[#666666] hover:text-black transition-colors">Terms</Link>
+              <Link href="/policy/privacy" className="text-[11px] text-[#666666] hover:text-black transition-colors">Privacy</Link>
+              <Link href="/policy/shipping" className="text-[11px] text-[#666666] hover:text-black transition-colors">Shipping &amp; returns</Link>
+              <Link href="/faq" className="text-[11px] text-[#666666] hover:text-black transition-colors">FAQs</Link>
+            </div>
           </div>
-          <p className="text-[11px] text-[#666666] tracking-[0.12em]">KIMONDO — MADE IN BHARAT</p>
+          {/* Center footer cell is taken by row-span-2 image */}
+          {/* Right column footer row */}
+          <div className="flex items-center justify-end px-6 xl:px-10 py-3 border-t border-[rgba(0,0,0,0.08)]">
+            <p className="text-[11px] text-[#666666] tracking-[0.12em]">KIMONDO — MADE IN BHARAT</p>
+          </div>
         </div>
       </div>
     </>
