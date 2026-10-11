@@ -35,7 +35,7 @@ export function Header() {
           <div className="flex-1 flex items-center">
             <button
               onClick={toggleMenu}
-              className="lg:hidden text-[11px] font-medium tracking-[0.08em] uppercase"
+              className="lg:hidden text-[13px] tracking-[0.02em]"
               aria-label="Menu"
             >
               Menu
@@ -45,7 +45,7 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-[11px] tracking-[0.08em] uppercase transition-opacity ${
+                  className={`text-[13px] tracking-[0.02em] transition-opacity ${
                     isLinkActive(link.href)
                       ? "opacity-100 underline underline-offset-4 decoration-[1px]"
                       : "opacity-60 hover:opacity-100"
@@ -76,7 +76,7 @@ export function Header() {
                   openAuth();
                 }
               }}
-              className="hidden lg:block text-[11px] tracking-[0.08em] uppercase opacity-60 hover:opacity-100 transition-opacity"
+              className="hidden lg:block text-[13px] tracking-[0.02em] opacity-60 hover:opacity-100 transition-opacity"
             >
               Profile
             </button>
@@ -89,7 +89,7 @@ export function Header() {
                   openAuth(() => openCart());
                 }
               }}
-              className="text-[11px] tracking-[0.08em] uppercase opacity-60 hover:opacity-100 transition-opacity"
+              className="text-[13px] tracking-[0.02em] opacity-60 hover:opacity-100 transition-opacity"
             >
               <span className="lg:hidden">Bag</span>
               <span className="hidden lg:inline">Bag ({count})</span>
