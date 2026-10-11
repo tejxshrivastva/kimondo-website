@@ -3,6 +3,8 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { POLICY_SLUGS } from "@/lib/constants";
 
+
+export const dynamic = "force-dynamic";
 interface Props {
   params: Promise<{ slug: string }>;
 }

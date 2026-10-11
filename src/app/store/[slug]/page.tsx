@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { ProductPageClient } from "./product-page-client";
 
+
+export const dynamic = "force-dynamic";
 interface Props {
   params: Promise<{ slug: string }>;
 }

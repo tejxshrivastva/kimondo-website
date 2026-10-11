@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { FaqAccordion } from "./client";
 
+
+export const dynamic = "force-dynamic";
 export const metadata = {
   title: "FAQ",
   description: "Frequently asked questions about Kimondo.",

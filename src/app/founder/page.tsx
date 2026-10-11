@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { FounderForm } from "./client";
 
+
+export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Founder",
 };

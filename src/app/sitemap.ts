@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
 import { POLICY_SLUGS } from "@/lib/constants";
 
+export const dynamic = "force-dynamic";
+
 const BASE = "https://www.kimondo.in";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
